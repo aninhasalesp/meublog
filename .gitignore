@@ -10,5 +10,3 @@ __pycache__/
 .DS_Store
 Thumbs.db
 uv.lock
-pelican-themes/
-pelican-themes/
