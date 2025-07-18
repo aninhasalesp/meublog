@@ -1,18 +1,8 @@
-# 📝 Blog Pessoal da Ana Paula
+# Ana Paula S. | Blog 🌻🤍
 
-Este é o repositório do meu blog pessoal, onde compartilho ideias, textos, projetos e aprendizados sobre tecnologia, escrita e o que mais me atravessar.
+Este é o repositório do meu blog pessoal, onde compartilho minhas experiências com tecnologia, desenvolvimento e outros temas que gosto e/ou acho importante falar. 💻✨
 
-O blog é construído com [Pelican](https://blog.getpelican.com/), um gerador de site estático escrito em Python.
-
----
-
-## ✨ Funcionalidades
-
-- 📚 Publicação de artigos em formato estático  
-- 🧩 Organização de conteúdos por categorias e tags  
-- 📅 URLs baseadas na data dos posts  
-- 🎨 Layout simples, limpo e fácil de manter  
-
+> 📍 Você pode visitar o blog [aqui](https://aninhasalesp.github.io/meublog)
 ---
 
 ## 🚀 Como rodar localmente
@@ -24,15 +14,15 @@ Se você quiser rodar o blog localmente na sua máquina, siga estes passos:
 git clone https://github.com/aninhasalesp/meublog.git
 cd meublog
 
-# Crie um ambiente virtual
-python3 -m venv venv
-source venv/bin/activate  # ou venv\Scripts\activate no Windows
-
-# Instale as dependências
-pip install -r requirements.txt
+# Instale as dependências com uv
+uv sync
 
 # Gere os arquivos estáticos
-pelican content
+make html
 
 # Rode o servidor local
 pelican --listen
+```
+
+Feito com carinho por @aninhasalesp 💖
+
