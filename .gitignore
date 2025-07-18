@@ -1,17 +1,14 @@
-# Ambiente virtual
 .venv/
-
-# Arquivos gerados pelo Pelican
 output/
 .cache/
 *.pyc
 __pycache__/
-
-# Configurações de editor
+.python-version
 .vscode/
 *.swp
 *.swo
-
-# Arquivos do sistema
 .DS_Store
 Thumbs.db
+uv.lock
+pelican-themes/
+pelican-themes/
