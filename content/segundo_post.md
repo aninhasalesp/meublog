@@ -5,7 +5,7 @@ Summary: Aprenda a transformar seu perfil do GitHub num espaço que mostre quem 
 
 ---
 
-Ei, tu já visitou algum perfil no GitHub que parecia te contar uma história, mesmo sem abrir nenhum repositório? Ou que tu tenha achado fofinho e super organizado?
+Ei, tu já visitou algum perfil no GitHub que parecia te contar a história da pessoa e/ou com o que ela trabalha, mesmo sem abrir nenhum repositório? Ou que tu tenha achado fofinho e super organizado?
 
 Eu acho incrível como as pessos conseguem dar vida àquele cantinho, fica com personalidade, cuidado e, muitas vezes, até com afeto. ✨
 
@@ -59,5 +59,6 @@ Não existe uma fórmula certa, mas aqui vão ideias que funcionam bem:
 O mais importante é que ele diga algo sobre você. Ta tudo bem ser simples no início e ir crescendo aos poucos.
 A ideia não é impressionar, é se expressar 💜
 
+Ah, se quiser ver como ficou o meu, está [aqui](https://github.com/aninhasalesp/aninhasalesp)!
 
 Se tiver dúvidas pra começar, me chama, vou adorar ajudar 🌷.
