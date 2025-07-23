@@ -6,7 +6,7 @@ Se você quiser trocar uma ideia sobre desenvolvimento, carreira, comunidades, o
 
 ## Como falar comigo?
 
-- ✉️ **Email**: [ana@gonzaga.dev](ana@gonzaga.dev)  
+- ✉️ **Email**: [me@anapaula.org](me@anapaula.org)  
 - 🐙 **GitHub**: [github.com/aninhasalesp](https://github.com/aninhasalesp)  
 - 🐦 **Twitter/X**: [@aninhasalesp](https://twitter.com/aninhasalesp)  
 - 💼 **LinkedIn**: [linkedin.com/in/aninhasalesp](https://www.linkedin.com/in/aninhasalesp)  
