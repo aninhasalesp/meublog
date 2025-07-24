@@ -88,9 +88,12 @@ ol {
 }
 
 .post-info {
-    float:right;
-    margin:10px;
-    padding:5px;
+    float: right;
+    margin: 10px;
+    padding: 5px;
+	position: relative;
+    top: -70px;
+    left: 10px;
 }
 
 .post-info p{
@@ -148,7 +151,7 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 #banner {
     clear: both;
 	margin: 0 auto 0 auto;
-	padding: 2.5em 0 0 0;
+	padding: 45px 0 0 0;
 }
 
 	/* Banner */
@@ -156,6 +159,7 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
         font-size: 3.571em; 
         line-height: 0;
 	    margin: 0 auto 0 auto;
+		margin-bottom: 45px;
     }
 	#banner h1 a:link, #banner h1 a:visited {
 		color: #000305;
@@ -179,9 +183,9 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 		font-size: 1.143em;
 		height: 40px;
 		line-height: 30px;
-		margin: 0 auto 2em auto;
+		margin: 0 0 2em 0;
 		padding: 0;
-		width: 90%;
+		/* width: 90%; */
 		
 		border-radius: 5px;
 		-moz-border-radius: 5px;
@@ -219,17 +223,18 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 	Featured
 *****************/
 #content {
+	box-sizing: border-box;
 	background: #fff;
 	border-radius: 10px;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
     float: left;
-    margin: 1em 10px 2em 7%;
+    /* margin: 1em 10px 2em 7%; */
 	background: #fff;
 	overflow: hidden;
 	padding: 20px 20px;
-	min-width: 600px;
-	width: 60%;
+	/* min-width: 600px; */
+	width: 100%;
 }
 
 /*
@@ -333,11 +338,16 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 	Footer
 *****************/
 #footer {
-    padding-bottom: 2em; 
+    padding-bottom: 2em;
+	padding-top: 2em;
     text-align: center; 
     clear: both; 
     width: 80%;
     margin: 20px auto;
+}
+
+#footer p {
+	margin-bottom: 0;
 }
 
 /***** Sections *****/
@@ -363,13 +373,14 @@ li:last-child .hentry, #content > .hentry {border: 0; margin: 0;}
 	/* Blog Index */
 	#posts-list {list-style: none; margin: 0;}
 	#posts-list .hentry {padding-left: 10px; position: relative;}
+	#posts-list .hentry header {padding-left: 175px;}
 	
 	#posts-list footer {
-		left: 10px;
+		left: 0px;
 		position: relative;
-        float: left;
-		top: 0.5em;
-		width: 190px;
+		float: left;
+		top: -4.5em;
+		width: 145px;
 	}
 	
 	/* About the Author */

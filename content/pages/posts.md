@@ -1,4 +1,4 @@
-Title: Posts principais
+Title: Sugestões de leitura
 
 Aqui estão alguns dos meus posts favoritos, que compartilho com carinho e que refletem um pouco do meu jeito de ver o mundo tech:
 

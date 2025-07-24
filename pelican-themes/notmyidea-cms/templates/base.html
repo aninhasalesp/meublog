@@ -22,7 +22,9 @@
 
 </head>
 
-<body id="index" class="home">
+<body id="index" class="home" style="margin: auto;">
+<!-- <body id="index" class="home"> -->
+<!-- <div id="container" style="width: 95%; max-width: 1400px; margin: auto; padding: 2em;"> -->
 {% include 'github.html' %}
         <header id="banner" class="body">
                 <h1><a href="{{ SITEURL }}/index.html">{{ SITENAME }} {% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</a></h1>
@@ -37,7 +39,7 @@
                     <li {% if p == page %}class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
                 {% endfor %}
                 {% endif %}
-                <li><a href="{{ SITEURL }}/{{ ARCHIVES_URL }}">Archives</a></li>
+                <li><a href="{{ SITEURL }}/{{ ARCHIVES_URL }}">Posts</a></li>
                 {#{% for cat, null in categories %}
                     <li {% if cat == category %}class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
                 {% endfor %}#}
@@ -47,16 +49,16 @@
         {% block content %}
         {% endblock %}
 
-        <aside id="sidebar">
+        <!-- <aside id="sidebar">
                 <div class="widget">
-                        <h2>Categories</h2>
+                        <h2>Categorias</h2>
                         <ul>
                         {% for cat, null in categories %}
                            <li {% if cat == category %}class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
                         {% endfor %}
                         </ul>
-                </div>
-        {% if LINKS %}
+                </div> -->
+        <!-- {% if LINKS %}
                 <div class="widget blogroll">
                         <h2>Blogroll</h2>
                         <ul>
@@ -64,9 +66,9 @@
                             <li><a href="{{ link }}">{{ name }}</a></li>
                         {% endfor %}
                         </ul>
-                </div><!-- /.blogroll -->
-        {% endif %}
-        {% if SOCIAL %}
+                </div> /.blogroll -->
+        <!-- {% endif %} -->
+        <!-- {% if SOCIAL %}
                 <div class="widget social">
                         <h2>Social</h2>
                         <ul>
@@ -79,16 +81,16 @@
                             <li><a href="{{ link }}">{{ name }}</a></li>
                         {% endfor %}
                         </ul>
-                </div><!-- /.social -->
-        {% endif %}
-        </aside><!-- /#sidebar -->
+                </div>/.social -->
+        <!-- {% endif %} -->
+        <!-- </aside>/#sidebar -->
 
         <footer id="footer" class="body">
-                <address id="about" class="vcard body">
+                <!-- <address id="about" class="vcard body">
                 Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>, which takes great advantages of <a href="http://python.org">python</a>.
-                </address><!-- /#about -->
+                </address>/#about -->
 
-                <p>The theme is «notmyidea-cms», a modified version of «notmyidea», the default theme.</p>
+                <p>Feito com amor, por <a href="https://github.com/aninhasalesp"> Ana Paula</a> ❤️</p>
         </footer><!-- /#footer -->
 
 {% include 'analytics.html' %}
