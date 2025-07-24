@@ -166,6 +166,7 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 		display: block;
 		font-weight: bold;
 		margin: 0 auto .6em auto;
+		margin-right: 406px;
 		text-decoration: none;
 		width: 427px;
 	}

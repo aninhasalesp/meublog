@@ -1,5 +1,5 @@
 AUTHOR = "Ana Paula Sales"
-SITENAME = "@aninhasalesp | Blog"
+SITENAME = "@aninhasalesp"
 SITEURL = ""
 
 # Path to the content directory

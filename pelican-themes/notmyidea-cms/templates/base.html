@@ -27,7 +27,7 @@
 <!-- <div id="container" style="width: 95%; max-width: 1400px; margin: auto; padding: 2em;"> -->
 {% include 'github.html' %}
         <header id="banner" class="body">
-                <h1><a href="{{ SITEURL }}/index.html">{{ SITENAME }} {% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</a></h1>
+                <h1><a href="{{ SITEURL }}/">{{ SITENAME }} {% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</a></h1>
                 <nav><ul>
                 {% for title, url in MENUITEMS %}
                     <li {% if page is defined and url == page.url %} class="active" {% endif %}>
