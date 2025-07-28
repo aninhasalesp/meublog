@@ -91,7 +91,7 @@ rsync_upload: publish
 
 github: publish
 	ghp-import -m "$(GITHUB_PAGES_COMMIT_MESSAGE)" -b $(GITHUB_PAGES_BRANCH) "$(OUTPUTDIR)" --no-jekyll
-	git push origin $(GITHUB_PAGES_BRANCH)
+	git push origin $(GITHUB_PAGES_BRANCH) --force
 
 
 .PHONY: html help clean regenerate serve serve-global devserver devserver-global publish ssh_upload sftp_upload rsync_upload github
