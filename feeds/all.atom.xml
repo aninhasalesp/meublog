@@ -1,5 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>@aninhasalesp</title><link href="/" rel="alternate"/><link href="/feeds/all.atom.xml" rel="self"/><id>/</id><updated>2025-07-23T00:00:00-03:00</updated><entry><title>Carreira x Filhos</title><link href="/2025/07/23/carreira-x-filhos/" rel="alternate"/><published>2025-07-23T00:00:00-03:00</published><updated>2025-07-23T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-07-23:/2025/07/23/carreira-x-filhos/</id><summary type="html">&lt;p&gt;Entre fraldas, reuniões e sonhos: como é ser mãe e profissional ao mesmo&amp;nbsp;tempo.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Vi um post no LinkedIn recentemente (infelizmente perdi o link) sobre uma candidata a uma vaga que, no currículo, escreveu com destaque: &lt;strong&gt;(&lt;span class="caps"&gt;SEM&lt;/span&gt; &lt;span class="caps"&gt;FILHOS&lt;/span&gt;)&lt;/strong&gt;.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>@aninhasalesp</title><link href="/" rel="alternate"/><link href="/feeds/all.atom.xml" rel="self"/><id>/</id><updated>2025-07-28T00:00:00-03:00</updated><entry><title>Como criei meu blog 💁‍♀️💓</title><link href="/2025/07/28/como-criei-meu-blog/" rel="alternate"/><published>2025-07-28T00:00:00-03:00</published><updated>2025-07-28T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-07-28:/2025/07/28/como-criei-meu-blog/</id><summary type="html">&lt;p&gt;Um passo a passo de como coloquei meu blog no ar usando o Pelican, GitHub Pages e um tema&amp;nbsp;personalizado.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
+&lt;p&gt;Ter um espaço só meu, fora de redes sociais, longe dos algoritmos, era um desejo antigo. Um cantinho para escrever sobre o que gosto, do meu jeito, sem pressa. 
+E foi assim que nasceu o &lt;a href="https://anapaula.org/"&gt;meu blog&lt;/a&gt;.&amp;nbsp;💛&lt;/p&gt;
+&lt;p&gt;Neste post, compartilho como tirei a ideia do papel, desde a escolha da stack até o&amp;nbsp;deploy.&lt;/p&gt;
+&lt;h2&gt;✨ A stack que&amp;nbsp;escolhi&lt;/h2&gt;
+&lt;p&gt;Optei por usar o &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, um gerador de site estático escrito em Python. Ele me atraiu por vários&amp;nbsp;motivos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;É feito com Python&amp;nbsp;🐍&lt;/li&gt;
+&lt;li&gt;Gera &lt;span class="caps"&gt;HTML&lt;/span&gt; puro (leve, rápido e fácil de&amp;nbsp;hospedar)&lt;/li&gt;
+&lt;li&gt;A estrutura é simples de&amp;nbsp;customizar&lt;/li&gt;
+&lt;li&gt;Permite escrever os posts em Markdown&amp;nbsp;📝&lt;/li&gt;
+&lt;li&gt;A documentação&amp;#8230; é meio confusa, mas fui até o fim mesmo assim&amp;nbsp;😅&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;🛠️ Passo a&amp;nbsp;passo&lt;/h2&gt;
+&lt;h3&gt;1. Criar o ambiente e instalar o&amp;nbsp;Pelican&lt;/h3&gt;
+&lt;p&gt;Comecei criando um ambiente virtual com o &lt;a href="https://github.com/astral-sh/uv"&gt;uv&lt;/a&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uv&lt;span class="w"&gt; &lt;/span&gt;venv&lt;span class="w"&gt; &lt;/span&gt;.venv
+&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;.venv/bin/activate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Depois instalei o Pelican com suporte a&amp;nbsp;Markdown:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uv&lt;span class="w"&gt; &lt;/span&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;pelican[markdown]&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;E então criei a estrutura base&amp;nbsp;com:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pelican-quickstart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;2. Organização do&amp;nbsp;projeto&lt;/h3&gt;
+&lt;p&gt;Segui as perguntas do setup e logo já tinha uma estrutura básica criada. A partir disso, organizei o repositório com o seguinte&amp;nbsp;foco:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;content/&lt;/code&gt; → onde ficam os posts em&amp;nbsp;Markdown&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;output/&lt;/code&gt; → site gerado (&lt;span class="caps"&gt;HTML&lt;/span&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;theme/&lt;/code&gt; → arquivos do tema e&amp;nbsp;personalizações&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;O repositório está disponível aqui: &lt;a href="https://github.com/aninhasalesp/meublog"&gt;github.com/aninhasalesp/meublog&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;3. Escolhendo e personalizando o tema&amp;nbsp;🎨&lt;/h3&gt;
+&lt;p&gt;Usei o&amp;nbsp;tema &lt;code&gt;notmyidea-cms&lt;/code&gt;, que vem com o Pelican, e fui personalizando aos&amp;nbsp;poucos.&lt;/p&gt;
+&lt;p&gt;No &lt;code&gt;pelicanconf.py&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;pelican-themes/notmyidea-cms&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Fiz as seguintes&amp;nbsp;mudanças:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Rodapé com meu nome e link pro GitHub&amp;nbsp;❤️&lt;/li&gt;
+&lt;li&gt;Comentários com &lt;a href="https://utteranc.es"&gt;Utterances&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Botões de compartilhamento (LinkedIn, WhatsApp e&amp;nbsp;Telegram)&lt;/li&gt;
+&lt;li&gt;Ajustes no &lt;span class="caps"&gt;CSS&lt;/span&gt; para espaçamentos, layout e&amp;nbsp;cores&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3&gt;4. Comentários com Utterances&amp;nbsp;💬&lt;/h3&gt;
+&lt;p&gt;Usei o &lt;a href="https://utteranc.es/"&gt;Utterances&lt;/a&gt; para habilitar comentários nos posts. É leve, usa issues do GitHub, é simples e&amp;nbsp;eficiente:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://utteranc.es/client.js&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;repo&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;aninhasalesp/meublog&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;issue-term&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;pathname&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;theme&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;github-light&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;crossorigin&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;anonymous&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;async&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;5. Escrevendo os posts&amp;nbsp;✍️&lt;/h3&gt;
+&lt;p&gt;Os posts ficam&amp;nbsp;em &lt;code&gt;content/&lt;/code&gt; e são escritos&amp;nbsp;assim:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Title: Primeiro post
+Date: 2025-07-20
+Category: pessoal
+Summary: Um breve texto pra dar boas-vindas ao blog.
+
+---
+
+Esse é o primeiro post do blog! 🎉
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;6. Customizações no&amp;nbsp;tema&lt;/h3&gt;
+&lt;p&gt;Editei os arquivos dentro&amp;nbsp;de &lt;code&gt;pelican-themes/notmyidea-cms/&lt;/code&gt; e deixei o blog com mais&amp;nbsp;identidade.&lt;/p&gt;
+&lt;p&gt;No &lt;span class="caps"&gt;CSS&lt;/span&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ajustei padding e&amp;nbsp;margin&lt;/li&gt;
+&lt;li&gt;Alinhei melhor os&amp;nbsp;elementos&lt;/li&gt;
+&lt;li&gt;Adicionei ícones e links&amp;nbsp;visuais&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;No &lt;span class="caps"&gt;HTML&lt;/span&gt; (como&amp;nbsp;o &lt;code&gt;base.html&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Adicionei o&amp;nbsp;rodapé&lt;/li&gt;
+&lt;li&gt;Posicionei os botões de&amp;nbsp;compartilhamento&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;💡 &lt;em&gt;Fazer as edições direto no tema funcionou bem pra mim, mesmo que não seja o ideal a longo&amp;nbsp;prazo.&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;7. Gerando os arquivos&amp;nbsp;estáticos&lt;/h3&gt;
+&lt;p&gt;Para compilar o blog e gerar os arquivos &lt;span class="caps"&gt;HTML&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make&lt;span class="w"&gt; &lt;/span&gt;html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Durante o desenvolvimento, usei o servidor local pra visualizar as&amp;nbsp;mudanças:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pelican&lt;span class="w"&gt; &lt;/span&gt;--listen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;8. Deploy no GitHub Pages&amp;nbsp;🚀&lt;/h3&gt;
+&lt;p&gt;Usei GitHub Pages pra hospedar o blog. O processo&amp;nbsp;foi:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Gerei os arquivos&amp;nbsp;com &lt;code&gt;pelican content&lt;/code&gt; ou &lt;code&gt;make html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Subi a&amp;nbsp;pasta &lt;code&gt;output/&lt;/code&gt; para o&amp;nbsp;branch &lt;code&gt;gh-pages&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Configurei o domínio personalizado no GitHub e apontei o &lt;span class="caps"&gt;DNS&lt;/span&gt; para os servidores do&amp;nbsp;GitHub&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;O &lt;code&gt;Makefile&lt;/code&gt; ajuda bastante, publiquei&amp;nbsp;com:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make&lt;span class="w"&gt; &lt;/span&gt;github
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;O conteúdo gerado vai pra&amp;nbsp;pasta &lt;code&gt;output/&lt;/code&gt;, que é servida diretamente no GitHub&amp;nbsp;Pages.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;9. Domínio personalizado&amp;nbsp;🌐&lt;/h3&gt;
+&lt;p&gt;Registrei o&amp;nbsp;domínio &lt;code&gt;anapaula.org&lt;/code&gt; e fiz as seguintes&amp;nbsp;configurações:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Apontei o &lt;span class="caps"&gt;DNS&lt;/span&gt; para os servidores do GitHub&amp;nbsp;Pages&lt;/li&gt;
+&lt;li&gt;Criei um&amp;nbsp;arquivo &lt;code&gt;CNAME&lt;/code&gt; dentro da&amp;nbsp;pasta &lt;code&gt;output/&lt;/code&gt; com o&amp;nbsp;conteúdo:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;anapaula.org
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ativei o &lt;span class="caps"&gt;HTTPS&lt;/span&gt; no painel do GitHub&amp;nbsp;Pages&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1&gt;Conclusão&lt;/h1&gt;
+&lt;p&gt;O processo teve tropeços (a documentação do Pelican podia ser melhor 😅), mas valeu demais. Ter um espaço meu, com o meu nome e com a minha cara, era um desejo antigo que finalmente saiu do&amp;nbsp;papel.&lt;/p&gt;
+&lt;p&gt;Se você também pensa em criar um blog, seja técnico ou pessoal, recomendo muito! E se eu puder ajudar de alguma forma, é só me chamar.&amp;nbsp;💛&lt;/p&gt;
+&lt;p&gt;O código-fonte do blog está no GitHub: &lt;a href="https://github.com/aninhasalesp/meublog"&gt;aninhasalesp/meublog&lt;/a&gt;&amp;nbsp;🌱&lt;/p&gt;</content><category term="dev"/></entry><entry><title>Carreira x Filhos</title><link href="/2025/07/23/carreira-x-filhos/" rel="alternate"/><published>2025-07-23T00:00:00-03:00</published><updated>2025-07-23T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-07-23:/2025/07/23/carreira-x-filhos/</id><summary type="html">&lt;p&gt;Entre fraldas, reuniões e sonhos: como é ser mãe e profissional ao mesmo&amp;nbsp;tempo.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Vi um post no LinkedIn recentemente (infelizmente perdi o link) sobre uma candidata a uma vaga que, no currículo, escreveu com destaque: &lt;strong&gt;(&lt;span class="caps"&gt;SEM&lt;/span&gt; &lt;span class="caps"&gt;FILHOS&lt;/span&gt;)&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Pra quem não sabe, eu sou mãe de uma menina de 9 anos. Isso causa espanto em algumas pessoas porque sou considerada jovem demais pra ser&amp;nbsp;mãe.&lt;/p&gt;
 &lt;p&gt;Essa é minha filha, Maria Eduarda&amp;nbsp;💕: &lt;/p&gt;
 &lt;p&gt;&lt;img src="/images/IMG_1011.jpg" alt="Eu e Maria" width="400"/&gt;&lt;/p&gt;

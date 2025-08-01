@@ -20,7 +20,162 @@
 
      <section id="content" class="body">
         <aside id="featured"><article>
-                <h1 class="entry-title"><a href="/2025/07/23/carreira-x-filhos/">Carreira x&nbsp;Filhos</a></h1>
+                <h1 class="entry-title"><a href="/2025/07/28/como-criei-meu-blog/">Como criei meu blog&nbsp;💁‍♀️💓</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-07-28T00:00:00-03:00">
+                seg 28 julho 2025
+        </abbr>
+
+        <!-- <address class="vcard author">
+                By <a class="url fn" href="/author/ana-paula-sales.html">Ana Paula Sales</a>
+        </address> -->
+<!-- <p>In <a href="/category/dev.html">dev</a>. </p> -->
+</p></footer><!-- /.post-info --><!-- /.post-info -->
+                <hr>
+<p>Ter um espaço só meu, fora de redes sociais, longe dos algoritmos, era um desejo antigo. Um cantinho para escrever sobre o que gosto, do meu jeito, sem pressa. 
+E foi assim que nasceu o <a href="https://anapaula.org/">meu blog</a>.&nbsp;💛</p>
+<p>Neste post, compartilho como tirei a ideia do papel, desde a escolha da stack até o&nbsp;deploy.</p>
+<h2>✨ A stack que&nbsp;escolhi</h2>
+<p>Optei por usar o <a href="https://blog.getpelican.com/">Pelican</a>, um gerador de site estático escrito em Python. Ele me atraiu por vários&nbsp;motivos:</p>
+<ul>
+<li>É feito com Python&nbsp;🐍</li>
+<li>Gera <span class="caps">HTML</span> puro (leve, rápido e fácil de&nbsp;hospedar)</li>
+<li>A estrutura é simples de&nbsp;customizar</li>
+<li>Permite escrever os posts em Markdown&nbsp;📝</li>
+<li>A documentação&#8230; é meio confusa, mas fui até o fim mesmo assim&nbsp;😅</li>
+</ul>
+<hr>
+<h2>🛠️ Passo a&nbsp;passo</h2>
+<h3>1. Criar o ambiente e instalar o&nbsp;Pelican</h3>
+<p>Comecei criando um ambiente virtual com o <a href="https://github.com/astral-sh/uv">uv</a>:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>venv<span class="w"> </span>.venv
+<span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+</code></pre></div>
+
+<p>Depois instalei o Pelican com suporte a&nbsp;Markdown:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;pelican[markdown]&quot;</span>
+</code></pre></div>
+
+<p>E então criei a estrutura base&nbsp;com:</p>
+<div class="highlight"><pre><span></span><code>pelican-quickstart
+</code></pre></div>
+
+<hr>
+<h3>2. Organização do&nbsp;projeto</h3>
+<p>Segui as perguntas do setup e logo já tinha uma estrutura básica criada. A partir disso, organizei o repositório com o seguinte&nbsp;foco:</p>
+<ul>
+<li><code>content/</code> → onde ficam os posts em&nbsp;Markdown</li>
+<li><code>output/</code> → site gerado (<span class="caps">HTML</span>)</li>
+<li><code>theme/</code> → arquivos do tema e&nbsp;personalizações</li>
+</ul>
+<p>O repositório está disponível aqui: <a href="https://github.com/aninhasalesp/meublog">github.com/aninhasalesp/meublog</a></p>
+<hr>
+<h3>3. Escolhendo e personalizando o tema&nbsp;🎨</h3>
+<p>Usei o&nbsp;tema <code>notmyidea-cms</code>, que vem com o Pelican, e fui personalizando aos&nbsp;poucos.</p>
+<p>No <code>pelicanconf.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;pelican-themes/notmyidea-cms&quot;</span>
+</code></pre></div>
+
+<p>Fiz as seguintes&nbsp;mudanças:</p>
+<ul>
+<li>Rodapé com meu nome e link pro GitHub&nbsp;❤️</li>
+<li>Comentários com <a href="https://utteranc.es">Utterances</a></li>
+<li>Botões de compartilhamento (LinkedIn, WhatsApp e&nbsp;Telegram)</li>
+<li>Ajustes no <span class="caps">CSS</span> para espaçamentos, layout e&nbsp;cores</li>
+</ul>
+<hr>
+<h3>4. Comentários com Utterances&nbsp;💬</h3>
+<p>Usei o <a href="https://utteranc.es/">Utterances</a> para habilitar comentários nos posts. É leve, usa issues do GitHub, é simples e&nbsp;eficiente:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;comments&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://utteranc.es/client.js&quot;</span>
+    <span class="na">repo</span><span class="o">=</span><span class="s">&quot;aninhasalesp/meublog&quot;</span>
+    <span class="na">issue-term</span><span class="o">=</span><span class="s">&quot;pathname&quot;</span>
+    <span class="na">theme</span><span class="o">=</span><span class="s">&quot;github-light&quot;</span>
+    <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span>
+    <span class="na">async</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<hr>
+<h3>5. Escrevendo os posts&nbsp;✍️</h3>
+<p>Os posts ficam&nbsp;em <code>content/</code> e são escritos&nbsp;assim:</p>
+<div class="highlight"><pre><span></span><code>Title: Primeiro post
+Date: 2025-07-20
+Category: pessoal
+Summary: Um breve texto pra dar boas-vindas ao blog.
+
+---
+
+Esse é o primeiro post do blog! 🎉
+</code></pre></div>
+
+<hr>
+<h3>6. Customizações no&nbsp;tema</h3>
+<p>Editei os arquivos dentro&nbsp;de <code>pelican-themes/notmyidea-cms/</code> e deixei o blog com mais&nbsp;identidade.</p>
+<p>No <span class="caps">CSS</span>:</p>
+<ul>
+<li>Ajustei padding e&nbsp;margin</li>
+<li>Alinhei melhor os&nbsp;elementos</li>
+<li>Adicionei ícones e links&nbsp;visuais</li>
+</ul>
+<p>No <span class="caps">HTML</span> (como&nbsp;o <code>base.html</code>):</p>
+<ul>
+<li>Adicionei o&nbsp;rodapé</li>
+<li>Posicionei os botões de&nbsp;compartilhamento</li>
+</ul>
+<p>💡 <em>Fazer as edições direto no tema funcionou bem pra mim, mesmo que não seja o ideal a longo&nbsp;prazo.</em></p>
+<hr>
+<h3>7. Gerando os arquivos&nbsp;estáticos</h3>
+<p>Para compilar o blog e gerar os arquivos <span class="caps">HTML</span>:</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>html
+</code></pre></div>
+
+<p>Durante o desenvolvimento, usei o servidor local pra visualizar as&nbsp;mudanças:</p>
+<div class="highlight"><pre><span></span><code>pelican<span class="w"> </span>--listen
+</code></pre></div>
+
+<hr>
+<h3>8. Deploy no GitHub Pages&nbsp;🚀</h3>
+<p>Usei GitHub Pages pra hospedar o blog. O processo&nbsp;foi:</p>
+<ol>
+<li>Gerei os arquivos&nbsp;com <code>pelican content</code> ou <code>make html</code></li>
+<li>Subi a&nbsp;pasta <code>output/</code> para o&nbsp;branch <code>gh-pages</code></li>
+<li>Configurei o domínio personalizado no GitHub e apontei o <span class="caps">DNS</span> para os servidores do&nbsp;GitHub</li>
+</ol>
+<p>O <code>Makefile</code> ajuda bastante, publiquei&nbsp;com:</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>github
+</code></pre></div>
+
+<p>O conteúdo gerado vai pra&nbsp;pasta <code>output/</code>, que é servida diretamente no GitHub&nbsp;Pages.</p>
+<hr>
+<h3>9. Domínio personalizado&nbsp;🌐</h3>
+<p>Registrei o&nbsp;domínio <code>anapaula.org</code> e fiz as seguintes&nbsp;configurações:</p>
+<ul>
+<li>Apontei o <span class="caps">DNS</span> para os servidores do GitHub&nbsp;Pages</li>
+<li>Criei um&nbsp;arquivo <code>CNAME</code> dentro da&nbsp;pasta <code>output/</code> com o&nbsp;conteúdo:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>anapaula.org
+</code></pre></div>
+
+<ul>
+<li>Ativei o <span class="caps">HTTPS</span> no painel do GitHub&nbsp;Pages</li>
+</ul>
+<hr>
+<h1>Conclusão</h1>
+<p>O processo teve tropeços (a documentação do Pelican podia ser melhor 😅), mas valeu demais. Ter um espaço meu, com o meu nome e com a minha cara, era um desejo antigo que finalmente saiu do&nbsp;papel.</p>
+<p>Se você também pensa em criar um blog, seja técnico ou pessoal, recomendo muito! E se eu puder ajudar de alguma forma, é só me chamar.&nbsp;💛</p>
+<p>O código-fonte do blog está no GitHub: <a href="https://github.com/aninhasalesp/meublog">aninhasalesp/meublog</a>&nbsp;🌱</p>
+        </article></aside><!-- /#featured -->
+                <h1>Outros posts</h1>
+                <hr />
+                    <ol id="posts-list" class="hfeed">
+        <li><article class="hentry">
+                <header>
+                        <h1><a href="/2025/07/23/carreira-x-filhos/" rel="bookmark" title="Permalink to Carreira x Filhos">Carreira x&nbsp;Filhos</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2025-07-23T00:00:00-03:00">
                 qua 23 julho 2025
@@ -31,34 +186,10 @@
         </address> -->
 <!-- <p>In <a href="/category/dicas-dev.html">Dicas Dev</a>. </p> -->
 </p></footer><!-- /.post-info --><!-- /.post-info -->
-                <p>Vi um post no LinkedIn recentemente (infelizmente perdi o link) sobre uma candidata a uma vaga que, no currículo, escreveu com destaque: <strong>(<span class="caps">SEM</span> <span class="caps">FILHOS</span>)</strong>.</p>
-<p>Pra quem não sabe, eu sou mãe de uma menina de 9 anos. Isso causa espanto em algumas pessoas porque sou considerada jovem demais pra ser&nbsp;mãe.</p>
-<p>Essa é minha filha, Maria Eduarda&nbsp;💕: </p>
-<p><img src="/images/IMG_1011.jpg" alt="Eu e Maria" width="400"/></p>
-<p>Por muito tempo me culpei por ter sido mãe cedo, por não ter seguido a linha do tempo que parece ser a “correta” para a maioria das&nbsp;pessoas: </p>
-<p><strong>estudar ➜ se formar ➜ trabalhar ➜ casar ➜ juntar dinheiro ➜ ter&nbsp;filhos</strong></p>
-<p>Também me sentia mal por não ter a mesma experiência técnica que muitos dos meus amigos.<br>
-A verdade é que, enquanto eles estavam na faculdade ou fazendo mestrado, eu estava aprendendo a ser mãe, aprendendo como manter uma criança viva, sendo eu mesma praticamente uma&nbsp;criança.</p>
-<p>Mas o que isso diz sobre mim e meu perfil&nbsp;profissional?</p>
-<p>Quando nos tornamos mães, a vida <strong>não para</strong> pra gente aprender a ser mãe, a vida continua, <strong>acontece em paralelo</strong> à maternidade.<br>
-Enquanto eu aprendia a ser mãe, também era estudante, mulher migrando de área, mudando de estado em busca de oportunidades melhores pra mim e pra minha filha.<br>
-Busquei apoio nas PyLadies locais, buscava algo que me mostrasse que eu era capaz de trabalhar <strong>fora de casa</strong>, e não só <strong>em casa</strong>.</p>
-<p>Hoje, sou uma mãe que trabalha, estuda, treina, ajuda a filha com as provas, colabora com a comunidade Python, cozinha, palestra em eventos, viaja a trabalho e mantém a casa organizada (na medida do possível) no meio de tudo&nbsp;isso.</p>
-<p>Tá, mas&#8230; o que isso tem a ver com meu perfil&nbsp;profissional?</p>
-<p>Sou uma profissional com excelente gestão de tempo, foco em produtividade, que sabe priorizar o essencial, que organiza tarefas, que está sempre aprendendo algo novo.<br>
-Sou alguém que se formou com uma criança correndo pela casa, que sabe se comunicar com clareza e que, mesmo com algumas inseguranças, consegue se reinventar quando necessário.<br>
-Quando eu <strong>preciso</strong> estudar algo profundamente, crio uma palestra e submeto em eventos, é assim que aprendo e&nbsp;compartilho.</p>
-<p>Não sou a Mulher-Maravilha. Não sou boa em tudo.<br>
-Sou um ser humano em constante mudança, que se adapta, que mergulha de cabeça no que se propõe a fazer e isso me agrega muito&nbsp;profissionalmente.</p>
-<p>Hoje, não me culpo mais por ter sido mãe cedo.<br>
-Hoje, agradeço.<br>
-Sem minha filha, eu talvez não tivesse a garra, a facilidade de lidar com obrigações em meio ao caos, num curto espaço de tempo e, principalmente, não teria aprendido tão cedo a <strong>pedir ajuda</strong> antes de perder tempo esperando que as coisas acontecessem&nbsp;magicamente.</p>
-<p><strong>Contratem mães.</strong><br>
-Mesmo que a prioridade número um delas não seja sua empresa, elas ainda fazem dela uma prioridade. E o que elas entregam tem muito valor.&nbsp;💖</p>
-        </article></aside><!-- /#featured -->
-                <h1>Outros posts</h1>
-                <hr />
-                    <ol id="posts-list" class="hfeed">
+                <p>Entre fraldas, reuniões e sonhos: como é ser mãe e profissional ao mesmo&nbsp;tempo.</p>
+                <a class="readmore" href="/2025/07/23/carreira-x-filhos/">read more</a>
+                </div><!-- /.entry-content -->
+        </article></li>
         <li><article class="hentry">
                 <header>
                         <h1><a href="/2025/07/16/personalizando-o-github/" rel="bookmark" title="Permalink to Personalizando o GitHub 🤌🏻💕">Personalizando o GitHub&nbsp;🤌🏻💕</a></h1>
