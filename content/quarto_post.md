@@ -36,7 +36,7 @@ Comecei criando um ambiente virtual com o [uv](https://github.com/astral-sh/uv):
 uv venv .venv
 source .venv/bin/activate
 ```
-O uv venv já cria o ambiente e ativa os pacotes com isolamento, mas, por hábito (e um pouco de força do costume), usei source .venv/bin/activate logo depois. O uv também poderia dispensar esse passo.
+O `uv venv` já cria o ambiente e ativa os pacotes com isolamento, mas, por hábito (e um pouco de força do costume), usei `source .venv/bin/activate` logo depois. O uv também poderia dispensar esse passo.
 
 Depois instalei o Pelican com suporte a Markdown:
 
