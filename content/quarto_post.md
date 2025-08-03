@@ -1,4 +1,4 @@
-Title: Como criei meu blog 💁‍♀️💓
+Title: Como criei meu blog 💁‍♀️✨
 Date: 2025-07-28
 Category: dev
 Summary: Um passo a passo de como coloquei meu blog no ar usando o Pelican, GitHub Pages e um tema personalizado.
@@ -10,15 +10,19 @@ E foi assim que nasceu o [meu blog](https://anapaula.org/). 💛
 
 Neste post, compartilho como tirei a ideia do papel, desde a escolha da stack até o deploy.
 
-## ✨ A stack que escolhi
+## A stack que escolhi
 
 Optei por usar o [Pelican](https://blog.getpelican.com/), um gerador de site estático escrito em Python. Ele me atraiu por vários motivos:
 
 - É feito com Python 🐍
 - Gera HTML puro (leve, rápido e fácil de hospedar)
+    - Ou seja: não tem nada sendo processado dinamicamente no servidor; Isso deixa o site mais rápido, seguro e barato/fácil de hospedar (como no GitHub Pages, que só serve arquivos estáticos).
 - A estrutura é simples de customizar
 - Permite escrever os posts em Markdown 📝
 - A documentação... é meio confusa, mas fui até o fim mesmo assim 😅
+
+
+Além do Pelican, usei o [uv](https://github.com/astral-sh/uv) como gerenciador de pacotes e ambientes virtuais, ele é rápido e prático, e tem substituído o uso manual do venv e do pip.
 
 ---
 
@@ -32,6 +36,7 @@ Comecei criando um ambiente virtual com o [uv](https://github.com/astral-sh/uv):
 uv venv .venv
 source .venv/bin/activate
 ```
+O uv venv já cria o ambiente e ativa os pacotes com isolamento, mas, por hábito (e um pouco de força do costume), usei source .venv/bin/activate logo depois. O uv também poderia dispensar esse passo.
 
 Depois instalei o Pelican com suporte a Markdown:
 
@@ -55,6 +60,8 @@ Segui as perguntas do setup e logo já tinha uma estrutura básica criada. A par
 - `theme/` → arquivos do tema e personalizações
 
 O repositório está disponível aqui: [github.com/aninhasalesp/meublog](https://github.com/aninhasalesp/meublog)
+
+A pasta `pelican-themes/` foi criada por mim manualmente pra colocar o tema clonado e fazer as modificações.
 
 ---
 
@@ -160,23 +167,56 @@ O `Makefile` ajuda bastante, publiquei com:
 ```bash
 make github
 ```
+Esse comando está no meu Makefile e automatiza a geração e envio do conteúdo. Se quiser ver, ele basicamente faz:
 
-O conteúdo gerado vai pra pasta `output/`, que é servida diretamente no GitHub Pages.
+```
+cd output
+git checkout -b gh-pages
+git add .
+git commit -m "Deploy"
+git push -f origin gh-pages
+```
+
+1. No GitHub, fui na aba Settings > Pages e configurei pra servir o site a partir do branch gh-pages, pasta raiz (/).
+2. Adicionei um arquivo CNAME com meu domínio personalizado (anapaula.org)
+3. Apontei os DNSs da minha hospedagem pro GitHub Pages
+4. Ativei o HTTPS no painel
+
+Se você quiser automatizar esse deploy com GitHub Actions, também dá. Mas como é um blog pessoal que não atualizo todos os dias, preferi o método manual.
 
 ---
 
 ### 9. Domínio personalizado 🌐
 
-Registrei o domínio `anapaula.org` e fiz as seguintes configurações:
+Registrei o domínio `anapaula.org` e configurei para ser usado no meu blog hospedado via GitHub Pages.
 
-- Apontei o DNS para os servidores do GitHub Pages
-- Criei um arquivo `CNAME` dentro da pasta `output/` com o conteúdo:
+O que eu fiz:
+No painel da empresa onde registrei o domínio, adicionei os seguintes registros DNS:
+
+Tipo A (IPv4): apontando para os IPs do GitHub Pages:
+```
+185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+```
+- CNAME (se quiser usar subdomínio): apontando para suaconta.github.io
+
+Dentro da pasta `output/` (que é a que vai para o GitHub Pages no branch gh-pages), criei um arquivo CNAME com o conteúdo:
 
 ```
 anapaula.org
 ```
 
-- Ativei o HTTPS no painel do GitHub Pages
+Isso é necessário para que o GitHub saiba qual domínio deve ser vinculado ao seu site. Esse arquivo é incluído automaticamente no deploy quando rodo `make github`.
+
+No repositório no GitHub, fui em Settings > Pages e:
+
+  - Marquei a opção "Use a custom domain" e coloquei anapaula.org
+  - Ativei o HTTPS (pra garantir navegação segura)
+
+Segui a documentação oficial do GitHub Pages para configurar tudo isso:
+👉 [documentação github-pages](https://docs.github.com/pt/pages/configuring-a-custom-domain-for-your-github-pages-site)
 
 ---
 
