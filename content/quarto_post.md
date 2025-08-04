@@ -41,6 +41,7 @@ Depois disso, ativei o ambiente manualmente com:
 ```bash
 source .venv/bin/activate
 ```
+O `uv venv` já cria o ambiente e ativa os pacotes com isolamento, mas, por hábito (e um pouco de força do costume), usei `source .venv/bin/activate` logo depois. O uv também poderia dispensar esse passo.
 
 Esse passo não é automático, o uv venv cria o ambiente, mas não o ativa. Eu fiz isso por hábito, já que é o modo tradicional que muitos de nós usamos com venv.
 
