@@ -30,25 +30,32 @@ Além do Pelican, usei o [uv](https://github.com/astral-sh/uv) como gerenciador 
 
 ### 1. Criar o ambiente e instalar o Pelican
 
-Comecei criando um ambiente virtual com o [uv](https://github.com/astral-sh/uv):
+Usei o uv para criar meu ambiente virtual com:
 
 ```bash
-uv venv .venv
+uv venv
+```
+
+Depois disso, ativei o ambiente manualmente com:
+
+```bash
 source .venv/bin/activate
 ```
-O uv venv já cria o ambiente e ativa os pacotes com isolamento, mas, por hábito (e um pouco de força do costume), usei source .venv/bin/activate logo depois. O uv também poderia dispensar esse passo.
 
-Depois instalei o Pelican com suporte a Markdown:
+Esse passo não é automático, o uv venv cria o ambiente, mas não o ativa. Eu fiz isso por hábito, já que é o modo tradicional que muitos de nós usamos com venv.
 
-```bash
-uv pip install "pelican[markdown]"
-```
-
-E então criei a estrutura base com:
+No entanto, o uv também oferece uma forma mais moderna (e prática!) de lidar com ambientes virtuais: você pode pular o uv venv e o source, e simplesmente deixar que ele gerencie tudo pra você:
 
 ```bash
-pelican-quickstart
+uv add pelican[markdown] # declara o `pelican` como uma dependência do projeto
+
+uv run pelican-quickstart # executa o comando `pelican-quickstart` dentro do ambiente virtual gerenciado automaticamente pelo `uv`
 ```
+
+Assim, o uv cria o ambiente e executa os comandos dentro dele automaticamente, sem precisar ativar nada "na mão
+
+Só uma observação: se você preferir usar a forma `uv add ...` e `uv run ...`, o arquivo Makefile precisaria ser alterado, substituindo a linha `PELICAN=pelican` por `PELICAN=uv run pelican` - ou todas as referências a `make <rule>` precisariam virar `PELICAN="uv run pelican" make <rule>`.
+
 ---
 
 ### 2. Organização do projeto
@@ -169,7 +176,7 @@ make github
 ```
 Esse comando está no meu Makefile e automatiza a geração e envio do conteúdo. Se quiser ver, ele basicamente faz:
 
-```
+```bash
 cd output
 git checkout -b gh-pages
 git add .
@@ -204,7 +211,7 @@ Tipo A (IPv4): apontando para os IPs do GitHub Pages:
 
 Dentro da pasta `output/` (que é a que vai para o GitHub Pages no branch gh-pages), criei um arquivo CNAME com o conteúdo:
 
-```
+```bash
 anapaula.org
 ```
 

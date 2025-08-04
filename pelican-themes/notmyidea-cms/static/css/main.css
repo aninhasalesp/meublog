@@ -435,3 +435,14 @@ li:last-child .hentry, #content > .hentry {border: 0; margin: 0;}
 	
 	#add-comment input[type='submit'] {float: right; margin: 0 .5em;}
 	#add-comment * {margin-bottom: .5em;}
+
+
+p code, li code, span code {
+  background-color: #f0f0f0;     /* Cor de fundo leve */
+  color: #000;                   /* Cor do texto */
+  font-family: monospace;        /* Fonte tipo terminal */
+  font-size: 0.95em;             /* Tamanho um pouco menor */
+  padding: 2px 6px;              /* Espaçamento interno */
+  border-radius: 4px;            /* Cantos arredondados */
+  white-space: nowrap;           /* Não quebrar linha */
+}
