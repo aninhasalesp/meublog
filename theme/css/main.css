@@ -24,7 +24,6 @@ body {
     padding: 0;
     text-align: left;
     max-width: 1440px;
-    min-width: 1000px;
 }
 
 
@@ -165,7 +164,7 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 		color: #000305;
 		display: block;
 		font-weight: bold;
-		margin: 0 auto .6em auto;
+		margin: 0 auto 0.8em auto;
 		margin-right: 406px;
 		text-decoration: none;
 		width: 427px;
@@ -184,7 +183,7 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 		font-size: 1.143em;
 		height: 40px;
 		line-height: 30px;
-		margin: 0 0 2em 0;
+		margin: 0 0 12px 0;
 		padding: 0;
 		/* width: 90%; */
 		
@@ -445,4 +444,261 @@ p code, li code, span code {
   padding: 2px 6px;              /* Espaçamento interno */
   border-radius: 4px;            /* Cantos arredondados */
   white-space: nowrap;           /* Não quebrar linha */
+}
+
+/*
+   ADICIONAR ESTAS MEDIA QUERIES NO FINAL DO SEU main.css
+   NÃO ALTERE NADA DO CSS EXISTENTE - APENAS ADICIONE ISTO NO FINAL
+*/
+
+/* Menu hambúrguer - só aparece no mobile */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #000000;
+    font-size: 1.5em;
+    padding: 10px 15px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.menu-toggle:hover {
+    background: #C74451;
+}
+
+/* Ícone do hambúrguer */
+.hamburger {
+    display: flex;
+    flex-direction: column;
+    width: 20px;
+    height: 15px;
+    justify-content: space-between;
+}
+
+.hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+/* Animação do X quando menu aberto */
+.menu-toggle.active .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle.active .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* RESPONSIVIDADE - TABLETS */
+@media screen and (max-width: 1024px) {
+    body {
+        min-width: auto;
+        max-width: 100%;
+        margin: 0;
+        padding: 0 20px;
+    }
+
+    #banner h1 a:link, #banner h1 a:visited {
+        margin-right: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    #content {
+        float: none;
+        width: 100%;
+        margin: 1em 0 2em 0;
+    }
+
+    #sidebar {
+        float: none;
+        width: 100%;
+        margin: 1em 0 2em 0;
+    }
+}
+
+/* RESPONSIVIDADE - MOBILE */
+@media screen and (max-width: 767px) {
+    body {
+        min-width: auto;
+        font-size: 16px;
+        padding: 0 10px;
+    }
+
+    #banner {
+        padding: 30px 0 0 0;
+    }
+
+    #banner h1 {
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+
+    #banner h1 a:link, #banner h1 a:visited {
+        margin-right: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Mostrar botão hambúrguer */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Menu inicialmente escondido */
+    #banner nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #000305;
+        border-radius: 0 0 5px 5px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        z-index: 999;
+        list-style: none;
+        margin: 0;
+    }
+
+    /* Menu visível quando ativo */
+    #banner nav ul.active {
+        display: flex;
+    }
+
+    #banner nav {
+        position: relative;
+    }
+
+    #banner nav li {
+        float: none;
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #333;
+        margin: 0;
+    }
+
+    #banner nav li:last-child {
+        border-bottom: none;
+    }
+
+    #banner nav a:link, #banner nav a:visited {
+        display: block;
+        padding: 12px 20px;
+        height: auto;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    #banner nav li:first-child a {
+        border-radius: 0;
+    }
+
+    #banner nav li:last-child a {
+        border-radius: 0 0 5px 5px;
+    }
+
+    #content {
+        float: none;
+        width: 100%;
+        margin: 1em 0 2em 0;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    #sidebar {
+        float: none;
+        width: 100%;
+        margin: 1em 0 2em 0;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    .entry-title {
+        font-size: 2em;
+        word-wrap: break-word;
+    }
+
+    .post-info {
+        position: static;
+        float: none;
+        top: auto;
+        left: auto;
+        margin: 10px 0;
+        padding: 10px;
+        background: #f9f9f9;
+        border-radius: 5px;
+    }
+
+    pre {
+        overflow-x: auto;
+        font-size: 14px;
+    }
+
+    table {
+        font-size: 12px;
+        overflow-x: auto;
+        display: block;
+        white-space: nowrap;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Posts list adjustments */
+    #posts-list .hentry {
+        padding: 10px 0;
+    }
+
+    #posts-list .hentry header {
+        padding-left: 0;
+    }
+
+    #posts-list footer {
+        position: static;
+        float: none;
+        width: 100%;
+        top: auto;
+        left: auto;
+        margin-top: 10px;
+    }
+}
+
+/* RESPONSIVIDADE - MOBILE PEQUENO */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 0 5px;
+        font-size: 14px;
+    }
+
+    #banner h1 {
+        font-size: 2em;
+        margin-bottom: 15px;
+    }
+
+    #content, #sidebar {
+        padding: 10px;
+    }
+
+    .entry-title {
+        font-size: 1.7em;
+    }
+
+    #banner nav a:link, #banner nav a:visited {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
 }

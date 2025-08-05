@@ -3,6 +3,7 @@
 <head>
         <title>@aninhasalesp - dev</title>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
         <link href="/" type="application/atom+xml" rel="alternate" title="@aninhasalesp ATOM Feed" />
 </head>
@@ -10,12 +11,23 @@
 <body id="index" class="home" style="margin: auto;">
         <header id="banner" class="body">
                 <h1><a href="/">@aninhasalesp </a></h1>
-                <nav><ul>
+                <nav>
+                    <!-- BOTÃO HAMBÚRGUER FORA DA UL -->
+                    <button class="menu-toggle" onclick="toggleMenu()">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                    <!-- SÓ UMA UL COM ID="menu" -->
+                    <ul id="menu">
                     <li ><a href="/pages/contato.html">Contato</a></li>
                     <li ><a href="/pages/sugestoes-de-leitura.html">Sugestões de&nbsp;leitura</a></li>
                     <li ><a href="/pages/quem-sou-eu.html">Quem sou eu?&nbsp;🌿🌸</a></li>
                 <li><a href="/">Posts</a></li>
-                </ul></nav>
+                </ul>
+                </nav>
         </header><!-- /#banner -->
 
      <section id="content" class="body">
@@ -211,6 +223,16 @@ No painel da empresa onde registrei o domínio, adicionei os seguintes registros
         <footer id="footer" class="body">
                 <p>Feito com amor, por <a href="https://github.com/aninhasalesp"> Ana Paula</a> ❤️</p>
         </footer><!-- /#footer -->
+
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById('menu');
+                const toggle = document.querySelector('.menu-toggle');
+
+                menu.classList.toggle('active');
+                toggle.classList.toggle('active');
+            }
+        </script>
 
 </body>
 </html>
