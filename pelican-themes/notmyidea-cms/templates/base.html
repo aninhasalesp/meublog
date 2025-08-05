@@ -3,6 +3,7 @@
 <head>
         <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
         <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/{{ CSS_FILE }}" type="text/css" />
         <link href="{{ SITEURL }}/{{ FEED }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed" />
         {% if FEED_RSS %}
@@ -14,7 +15,17 @@
 {% include 'github.html' %}
         <header id="banner" class="body">
                 <h1><a href="{{ SITEURL }}/">{{ SITENAME }} {% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</a></h1>
-                <nav><ul>
+                <nav>
+                    <!-- BOTÃO HAMBÚRGUER FORA DA UL -->
+                    <button class="menu-toggle" onclick="toggleMenu()">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                    <!-- SÓ UMA UL COM ID="menu" -->
+                    <ul id="menu">
                 {% for title, url in MENUITEMS %}
                     <li {% if page is defined and url == page.url %} class="active" {% endif %}>
                         <a href="{{ SITEURL }}/{{ url }}">{{ title }}</a>
@@ -29,7 +40,8 @@
                 {#{% for cat, null in categories %}
                     <li {% if cat == category %}class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
                 {% endfor %}#}
-                </ul></nav>
+                </ul>
+                </nav>
         </header><!-- /#banner -->
 
         {% block content %}
@@ -38,6 +50,16 @@
         <footer id="footer" class="body">
                 <p>Feito com amor, por <a href="https://github.com/aninhasalesp"> Ana Paula</a> ❤️</p>
         </footer><!-- /#footer -->
+
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById('menu');
+                const toggle = document.querySelector('.menu-toggle');
+
+                menu.classList.toggle('active');
+                toggle.classList.toggle('active');
+            }
+        </script>
 
 {% include 'analytics.html' %}
 </body>
