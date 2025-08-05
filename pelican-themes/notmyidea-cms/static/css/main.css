@@ -702,3 +702,111 @@ p code, li code, span code {
         font-size: 14px;
     }
 }
+
+/* Remove a borda inferior padrão dos posts */
+#posts-list .hentry {
+    border-bottom: none;
+    background: #fff;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+/* Efeito hover nas caixinhas */
+#posts-list .hentry:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Ajusta o header do post dentro da caixinha */
+#posts-list .hentry header {
+    padding-left: 0;
+}
+
+/* Ajusta o footer (info do post) dentro da caixinha */
+#posts-list footer {
+    position: static;
+    float: none;
+    width: 100%;
+    top: auto;
+    left: auto;
+    margin-top: 15px;
+    padding: 10px 0 0 0;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Ajustes para mobile - mantém as caixinhas funcionando bem */
+@media screen and (max-width: 767px) {
+    #posts-list .hentry {
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+    
+    #posts-list footer {
+        margin-top: 10px;
+        padding-top: 10px;
+    }
+}
+
+/* ===================================
+   CORREÇÃO: DATA NO CANTO DIREITO NA MESMA LINHA DO TÍTULO
+   SUBSTITUA o código anterior por este
+   =================================== */
+
+/* Container principal do post - usa flexbox para alinhar título e data */
+#posts-list .hentry {
+    position: relative;
+}
+
+/* Header com título à esquerda */
+#posts-list .hentry header {
+    display: inline-block;
+    width: calc(70% - 10px);
+    vertical-align: top;
+    padding-right: 0;
+}
+
+/* Remove linha do título */
+#posts-list .hentry header h1 {
+    border-bottom: none;
+    margin: 0 0 15px 0;
+}
+
+/* Footer (data) posicionado à direita na mesma linha do título */
+#posts-list footer {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: 30%;
+    text-align: right;
+    color: #000000;
+    font-size: 0.9em;
+    margin: 0;
+    padding: 0;
+    border-top: none;
+    float: none;
+}
+
+/* Garante que o conteúdo do post fique abaixo */
+#posts-list .entry-content {
+    clear: both;
+    margin-top: 10px;
+}
+
+/* Ajustes para mobile - empilha título e data */
+@media screen and (max-width: 767px) {
+    #posts-list .hentry header {
+        width: 100%;
+        display: block;
+    }
+    
+    #posts-list footer {
+        position: static;
+        width: 100%;
+        text-align: left;
+        margin-top: 5px;
+    }
+}
