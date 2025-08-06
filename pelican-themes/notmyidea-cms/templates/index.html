@@ -8,9 +8,9 @@
     <ol id="posts-list" class="hfeed">
     {% for article in articles %}
         <li>
-            <article class="hentry clickable-post" data-url="{{ SITEURL }}/{{ article.url }}" style="cursor: pointer;">
+            <article class="hentry clickable-post" data-url="{{ SITEURL }}/{{ article.url }}">
                 <header>
-                    <h1><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h1>
+                    <h1><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark">{{ article.title }}</a></h1>
                 </header>
 
                 <div class="entry-content">
@@ -39,19 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = url;
             }
         });
-        
-        // Adiciona efeito hover
-        post.addEventListener('mouseenter', function() {
-            this.style.backgroundColor = '#f5f5f5';
-            this.style.transition = 'background-color 0.2s ease';
-        });
-        
-        post.addEventListener('mouseleave', function() {
-            this.style.backgroundColor = '';
-        });
     });
 });
 </script>
+
 {% else %}
 <section id="content" class="body">
 <h2>Pages</h2>

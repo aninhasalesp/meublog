@@ -810,3 +810,95 @@ p code, li code, span code {
         margin-top: 5px;
     }
 }
+/* ===================================
+   POSTS CLICÁVEIS E MELHORIAS VISUAIS
+   Adicione este código no final do main.css
+   =================================== */
+
+/* Remove sublinhado dos títulos dos posts */
+#posts-list h1 a:link, 
+#posts-list h1 a:visited {
+    text-decoration: none;
+    color: #C74350;
+}
+
+/* Remove sublinhado no hover - só muda a cor */
+#posts-list h1 a:hover {
+    text-decoration: none;
+    background-color: inherit; /* Mantém fundo original */
+    color: #C74350; /* Cor do tema */
+}
+
+/* Aumenta a fonte dos títulos dos posts */
+#posts-list h1 {
+    font-size: 1.8em; /* Aumentado de padrão para mais visível */
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+/* Aumenta a fonte do conteúdo dos posts */
+#posts-list .entry-content {
+    font-size: 1.1em; /* Ligeiramente maior que padrão */
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Estilo para posts clicáveis com JavaScript */
+.clickable-post {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.clickable-post:hover {
+    background-color: #f8f9fa !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
+    transform: translateY(-3px) !important;
+}
+
+/* Remove fundo cinza da data/post-info */
+.post-info {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+/* Ajustes para mobile - fonte um pouco menor */
+@media screen and (max-width: 767px) {
+    #posts-list h1 {
+        font-size: 1.5em;
+    }
+    
+    #posts-list .entry-content {
+        font-size: 1em;
+    }
+    
+    /* MANTÉM A DATA À DIREITA NO MOBILE TAMBÉM */
+    #posts-list .hentry header {
+        width: calc(70% - 10px);
+        display: inline-block;
+    }
+    
+    #posts-list footer {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        width: 30%;
+        text-align: right;
+        color: #000000;
+        font-size: 0.8em; /* Fonte um pouco menor no mobile */
+        margin: 0;
+        padding: 0;
+        border-top: none;
+        float: none;
+    }
+    
+    /* Remove especificamente o fundo cinza da data no mobile */
+    .post-info {
+        background: transparent !important;
+        background-color: transparent !important;
+        padding: 5px 0 !important;
+        border-radius: 0 !important;
+        border: none !important;
+    }
+}
