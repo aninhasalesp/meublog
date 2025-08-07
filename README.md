@@ -2,7 +2,7 @@
 
 Este é o repositório do meu blog pessoal, onde compartilho minhas experiências com tecnologia, desenvolvimento e outros temas que gosto e/ou acho importante falar. 💻✨
 
-> 📍 Você pode visitar o blog [aqui](https://aninhasalesp.github.io/meublog)
+> 📍 Você pode visitar o blog [aqui](https://anapaula.org)
 ---
 
 ## 🚀 Como rodar localmente
