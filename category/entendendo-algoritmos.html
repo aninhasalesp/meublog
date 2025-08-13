@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>@aninhasalesp</title>
+        <title>@aninhasalesp - Entendendo algoritmos</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
@@ -30,11 +30,50 @@
                 </nav>
         </header><!-- /#banner -->
 
-<ul>
-    <li>dev</li>
-    <li>Dicas Dev</li>
-    <li>Entendendo algoritmos</li>
-</ul>
+<section id="content" class="body">
+    <h1>Posts</h1>
+    <hr />
+    <ol id="posts-list" class="hfeed">
+        <li>
+            <article class="hentry clickable-post" data-url="/2025/08/12/explorando-o-livro-entendendo-algoritmos-cap1/">
+                <header>
+                    <h1><a href="/2025/08/12/explorando-o-livro-entendendo-algoritmos-cap1/" rel="bookmark">Explorando o livro &#8220;Entendendo Algoritmos&#8221;,&nbsp;cap.1</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-08-12T00:00:00-03:00">
+                ter 12 agosto 2025
+        </abbr>
+
+        <!-- <address class="vcard author">
+                By <a class="url fn" href="/author/ana-paula-sales.html">Ana Paula Sales</a>
+        </address> -->
+<!-- <p>In <a href="/category/entendendo-algoritmos.html">Entendendo algoritmos</a>. </p> -->
+</p></footer><!-- /.post-info --><!-- /.post-info -->
+                    <p>Resumo, análises e exercícios práticos sobre o Capítulo 1 do livro &#8220;Entendendo Algoritmos&#8221;, com sugestões de desafios no LeetCode e&nbsp;Exercism.</p>
+                </div><!-- /.entry-content -->
+            </article>
+        </li>
+    </ol><!-- /#posts-list -->
+</section><!-- /#content -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const clickablePosts = document.querySelectorAll('.clickable-post');
+    
+    clickablePosts.forEach(function(post) {
+        post.addEventListener('click', function(e) {
+            // Evita conflito se clicarem no link do título
+            if (e.target.tagName !== 'A') {
+                const url = this.getAttribute('data-url');
+                window.location.href = url;
+            }
+        });
+    });
+});
+</script>
+
 
         <footer id="footer" class="body">
                 <p>Feito com amor, por <a href="https://github.com/aninhasalesp"> Ana Paula</a> ❤️</p>

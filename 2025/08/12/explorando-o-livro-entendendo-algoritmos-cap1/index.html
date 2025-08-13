@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Explorando o livro “Entendendo Algoritmos”, cap.1</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+        <link href="/" type="application/atom+xml" rel="alternate" title="@aninhasalesp ATOM Feed" />
+</head>
+
+<body id="index" class="home" style="margin: auto;">
+        <header id="banner" class="body">
+                <h1><a href="/">@aninhasalesp </a></h1>
+                <nav>
+                    <!-- BOTÃO HAMBÚRGUER FORA DA UL -->
+                    <button class="menu-toggle" onclick="toggleMenu()">
+                        <div class="hamburger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </button>
+                    <!-- SÓ UMA UL COM ID="menu" -->
+                    <ul id="menu">
+                    <li ><a href="/pages/contato.html">Contato</a></li>
+                    <li ><a href="/pages/sugestoes-de-leitura.html">Sugestões de&nbsp;leitura</a></li>
+                    <li ><a href="/pages/quem-sou-eu.html">Quem sou eu?&nbsp;🌿🌸</a></li>
+                <li><a href="/">Posts</a></li>
+                </ul>
+                </nav>
+        </header><!-- /#banner -->
+
+<div style="display: flex; flex-direction: column;">
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="2025/08/12/explorando-o-livro-entendendo-algoritmos-cap1/" rel="bookmark">
+            Explorando o livro &#8220;Entendendo Algoritmos&#8221;,&nbsp;cap.1
+          </a>
+        </h1>       </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-08-12T00:00:00-03:00">
+                ter 12 agosto 2025
+        </abbr>
+
+        <!-- <address class="vcard author">
+                By <a class="url fn" href="/author/ana-paula-sales.html">Ana Paula Sales</a>
+        </address> -->
+<!-- <p>In <a href="/category/entendendo-algoritmos.html">Entendendo algoritmos</a>. </p> -->
+</p></footer><!-- /.post-info --><!-- /.post-info -->
+        <p>Início de uma série de estudos sobre o livro <a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf">Entendendo Algoritmos</a> de Aditya Y. Bhargava. Uma leitura surpreendentemente acessível e fundamental para entender e pensar de forma mais&nbsp;eficiente.</p>
+<p>Esse livro foi indicado por uma amiga, <a href="https://github.com/anapaulamendes">Ana Paula Mendes</a>, e eu não imaginava o quanto iria gostar. Ele é simples de entender e mostra como conceitos de ciência da computação estão presentes no nosso dia a dia, mesmo para quem nunca&nbsp;programou.</p>
+<p><img src="/images/livro1.jpg" alt="capa do livro" width="400"/></p>
+<hr>
+<h2>A busca binária em&nbsp;resumo</h2>
+<p>Imagine uma lista telefônica com <strong>1 milhão de nomes</strong>. Já pensou em ter que folheá-la inteira? Existe um jeito de encontrar qualquer nome com no <strong>máximo 20 tentativas</strong>, eliminando a cada passo metade das opções, isso é o que chamamos de <strong>busca binária</strong>.
+Na busca binária, cada vez que dobramos o tamanho da lista, precisamos de apenas mais 1&nbsp;passo.</p>
+<p><strong>Observação importante</strong>: numa lista telefônica física, a gente já sabe pular quase direto para a letra certa, o que lembra mais o funcionamento de um hashmap (ou dict no Python), que encontra um item em tempo constante. Mas no computador, quando temos apenas uma lista ordenada&nbsp;(como <code>[1, 3, 5, 7, 9, 11, 13]</code>), não existe esse “pulo mágico”, é aí que a busca binária pode ajudar, cortando a lista ao meio de forma sistemática até encontrar (ou concluir que o elemento não está&nbsp;lá).</p>
+<p>Legal né? Isso é ciência da computação&nbsp;💁‍♀️✨</p>
+<h3>Exemplos básicos de busca&nbsp;binária:</h3>
+<p>Pense em um número entre 1 e 100. Dá para adivinhar em, no máximo, 7&nbsp;tentativas:</p>
+<p>Minha primeira pergunta: &#8220;É&nbsp;50?&#8221;</p>
+<ul>
+<li>Se você disser &#8220;maior&#8221;, eu sei que está entre 51 e&nbsp;100</li>
+<li>Se disser &#8220;menor&#8221;, está entre 1 e&nbsp;49</li>
+</ul>
+<p>Segunda pergunta: Digamos que seja maior que 50. &#8220;É 75?&#8221; (meio entre 51 e&nbsp;100)</p>
+<ul>
+<li>Maior? Está entre 76 e&nbsp;100</li>
+<li>Menor? Está entre 51 e&nbsp;74</li>
+</ul>
+<p>E assim por diante, sempre eliminando metade das&nbsp;possibilidades.</p>
+<p>Seguindo a mesma lógica do exemplo anterior, vamos ver como fica com uma quantidade maior de&nbsp;números:</p>
+<table>
+<thead>
+<tr>
+<th>Itens na lista</th>
+<th>Busca linear (tentativas)</th>
+<th>Busca binária (tentativas)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.000</td>
+<td>até 1.000</td>
+<td>até 10</td>
+</tr>
+<tr>
+<td>1.000.000</td>
+<td>até 1.000.000</td>
+<td>até 20</td>
+</tr>
+</tbody>
+</table>
+<p><span class="caps">VINTE</span> tentativas para encontrar algo entre 1 milhão de&nbsp;opções!!</p>
+<hr>
+<p><strong>Agora que vimos como ela funciona, vale notar que a busca binária não está restrita a livros, ela aparece em várias situações do nosso dia a&nbsp;dia</strong></p>
+<ul>
+<li><strong>Sistemas de busca (Google, WhatsApp, Spotify)</strong>: por trás, usam variações de busca binária em listas ordenadas ou&nbsp;índices.</li>
+<li><strong>Filtragem de dados</strong>: encontrar rapidamente um registro específico em planilhas ou bases de dados&nbsp;grandes.</li>
+<li><strong>Depuração de código</strong>: reduzir o espaço do problema pela metade a cada teste para achar onde o bug&nbsp;está.</li>
+</ul>
+<blockquote>
+<p>Observação: para que a busca binária funcione, os dados precisam estar&nbsp;ordenados.</p>
+</blockquote>
+<hr>
+<h2>Vamos praticar&nbsp;rapidinho?</h2>
+<p>Aqui está uma lista ordenada de&nbsp;números: <code>[2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]</code></p>
+<p>Tente encontrar o número 22 de duas&nbsp;formas:</p>
+<ol>
+<li><strong>Busca linear:</strong> Vá um a um desde o&nbsp;2.  </li>
+<li><strong>Busca binária:</strong> Comece no meio, elimine metade a cada&nbsp;passo.</li>
+</ol>
+<p>Compare quantos passos cada método&nbsp;precisou</p>
+<hr>
+<h2>Curiosidades</h2>
+<ul>
+<li>O git tem uma funcionalidade chamada <a href="https://git-scm.com/docs/git-bisect"><code>git bisect</code></a> que usa busca binária para ajudar desenvolvedores a encontrarem&nbsp;bug</li>
+<li>Se o item que estamos buscando for o primeiro item da lista, esse é o melhor caso na busca linear e o pior caso na busca&nbsp;binária</li>
+<li>A implementação&nbsp;do <code>sortedcontainers</code> usa busca binária (a partir do módulo bisect), <a href="https://grantjenks.com/docs/sortedcontainers/_modules/sortedcontainers/sortedlist.html#SortedList">veja&nbsp;aqui</a></li>
+</ul>
+<hr>
+<h2>Exercícios recomendados&nbsp;👩🏻‍💻💞</h2>
+<p>Para reforçar o aprendizado, aqui vão alguns desafios&nbsp;práticos:</p>
+<p><strong>LeetCode</strong></p>
+<ul>
+<li>
+<p><a href="https://leetcode.com/problems/binary-search/description/">Binary Search</a> — implementação&nbsp;direta.</p>
+</li>
+<li>
+<p><a href="https://leetcode.com/problems/search-insert-position/description/">Search Insert Position</a> — variação para encontrar onde inserir um&nbsp;número.</p>
+</li>
+<li>
+<p><a href="https://leetcode.com/problems/first-bad-version/description/">First Bad Version</a> — busca binária aplicada em <span class="caps">API</span>.</p>
+</li>
+</ul>
+<p><strong>Exercism</strong></p>
+<ul>
+<li><a href="https://exercism.org/tracks/python/exercises/binary-search">Binary Search (Python Track)</a> — implementação e&nbsp;testes.</li>
+</ul>
+<p><strong>Dica: resolva primeiro o problema sem olhar a solução e depois compare com implementações&nbsp;otimizadas.</strong></p>
+<p>E assim começa meu roadmap de estudo: cada capítulo do livro vem acompanhado de exercícios para fixar o&nbsp;conteúdo.</p>
+
+         <!-- Botões de compartilhamento -->
+        <div class="compartilhar" style="margin-top: 2em; display: flex; gap: 1em; align-items: center;">
+          <strong>Compartilhar:</strong>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anapaula.org/2025/08/12/explorando-o-livro-entendendo-algoritmos-cap1/"
+            target="_blank" rel="noopener noreferrer" title="Compartilhar no LinkedIn">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" width="24" height="24" style="vertical-align: middle;">
+          </a>
+
+          <!-- Telegram -->
+          <a href="https://t.me/share/url?url=https://anapaula.org/2025/08/12/explorando-o-livro-entendendo-algoritmos-cap1/"
+             target="_blank" rel="noopener noreferrer" title="Compartilhar no Telegram">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram" width="24" height="24" style="vertical-align: middle;">
+          </a>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/?text=https://anapaula.org/2025/08/12/explorando-o-livro-entendendo-algoritmos-cap1/"
+            target="_blank" rel="noopener noreferrer" title="Compartilhar no WhatsApp">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" width="24" height="24">
+          </a>
+
+        </div>
+      </div><!-- /.entry-content -->
+    </article>
+  </section>
+
+  <div id="comments" style="max-width: 700px;">
+    <script src="https://utteranc.es/client.js"
+      repo="aninhasalesp/meublog"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+        <footer id="footer" class="body">
+                <p>Feito com amor, por <a href="https://github.com/aninhasalesp"> Ana Paula</a> ❤️</p>
+        </footer><!-- /#footer -->
+
+        <script>
+            function toggleMenu() {
+                const menu = document.getElementById('menu');
+                const toggle = document.querySelector('.menu-toggle');
+
+                menu.classList.toggle('active');
+                toggle.classList.toggle('active');
+            }
+        </script>
+
+</body>
+</html>
