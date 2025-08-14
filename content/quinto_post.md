@@ -1,28 +1,60 @@
 Title: Explorando o livro "Entendendo Algoritmos", cap.1
 Date: 2025-08-12
 Category: Entendendo algoritmos
-Summary: Resumo, análises e exercícios práticos sobre o Capítulo 1 do livro "Entendendo Algoritmos", com sugestões de desafios no LeetCode e Exercism.
+Summary: Análises e exercícios práticos sobre o Capítulo 1 do livro "Entendendo Algoritmos", com sugestões de desafios.
 
-Início de uma série de estudos sobre o livro [Entendendo Algoritmos](https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf) de Aditya Y. Bhargava. Uma leitura surpreendentemente acessível e fundamental para entender e pensar de forma mais eficiente.
+Início de uma série de estudos sobre o livro [Entendendo Algoritmos](https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf) de Aditya Y. Bhargava. 
 
-Esse livro foi indicado por uma amiga, [Ana Paula Mendes](https://github.com/anapaulamendes), e eu não imaginava o quanto iria gostar. Ele é simples de entender e mostra como conceitos de ciência da computação estão presentes no nosso dia a dia, mesmo para quem nunca programou.
+Esse livro foi indicado por uma amiga, [Ana Paula Mendes](https://github.com/anapaulamendes), e eu não imaginava o quanto iria gostar. A leitura é leve, clara e muito acessível. Se você, como eu, tem dificuldade em manter a constância em leituras técnicas, esse livro é um achado, fácil de entender, ótimo para aprender ou revisar conceitos. 
+
+Ele apresenta ideias da ciência da computação que estão no nosso dia a dia, muitas vezes sem que a gente perceba.
 
 <img src="{static}/images/livro1.jpg" alt="capa do livro" width="400"/>
 
+
+Uma das coisas que mais me chamam atenção nesse livro é o jeito como o autor ensina, sempre com exemplos. Em vez de encher de símbolos e fórmulas, ele quer que a gente visualize os conceitos. Ele acredita, e eu concordo, que aprendemos melhor quando conseguimos relacionar o conteúdo com algo que já conhecemos. E, pra isso, os exemplos ajudam muito. 
+
+E o melhor é que ele desenha 🤩! 
+Sabe aquela frase “quer que eu desenhe pra você entender”? Eu respondo “sim, por favorrrrr!” e ele realmente desenha. É maravilhoso ✨. 
+
+Dá pra sentir que tudo foi pensado com cuidado, desde o conteúdo, os exemplos ilustrados até a recapitulação no fim de cada capítulo. 
+
+Depois dessa introdução, bora ver o que o capítulo 1 ensina.
+
+<img src="{static}/images/hahahaha-gif.gif" alt="gif" width="100"/>
+
 ---
 
-## A busca binária em resumo
+# A busca binária em resumo
 
-Imagine uma lista telefônica com **1 milhão de nomes**. Já pensou em ter que folheá-la inteira? Existe um jeito de encontrar qualquer nome com no **máximo 20 tentativas**, eliminando a cada passo metade das opções, isso é o que chamamos de **busca binária**.
-Na busca binária, cada vez que dobramos o tamanho da lista, precisamos de apenas mais 1 passo.
+Pensa numa lista telefônica com **1 milhão de nomes**. Olhar folha por folha seria um pesadelo, né? 
+Agora, e se eu te dissesse que dá para encontrar qualquer nome em no **máximo 20 tentativas**? 👀
 
+O truque é simples: a cada etapa, tu elimina metade das opções. Isso é a **busca binária**.
+E o mais legal é que, mesmo que a lista dobre de tamanho, tu só precisa de **mais uma** etapa para chegar ao resultado. 🤓
+
+**Exemplo**:
+Para facilitar a conta, vamos pegar uma lista menor de 128 nomes e calcular o número máximo de etapas que levaríamos para encontrar um nome específico. Logo em seguida, dobramos o tamanho da lista e vemos que isso adiciona apenas mais uma etapa:
+
+```python
+def max_etapas(n):
+    etapas = 0
+    while n > 1:
+        n //= 2
+        etapas += 1
+    return etapas
+
+print(max_etapas(128)) # 7
+print(max_etapas(128*2)) # 8
+
+```
 
 **Observação importante**: numa lista telefônica física, a gente já sabe pular quase direto para a letra certa, o que lembra mais o funcionamento de um hashmap (ou dict no Python), que encontra um item em tempo constante. Mas no computador, quando temos apenas uma lista ordenada (como `[1, 3, 5, 7, 9, 11, 13]`), não existe esse “pulo mágico”, é aí que a busca binária pode ajudar, cortando a lista ao meio de forma sistemática até encontrar (ou concluir que o elemento não está lá).
 
-Legal né? Isso é ciência da computação 💁‍♀️✨
+Legal né? Isso é ciência da computação!! 💁‍♀️✨
 
-
-### Exemplos básicos de busca binária:
+---
+## Exemplos básicos de busca binária:
 
 Pense em um número entre 1 e 100. Dá para adivinhar em, no máximo, 7 tentativas:
 
@@ -38,29 +70,86 @@ Segunda pergunta: Digamos que seja maior que 50. "É 75?" (meio entre 51 e 100)
 
 E assim por diante, sempre eliminando metade das possibilidades.
 
-Seguindo a mesma lógica do exemplo anterior, vamos ver como fica com uma quantidade maior de números:
-
+### Vamos ver como fica com uma quantidade maior de números:
 
 | Itens na lista | Busca linear (tentativas) | Busca binária (tentativas) |
 | --- | --- | --- |
 | 1.000 | até 1.000 | até 10 |
 | 1.000.000 | até 1.000.000 | até 20 |
 
-VINTE tentativas para encontrar algo entre 1 milhão de opções!!
+Sim, 20 tentativas para encontrar algo entre 1 milhão de opções! 🚀
 
+Esse “milagre” da busca binária acontece por causa de um conceito chamado **logaritmo**, e já já eu te mostro o porquê.
 
 ---
 
-**Agora que vimos como ela funciona, vale notar que a busca binária não está restrita a livros, ela aparece em várias situações do nosso dia a dia**
+Agora que você já entendeu a busca binária, vamos entrar em mais três pontos que andam de mãos dadas: **logaritmos, tempo de execução e notação Big O**.
 
+Preparei um resumo rápido de cada um, do jeito que fez sentido pra mim.
+Se em algum momento ficar confuso, não tem problema, dá uma olhada no livro que é sucesso 🫂💖
+
+---
+
+## Logaritmos:
+
+O número máximo de tentativas na busca binária é dado por log₂(n), logaritmo na base 2 de n.
+
+Se o nome assusta, pensa assim:
+
+> **log₂(n) é o número de vezes que você precisa dividir n por 2 até chegar em 1**
+
+**Exemplo**:
+
+- log₂(128) = 7, 7 cortes ao meio até sobrar 1 item
+- log₂(256) = 8, só mais uma etapa, mesmo dobrando o tamanho da lista
+
+A base "2" vem justamente porque a cada passo cortamos a lista **pela metade**.
+
+---
+
+## Tempo de execução: 
+
+Sempre que falamos sobre um algoritmo, é importante pensar no tempo de execução, quanto esforço (ou quantos passos) ele precisa para chegar ao resultado.
+
+Na **busca linear** (a pesquisa simples), verificamos item por item:
+
+- Lista com 100 números → até 100 tentativas
+- Lista com 4 bilhões de números → até 4 bilhões de tentativas
+
+
+O tempo de execução cresce na mesma proporção que o tamanho da lista. Chamamos isso de **tempo linear**.
+
+A **busca binária** é um outro mundo:
+
+- Lista com 100 números → no máximo 7 tentativas
+- Lista com 4 bilhões → no máximo 32 tentativas
+
+Isso acontece porque a busca binária corta as possibilidades pela metade a cada passo. Esse tipo de crescimento é chamado de **tempo logarítmico**.
+
+<img src="{static}/images/image-4.png" alt="tempo de execução" width="400"/>
+
+---
+## Notação Big O
+
+A **notação Big O** é um jeito de medir a eficiência de um algoritmo, mostrando como o **tempo de execução** cresce conforme aumentamos o tamanho da entrada.
+
+- O(log n), tempo logarítmico (ex: pesquisa binária)
+- O(n), tempo linear (ex: pesquisa simples)
+- O(n * log n), um algoritmo rápido de ordenação, como quicksort (Capítulo 4)
+- O(n²), um algoritmo de ordenação mais lenta, como ordenação por seleção (Capítulo 2).
+- O(n!), um algoritmo extremamente lento, como o do caixeiro viajante (Capítulo 1).
+
+O livro ilustra isso de forma bem visual e intuitiva: cresce linearmente, cresce em log, cresce muito, cresce lento... e por aí vai. 
+
+---
+
+**Agora que vimos como a busca binária funciona, vale notar que ela não está restrita a livros, ela aparece em várias situações do nosso dia a dia**
 
 - **Sistemas de busca (Google, WhatsApp, Spotify)**: por trás, usam variações de busca binária em listas ordenadas ou índices.
 - **Filtragem de dados**: encontrar rapidamente um registro específico em planilhas ou bases de dados grandes.
 - **Depuração de código**: reduzir o espaço do problema pela metade a cada teste para achar onde o bug está.
 
-> Observação: para que a busca binária funcione, os dados precisam estar ordenados.
-
----
+**Observação**: para que a busca binária funcione, os dados precisam estar ordenados.
 
 ## Vamos praticar rapidinho?
 
@@ -81,7 +170,6 @@ Compare quantos passos cada método precisou
 - Se o item que estamos buscando for o primeiro item da lista, esse é o melhor caso na busca linear e o pior caso na busca binária
 - A implementação do `sortedcontainers` usa busca binária (a partir do módulo bisect), [veja aqui](https://grantjenks.com/docs/sortedcontainers/_modules/sortedcontainers/sortedlist.html#SortedList)
  
-
 ---
 
 ## Exercícios recomendados 👩🏻‍💻💞
