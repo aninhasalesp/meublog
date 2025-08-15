@@ -30,7 +30,9 @@ Depois dessa introdução, bora ver o que o capítulo 1 ensina.
 Pensa numa lista telefônica com **1 milhão de nomes**. Olhar folha por folha seria um pesadelo, né? 
 Agora, e se eu te dissesse que dá para encontrar qualquer nome em no **máximo 20 tentativas**? 👀
 
-O truque é simples: a cada etapa, tu elimina metade das opções. Isso é a **busca binária**.
+O truque é simples: a cada etapa, tu elimina metade das opções. Comece considerando o elemento que está bem no meio da sequência. Em uma lista telefônica, isso seria abrir o livro bem no meio. Em uma lista com 10 itens, isso seria pegar o 5o item. Agora compare esse item do meio com o que você está buscando: se eles forem iguais, parabéns, você encontrou o que procurava! Agora, se o item que você encontrou for MAIOR que o item que você procura (no caso de nomes em uma lista telefônica, pense em qual nome vem primeiro na ordem alfabética), quer dizer que o item buscado está na primeira metade da lista. Caso contrário, o item está na segunda metade da lista. E assim você consegue cortar a lista pela *metade* apenas comparando o item procurado com o item do meio. Depois disso, basta pegar a parte que você selecionou e aplicar a mesma estratégia, checando o item do meio e descartando metade da lista.
+**Observação**: Essa técnica só funciona se a lista de itens estiver ordenada!
+
 E o mais legal é que, mesmo que a lista dobre de tamanho, tu só precisa de **mais uma** etapa para chegar ao resultado. 🤓
 
 **Exemplo**:
