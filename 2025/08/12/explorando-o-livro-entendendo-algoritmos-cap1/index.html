@@ -65,8 +65,9 @@ Sabe aquela frase “quer que eu desenhe pra você entender”? Eu respondo “s
 <h1>A busca binária em&nbsp;resumo</h1>
 <p>Pensa numa lista telefônica com <strong>1 milhão de nomes</strong>. Olhar folha por folha seria um pesadelo, né? 
 Agora, e se eu te dissesse que dá para encontrar qualquer nome em no <strong>máximo 20 tentativas</strong>?&nbsp;👀</p>
-<p>O truque é simples: a cada etapa, tu elimina metade das opções. Isso é a <strong>busca binária</strong>.
-E o mais legal é que, mesmo que a lista dobre de tamanho, tu só precisa de <strong>mais uma</strong> etapa para chegar ao resultado.&nbsp;🤓</p>
+<p>O truque é simples: a cada etapa, tu elimina metade das opções. Comece considerando o elemento que está bem no meio da sequência. Em uma lista telefônica, isso seria abrir o livro bem no meio. Em uma lista com 10 itens, isso seria pegar o 5o item. Agora compare esse item do meio com o que você está buscando: se eles forem iguais, parabéns, você encontrou o que procurava! Agora, se o item que você encontrou for <span class="caps">MAIOR</span> que o item que você procura (no caso de nomes em uma lista telefônica, pense em qual nome vem primeiro na ordem alfabética), quer dizer que o item buscado está na primeira metade da lista. Caso contrário, o item está na segunda metade da lista. E assim você consegue cortar a lista pela <em>metade</em> apenas comparando o item procurado com o item do meio. Depois disso, basta pegar a parte que você selecionou e aplicar a mesma estratégia, checando o item do meio e descartando metade da lista.
+<strong>Observação</strong>: Essa técnica só funciona se a lista de itens estiver&nbsp;ordenada!</p>
+<p>E o mais legal é que, mesmo que a lista dobre de tamanho, tu só precisa de <strong>mais uma</strong> etapa para chegar ao resultado.&nbsp;🤓</p>
 <p><strong>Exemplo</strong>:
 Para facilitar a conta, vamos pegar uma lista menor de 128 nomes e calcular o número máximo de etapas que levaríamos para encontrar um nome específico. Logo em seguida, dobramos o tamanho da lista e vemos que isso adiciona apenas mais uma&nbsp;etapa:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">max_etapas</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
