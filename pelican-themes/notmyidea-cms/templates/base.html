@@ -5,9 +5,9 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ SITEURL }}/theme/css/{{ CSS_FILE }}" type="text/css" />
-        <link href="{{ SITEURL }}/{{ FEED }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} ATOM Feed" />
+        <link href="{{ SITEURL }}/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
         {% if FEED_RSS %}
-        <link href="{{ SITEURL }}/{{ FEED_RSS }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
+        <link href="{{ SITEURL }}/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
         {% endif %}
 </head>
 
@@ -37,6 +37,12 @@
                 {% endfor %}
                 {% endif %}
                 <li><a href="{{ SITEURL }}/{{ ARCHIVES_URL }}">Posts</a></li>
+                    <li>
+                        <a href="{{ SITEURL }}/feeds/all.atom.xml" title="Assinar RSS">
+                            <img src="{{ SITEURL }}/images/rss-icon.png" alt="RSS" style="width:20px;height:20px;vertical-align:middle;">
+                        </a>
+                    </li>
+
                 {#{% for cat, null in categories %}
                     <li {% if cat == category %}class="active"{% endif %}><a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a></li>
                 {% endfor %}#}
