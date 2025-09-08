@@ -12,16 +12,80 @@
 @import url("pygment.css");
 @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz&subset=latin);
 
+
+/* ====== Tema Claro/Escuro ====== */
+:root {
+  --bg-color: #ffffff;
+  --body-bg-color: #F5F4EF;
+  --text-color: #000000;
+  --link-color: #C74451;
+
+  --code-bg: #f8f9fa;
+  --code-text: #212529;
+  --code-comment: #6c757d;
+
+}
+
+[data-theme="dark"] {
+  --bg-color: #2c2c2c;
+  --text-color: #f5f5f5;
+  --link-color: #C74451;
+  --body-bg-color: #1e1e1e;
+}
+
+/* === Overrides para Tema Escuro === */
+[data-theme="dark"] body {
+  background-color: var(--body-bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] #content,
+[data-theme="dark"] #sidebar,
+[data-theme="dark"] #about {
+  background-color: var(--bg-color);
+  color: var(--text-color) !important;
+  border-color: #444 !important;
+}
+
+[data-theme="dark"] #banner nav {
+  background: #2c2c2c !important;
+}
+
+[data-theme="dark"] #banner nav a:link,
+[data-theme="dark"] #banner nav a:visited {
+  color: var(--text-color) !important;
+}
+
+[data-theme="dark"] #banner h1 a {
+    color: var(--text-color) !important;
+}
+
+#theme-toggle {
+    padding-top: 9px !important;
+    height: 26px !important;
+}
+
+pre, code {
+  background-color: var(--code-bg) !important;
+  color: var(--code-text);
+  border: 1px solid var(--code-border);
+}
+
+/* [data-theme="dark"] a {
+  color: #c66190 !important;
+} */
+
+
 /***** Global *****/
 /* Body */
 body {
-    background: #F5F4EF;
+    background: var(--body-bg-color);
     color: #000305;
     font-size: 87.5%; /* Base font size: 14px */
     font-family: 'Trebuchet MS', Trebuchet, 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     line-height: 1.429;
     margin: 0;
-    padding: 0;
+    padding: 0 20px 0 20px;
     text-align: left;
     max-width: 1440px;
 }
@@ -153,71 +217,75 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 	padding: 45px 0 0 0;
 }
 
-	/* Banner */
-	#banner h1 {
-        font-size: 3.571em; 
-        line-height: 0;
-	    margin: 0 auto 0 auto;
-		margin-bottom: 45px;
-    }
-	#banner h1 a:link, #banner h1 a:visited {
-		color: #000305;
-		display: block;
-		font-weight: bold;
-		margin: 0 auto 0.8em auto;
-		margin-right: 406px;
-		text-decoration: none;
-		width: 427px;
-	}
-	#banner h1 a:hover, #banner h1 a:active {
-		background: none;
-		color: #C74350;
-		text-shadow: none;
-	}
-	
-	#banner h1 strong {font-size: 0.36em; font-weight: normal;}
-	
-	/* Main Nav */
-	#banner nav {
-		background: #000305;
-		font-size: 1.143em;
-		height: 40px;
-		line-height: 30px;
-		margin: 0 0 12px 0;
-		padding: 0;
-		/* width: 90%; */
-		
-		border-radius: 5px;
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-	}
-	
-	#banner nav ul {list-style: none; margin: 0 auto;}
-	#banner nav li {float: left; display: inline; margin: 0;}
-	
-	#banner nav a:link, #banner nav a:visited {
-		color: #fff;
-		display: inline-block;
-		height: 30px;
-		padding: 5px 1.5em;
-		text-decoration: none;
-	}
-	#banner nav a:hover, #banner nav a:active,
-	#banner nav .active a:link, #banner nav .active a:visited {
-		background: #C74451;
-		color: #fff;
-		text-shadow: none !important;
-	}
-	
-	#banner nav li:first-child a {
-		border-top-left-radius: 5px;
-		-moz-border-radius-topleft: 5px;
-		-webkit-border-top-left-radius: 5px;
-		
-		border-bottom-left-radius: 5px;
-		-moz-border-radius-bottomleft: 5px;
-		-webkit-border-bottom-left-radius: 5px;
-	}
+/* Banner */
+#banner h1 {
+    font-size: 3.571em; 
+    line-height: 0;
+    margin: 0 auto 0 auto;
+    margin-bottom: 45px;
+}
+/* #banner h1 a {
+    width: 100%;
+} */
+#banner h1 a:link, #banner h1 a:visited {
+    color: #000305;
+    display: block;
+    font-weight: bold;
+    margin: 0 auto 0.8em auto;
+    margin-right: 406px;
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+}
+#banner h1 a:hover, #banner h1 a:active {
+    background: none;
+    color: #C74350;
+    text-shadow: none;
+}
+
+#banner h1 strong {font-size: 0.36em; font-weight: normal;}
+
+/* Main Nav */
+#banner nav {
+    background: #000305;
+    font-size: 1.143em;
+    height: 40px;
+    line-height: 30px;
+    margin: 0 0 12px 0;
+    padding: 0;
+    /* width: 90%; */
+    
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+#banner nav ul {list-style: none; margin: 0 auto;}
+#banner nav li {float: left; display: inline; margin: 0;}
+
+#banner nav a:link, #banner nav a:visited {
+    color: #fff;
+    display: inline-block;
+    height: 30px;
+    padding: 5px 1.5em;
+    text-decoration: none;
+}
+#banner nav a:hover, #banner nav a:active,
+#banner nav .active a:link, #banner nav .active a:visited {
+    background: #C74451;
+    color: #fff;
+    text-shadow: none !important;
+}
+
+#banner nav li:first-child a {
+    border-top-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -webkit-border-top-left-radius: 5px;
+    
+    border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+}
 
 /*
 	Featured
@@ -235,6 +303,11 @@ img.left, figure.left {float: right; margin: 0 0 2em 2em;}
 	padding: 20px 20px;
 	/* min-width: 600px; */
 	width: 100%;
+}
+
+.body.posts-page {
+    padding: 10px 0 20px 0 !important;
+    background-color: transparent !important;
 }
 
 /*
@@ -360,7 +433,7 @@ li:last-child .hentry, #content > .hentry {border: 0; margin: 0;}
 #content > .hentry {padding: 1em 0;}
 .hentry img{display : none ;}
 .entry-title {font-size: 3em; margin-bottom: 10px; margin-top: 0;}
-.entry-title a:link, .entry-title a:visited {text-decoration: none; color: #333;}
+.entry-title a:link, .entry-title a:visited {text-decoration: none; color: var(--text-color);}
 .entry-title a:visited {background-color: #fff;}
 
 .hentry .post-info * {font-style: normal;}
@@ -460,15 +533,15 @@ p code, li code, span code {
     font-size: 1.5em;
     padding: 10px 15px;
     cursor: pointer;
-    position: absolute;
+    position: fixed;
     right: 0;
-    top: 0;
+    top: 5px;
     z-index: 1000;
 }
 
-.menu-toggle:hover {
+/* .menu-toggle:hover {
     background: #C74451;
-}
+} */
 
 /* Ícone do hambúrguer */
 .hamburger {
@@ -483,7 +556,7 @@ p code, li code, span code {
     display: block;
     height: 2px;
     width: 100%;
-    background: #fff;
+    background: var(--text-color);
     transition: all 0.3s ease;
 }
 
@@ -526,18 +599,43 @@ p code, li code, span code {
         width: 100%;
         margin: 1em 0 2em 0;
     }
+
+    #banner {
+        padding: 45px 0 0 0;
+    }
 }
 
 /* RESPONSIVIDADE - MOBILE */
 @media screen and (max-width: 767px) {
+    [data-theme="dark"] #banner nav ul li a:visited {
+        background: var(--bg-color) !important;
+    }
+
+    #banner nav ul li a:visited {
+        background: #000305 !important;
+    }
+
+    #banner nav ul li.active a:visited {
+        background: var(--link-color) !important;
+    }
+
     body {
         min-width: auto;
         font-size: 16px;
         padding: 0 10px;
     }
 
+    .menu-toggle {
+        top: 15px;
+    }
+
     #banner {
-        padding: 30px 0 0 0;
+        padding: 32px 0 0 0;
+        background-color: var(--body-bg-color);
+        position: sticky;
+        top: 0;
+        height: 30px;
+        z-index: 10;
     }
 
     #banner h1 {
@@ -579,6 +677,7 @@ p code, li code, span code {
 
     #banner nav {
         position: relative;
+        height: 0px;
     }
 
     #banner nav li {
@@ -684,6 +783,15 @@ p code, li code, span code {
         font-size: 14px;
     }
 
+    #banner {
+        padding: 22px 0 0 0;
+        height: 22px;
+    }
+
+    .menu-toggle {
+        top: 5px;
+    }
+
     #banner h1 {
         font-size: 2em;
         margin-bottom: 15px;
@@ -706,7 +814,7 @@ p code, li code, span code {
 /* Remove a borda inferior padrão dos posts */
 #posts-list .hentry {
     border-bottom: none;
-    background: #fff;
+    background: var(--bg-color);
     border: 1px solid #e1e8ed;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -715,10 +823,19 @@ p code, li code, span code {
     transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
+[data-theme="dark"] #posts-list .hentry {
+    border: 1px solid #3a3a3a;
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
 /* Efeito hover nas caixinhas */
 #posts-list .hentry:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
+}
+
+[data-theme="dark"] #posts-list .hentry:hover {
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 /* Ajusta o header do post dentro da caixinha */
@@ -782,7 +899,7 @@ p code, li code, span code {
     right: 15px;
     width: 30%;
     text-align: right;
-    color: #000000;
+    color: var(--text-color);
     font-size: 0.9em;
     margin: 0;
     padding: 0;
@@ -819,7 +936,7 @@ p code, li code, span code {
 #posts-list h1 a:link, 
 #posts-list h1 a:visited {
     text-decoration: none;
-    color: #C74350;
+    color: #E66572;
 }
 
 /* Remove sublinhado no hover - só muda a cor */
@@ -840,7 +957,7 @@ p code, li code, span code {
 #posts-list .entry-content {
     font-size: 1.1em; /* Ligeiramente maior que padrão */
     line-height: 1.5;
-    color: #333;
+    color: var(--text-color);
 }
 
 /* Estilo para posts clicáveis com JavaScript */
@@ -850,7 +967,7 @@ p code, li code, span code {
 }
 
 .clickable-post:hover {
-    background-color: #f8f9fa !important;
+    /* background-color: #f8f9fa !important; */
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
     transform: translateY(-3px) !important;
 }
@@ -885,7 +1002,7 @@ p code, li code, span code {
         right: 15px;
         width: 30%;
         text-align: right;
-        color: #000000;
+        /* color: #000000; */
         font-size: 0.8em; /* Fonte um pouco menor no mobile */
         margin: 0;
         padding: 0;
