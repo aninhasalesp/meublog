@@ -9,6 +9,7 @@
         {% if FEED_RSS %}
         <link href="{{ SITEURL }}/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="{{ SITENAME }} RSS Feed" />
         {% endif %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-toggles@4.10.1/css/classic.min.css">
 </head>
 
 <body id="index" class="home" style="margin: auto;">
@@ -46,8 +47,34 @@
             </li>
 
             <li style="float: right;">
-                <a href="#" id="theme-toggle">
-                    🌓
+                <a href="#" id="theme-toggle" class="theme-toggle theme-toggle--toggled" aria-label="Toggle theme">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        width="22px"
+                        height="22px"
+                        fill="currentColor"
+                        stroke-linecap="round"
+                        class="theme-toggle__classic"
+                        viewBox="0 0 32 32"
+                    >
+                        <clipPath id="theme-toggle__classic__cutout">
+                        <path d="M0-5h30a1 1 0 0 0 9 13v24H0Z" />
+                        </clipPath>
+                        <g clip-path="url(#theme-toggle__classic__cutout)">
+                        <circle cx="16" cy="16" r="9.34" />
+                        <g stroke="currentColor" stroke-width="1.5">
+                            <path d="M16 5.5v-4" />
+                            <path d="M16 30.5v-4" />
+                            <path d="M1.5 16h4" />
+                            <path d="M26.5 16h4" />
+                            <path d="m23.4 8.6 2.8-2.8" />
+                            <path d="m5.7 26.3 2.9-2.9" />
+                            <path d="m5.8 5.8 2.8 2.8" />
+                            <path d="m23.4 23.4 2.9 2.9" />
+                        </g>
+                        </g>
+                    </svg>
                 </a>
             </li>
 
@@ -79,10 +106,23 @@
 
         document.documentElement.setAttribute("data-theme", currentTheme);
 
+        function setThemeToggleIcon(theme) {
+            const themeToggle = document.getElementById("theme-toggle");
+            if (theme === "light") {
+                themeToggle.classList.add("theme-toggle--toggled");
+            } else {
+                themeToggle.classList.remove("theme-toggle--toggled");
+            }
+        }
+
+        setThemeToggleIcon(currentTheme);
+
         toggle.addEventListener("click", () => {
             const theme = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
             document.documentElement.setAttribute("data-theme", theme);
             localStorage.setItem("theme", theme);
+
+            setThemeToggleIcon(theme);
 
             const menuToggle = document.querySelector('.menu-toggle');
             if (menuToggle.classList.contains('active')) {
