@@ -25,6 +25,15 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+# Tags e categorias
+TAG_SAVE_AS = "tag/{slug}.html"
+TAG_URL = "tag/{slug}.html"
+CATEGORY_SAVE_AS = "category/{slug}.html"
+CATEGORY_URL = "category/{slug}.html"
+
+DISPLAY_CATEGORIES_ON_MENU = True
+DISPLAY_TAGS_ON_MENU = True
+
 # Opcional: gerar RSS também
 FEED_ALL_RSS = "feeds/all.rss.xml"
 CATEGORY_FEED_RSS = "feeds/{slug}.rss.xml"
