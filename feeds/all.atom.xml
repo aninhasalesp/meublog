@@ -1,5 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>@aninhasalesp</title><link href="/" rel="alternate"/><link href="/feeds/all.atom.xml" rel="self"/><id>/</id><updated>2025-08-27T00:00:00-03:00</updated><entry><title>Explorando o livro “Entendendo Algoritmos”, cap.2</title><link href="/2025/08/27/explorando-o-livro-entendendo-algoritmos-cap2/" rel="alternate"/><published>2025-08-27T00:00:00-03:00</published><updated>2025-08-27T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-08-27:/2025/08/27/explorando-o-livro-entendendo-algoritmos-cap2/</id><summary type="html">&lt;p&gt;Análises e exercícios práticos sobre o Capítulo 2 do livro &amp;#8220;Entendendo Algoritmos&amp;#8221;, com sugestões de&amp;nbsp;desafios.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Segundo capítulo da série de estudos sobre o livro &lt;a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf"&gt;Entendendo Algoritmos&lt;/a&gt; de Aditya Y.&amp;nbsp;Bhargava.&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>@aninhasalesp</title><link href="/" rel="alternate"/><link href="/feeds/all.atom.xml" rel="self"/><id>/</id><updated>2025-09-17T00:00:00-03:00</updated><entry><title>Explorando o livro “Entendendo Algoritmos”, cap.3</title><link href="/2025/09/17/explorando-o-livro-entendendo-algoritmos-cap3/" rel="alternate"/><published>2025-09-17T00:00:00-03:00</published><updated>2025-09-17T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-09-17:/2025/09/17/explorando-o-livro-entendendo-algoritmos-cap3/</id><summary type="html">&lt;p&gt;Análises e exercícios práticos sobre o Capítulo 3 do livro &amp;#8220;Entendendo Algoritmos&amp;#8221;, com sugestões de&amp;nbsp;desafios.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Terceiro capítulo da série de estudos sobre o livro &lt;a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf"&gt;Entendendo Algoritmos&lt;/a&gt; de Aditya Y.&amp;nbsp;Bhargava.&lt;/p&gt;
+&lt;p&gt;Se você está acompanhando a série, já resumi os capítulos anteriores 👀, então volta lá se tu tiver alguma dúvida:&lt;br&gt;
+- &lt;a href="https://anapaula.org/2025/08/12/explorando-o-livro-entendendo-algoritmos-cap1/"&gt;Capítulo 1 - Introdução a algoritmos&lt;/a&gt;&lt;br&gt;
+- &lt;a href="https://anapaula.org/2025/08/27/explorando-o-livro-entendendo-algoritmos-cap2/"&gt;Capítulo 2 - Ordenação por&amp;nbsp;seleção&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Oi, pessoal! Mais um resuminho do nosso livro querido&amp;nbsp;😊 &lt;/p&gt;
+&lt;p&gt;Esse capítulo foi um dos que mais me tirou a sensação de que programação é mágica. Bora entender recursão e pilhas sem&amp;nbsp;medo?&lt;/p&gt;
+&lt;p&gt;Neste capítulo, o autor explica de forma simples o conceito e o uso da &lt;strong&gt;recursão&lt;/strong&gt;, dividindo a explicação em caso base e caso recursivo. 
+Ele sugere que você, ao menos uma vez, analise uma função recursiva com papel e caneta, acompanhando passo a passo, assim você entenderá como a função&amp;nbsp;funciona.&lt;/p&gt;
+&lt;h1&gt;Recursão&lt;/h1&gt;
+&lt;p&gt;É a técnica onde uma função chama a si mesma para resolver um problema, dividindo-o em problemas menores. Devido ao fato de uma função recursiva chamar a si mesma, é mais fácil de escrevê-la de forma errada e acabar em um loop infinito. Para que a recursão funcione corretamente, ela deve conter um caso base para parar as chamadas e um caso recursivo que aproxime o problema da solução&amp;nbsp;final. &lt;/p&gt;
+&lt;h2&gt;Como a recursão&amp;nbsp;funciona:&lt;/h2&gt;
+&lt;p&gt;Antes de mostrar um exemplo de recursão, vamos entender como ela&amp;nbsp;funciona.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Caso base&lt;/strong&gt;: define quando a função deve &lt;strong&gt;parar&lt;/strong&gt; de se chamar. Sem ele, a recursão continuaria indefinidamente, causando&amp;nbsp;erro.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Caso recursivo&lt;/strong&gt;: é a parte em que a função &lt;strong&gt;se chama novamente&lt;/strong&gt;, aproximando-se da solução final a cada&amp;nbsp;passo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Um exemplo clássico é o cálculo do fatorial de um&amp;nbsp;número::&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fatorial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# Caso Base&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# Caso Recursivo&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;fatorial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fatorial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  &lt;span class="c1"&gt;# Saída: 120&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Nesse&amp;nbsp;exemplo:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Caso Base&lt;/strong&gt;: &lt;code&gt;n&lt;/code&gt; é 0 ou 1, o fatorial é&amp;nbsp;1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Caso Recursivo&lt;/strong&gt;:&amp;nbsp;Se &lt;code&gt;n&lt;/code&gt; é maior que 1, o fatorial&amp;nbsp;é &lt;code&gt;n * fatorial(n-1)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Olha como fica quase poético, cada número chama o próximo até o 1 dizer &amp;#8220;chega, agora volta&amp;#8221;. Aí a multiplicação acontece no caminho de&amp;nbsp;volta.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Pilha&lt;/h1&gt;
+&lt;p&gt;Suponha que você esteja fazendo um churrasco para os seus amigos. Você tem uma lista de afazeres em forma de uma pilha de notas adesivas. Quando você insere um item, ele é colocado no topo da pilha. Quando você lê um item, lê apenas o item do topo da pilha e ele é retirado da lista. Logo, sua lista de afazeres contém apenas duas ações: &lt;em&gt;push&lt;/em&gt; (inserir) e &lt;em&gt;pop&lt;/em&gt; (remover e&amp;nbsp;ler).&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/pilha.png" alt="pilha" width="700"/&gt;&lt;/p&gt;
+&lt;p&gt;Esta estrutura de dados é chamada de pilha. A pilha é uma estrutura de dados simples e nós usamos o tempo todo sem&amp;nbsp;perceber.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Pilha de&amp;nbsp;chamadas&lt;/h1&gt;
+&lt;p&gt;Sempre que uma função é chamada, o computador precisa “lembrar” de onde ela parou para poder continuar depois.
+Essa memória temporária é organizada numa &lt;strong&gt;pilha de chamadas&lt;/strong&gt; (call&amp;nbsp;stack).&lt;/p&gt;
+&lt;p&gt;Funciona&amp;nbsp;assim:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A cada nova chamada de função, o computador empilha informações sobre essa execução (como parâmetros e variáveis&amp;nbsp;locais).&lt;/li&gt;
+&lt;li&gt;Quando a função termina, o computador desempilha esses dados e volta para o ponto&amp;nbsp;anterior.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A metáfora do livro é ótima, pense em uma pilha de pratos na cozinha. Você só consegue pegar (ou retirar) o prato que está por cima.  Assim também funciona com funções, o último que entrou é o primeiro que sai (&lt;span class="caps"&gt;LIFO&lt;/span&gt;: Last In, First&amp;nbsp;Out).&lt;/p&gt;
+&lt;p&gt;Podemos visualizar isso com um exemplo simples em&amp;nbsp;Python:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;cumprimenta&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Oi,&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;despedida&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;despedida&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Tchau!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;cumprimenta&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Ana&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Ordem de execução na&amp;nbsp;pilha:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;cumprimenta(&amp;#8220;Ana&amp;#8221;) é chamada → vai para a&amp;nbsp;pilha.&lt;/li&gt;
+&lt;li&gt;Dentro dela, despedida() é chamada → fica no&amp;nbsp;topo.&lt;/li&gt;
+&lt;li&gt;despedida() roda e sai da&amp;nbsp;pilha.&lt;/li&gt;
+&lt;li&gt;cumprimenta(&amp;#8220;Ana&amp;#8221;) roda até o fim e sai da&amp;nbsp;pilha.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Ou seja, tudo organizado, prato por&amp;nbsp;prato.&lt;/p&gt;
+&lt;p&gt;Esse exemplo já mostra que não é só recursão que usa pilha, mas qualquer função. A diferença é que a recursão força a pilha a crescer muito mais&amp;nbsp;rápido.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Pilha de chamadas com&amp;nbsp;recursão&lt;/h1&gt;
+&lt;p&gt;Com recursão, essa pilha pode crescer bastante, porque a função vai se chamando várias vezes até chegar no caso&amp;nbsp;base.&lt;/p&gt;
+&lt;p&gt;Exemplo simplificado&amp;nbsp;com &lt;code&gt;fatorial(3)&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;O programa chama fatorial(3)
+    &lt;span class="k"&gt;-&lt;/span&gt; empilha fatorial(3)
+
+Para resolver, precisa de fatorial(2)
+    &lt;span class="k"&gt;-&lt;/span&gt; empilha fatorial(2)
+
+Para resolver, precisa de fatorial(1)
+    &lt;span class="k"&gt;-&lt;/span&gt; empilha fatorial(1)
+
+fatorial(1) chega no caso base e retorna 1
+    &lt;span class="k"&gt;-&lt;/span&gt; desempilha fatorial(1)
+
+Agora fatorial(2) consegue calcular 2 × 1 = 2
+    &lt;span class="k"&gt;-&lt;/span&gt; desempilha fatorial(2)
+
+Por fim, fatorial(3) calcula 3 × 2 = 6
+    &lt;span class="k"&gt;-&lt;/span&gt; desempilha fatorial(3)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;No fim, cada chamada só consegue terminar depois que a chamada menor retorna. 
+É por isso que &lt;strong&gt;definir bem o caso base é tão importante&lt;/strong&gt;, sem ele, a função nunca para de empilhar chamadas e acaba estourando a memória (stack&amp;nbsp;overflow).&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/coffee.gif" alt="overflow" width="400"/&gt;&lt;/p&gt;
+&lt;p&gt;Esse “estouro da pilha” é justamente de onde veio o nome do site &lt;a href="https://stackoverflow.com/questions"&gt;Stack Overflow&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Quando vi esse processo pela primeira vez, parecia uma espécie de “mágica”, como se o computador simplesmente soubesse de onde&amp;nbsp;voltar.&lt;/p&gt;
+&lt;p&gt;Foi nesse momento que percebi que entender programação é muito sobre desmistificar. Não é dom, não é gênio, é só empilhar e desempilhar com calma. 
+Hoje, sempre que vejo um código recursivo, tento imaginar essa pilha acontecendo em segundo plano, isso traz clareza e ainda transforma o “eu não nasci pra isso/nunca vou entender isso” para um “hihi que legal”&amp;nbsp;😎&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/chihuahua.gif" alt="cachorro" width="200"/&gt;&lt;/p&gt;
+&lt;p&gt;Então, da próxima vez que você se perder num código recursivo, respira: desenha a pilha, segue os passos, e lembra que não é mágica, é só &lt;strong&gt;prática&lt;/strong&gt;!!!&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Curiosidades&amp;nbsp;💡&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Uma recursão muito comum fora da programação: bonecas russas (matryoshkas). Cada boneca guarda outra dentro, até que a última (caso base) não guarda mais&amp;nbsp;nenhuma.&lt;/li&gt;
+&lt;li&gt;Algumas linguagens aplicam otimização de recursão de cauda (tail call optimization), que reaproveita os quadros da pilha para não estourar a memória em funções recursivas muito profundas. Python, porém, não faz&amp;nbsp;isso.&lt;/li&gt;
+&lt;li&gt;A pilha de chamadas é invisível na maior parte do tempo, mas você já viu ela funcionando, quando o Python mostra um traceback (aquele erro cheio de setas, indicando em que função a execução&amp;nbsp;estava).&lt;/li&gt;
+&lt;li&gt;Muitas funções recursivas podem ser reescritas de forma iterativa (usando&amp;nbsp;laços &lt;code&gt;for&lt;/code&gt; ou &lt;code&gt;while&lt;/code&gt;). Isso evita o risco de estouro da pilha em casos de chamadas muito&amp;nbsp;profundas.&lt;/li&gt;
+&lt;li&gt;Para entender recursão, você precisa primeiro entender recursão.&amp;nbsp;😅&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Exercícios recomendados&amp;nbsp;👩🏻‍💻💞&lt;/h2&gt;
+&lt;p&gt;Para reforçar o aprendizado, aqui vão alguns desafios&amp;nbsp;práticos:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LeetCode&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/merge-two-sorted-lists/description/"&gt;Merge two sorted lists&lt;/a&gt; - Dá pra resolver recursivamente, tratando como o caso base quando uma lista chega ao&amp;nbsp;fim.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/climbing-stairs/description/"&gt;Climbing Stairs&lt;/a&gt; - Um problema clássico de recursão + otimização (parecido com&amp;nbsp;Fibonacci).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Exercism&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/exercises/flatten-array"&gt;Flatten Array&lt;/a&gt; - Recebe uma lista que pode conter sublistas e precisa retornar tudo “achatado” em uma única&amp;nbsp;lista&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/concepts/recursion"&gt;Recursão com Python&lt;/a&gt; - Reforça o conceito de recursão e tem o exercício “Luhn” que admite uma abordagem&amp;nbsp;recursiva&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Desafio&amp;nbsp;extra&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Crie uma função recursiva que percorre pastas e arquivos no seu computador (ou só numa lista aninhada simulada). Isso é literalmente como muitos sistemas de arquivos&amp;nbsp;funcionam.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;Espero que tenha aproveitado o conteúdo!&amp;nbsp;✨💕&lt;/p&gt;
+&lt;p&gt;Se tiver alguma sugestão de exercício ou melhoria na explicação, me conta aqui&amp;nbsp;🫂🌻&lt;/p&gt;</content><category term="Entendendo algoritmos"/></entry><entry><title>Explorando o livro “Entendendo Algoritmos”, cap.2</title><link href="/2025/08/27/explorando-o-livro-entendendo-algoritmos-cap2/" rel="alternate"/><published>2025-08-27T00:00:00-03:00</published><updated>2025-08-27T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-08-27:/2025/08/27/explorando-o-livro-entendendo-algoritmos-cap2/</id><summary type="html">&lt;p&gt;Análises e exercícios práticos sobre o Capítulo 2 do livro &amp;#8220;Entendendo Algoritmos&amp;#8221;, com sugestões de&amp;nbsp;desafios.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Segundo capítulo da série de estudos sobre o livro &lt;a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf"&gt;Entendendo Algoritmos&lt;/a&gt; de Aditya Y.&amp;nbsp;Bhargava.&lt;/p&gt;
 &lt;p&gt;Espero que vocês tenham gostado da forma como estruturei o &lt;a href="https://anapaula.org/2025/08/12/explorando-o-livro-entendendo-algoritmos-cap1/"&gt;primeiro capítulo&lt;/a&gt;, seguirei naquela mesma linha de raciocínio e explicação. Se você tiver alguma sugestão de exercício ou melhoria na explicação, me conta aqui que eu ficarei feliz em receber esse feedback&amp;nbsp;🫂💕&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;No capítulo 2, o autor aprofunda dois conceitos fundamentais: &lt;strong&gt;estruturas de dados&lt;/strong&gt; (como arrays e listas) e a &lt;strong&gt;eficiência dos algoritmos&lt;/strong&gt; (notação Big O). Para ilustrar isso, ele apresenta o algoritmo de &lt;strong&gt;ordenação por seleção&lt;/strong&gt;.&lt;/p&gt;
