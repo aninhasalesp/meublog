@@ -519,11 +519,6 @@ p code, li code, span code {
   white-space: nowrap;           /* Não quebrar linha */
 }
 
-/*
-   ADICIONAR ESTAS MEDIA QUERIES NO FINAL DO SEU main.css
-   NÃO ALTERE NADA DO CSS EXISTENTE - APENAS ADICIONE ISTO NO FINAL
-*/
-
 /* Menu hambúrguer - só aparece no mobile */
 .menu-toggle {
     display: none;
@@ -538,10 +533,6 @@ p code, li code, span code {
     top: 5px;
     z-index: 1000;
 }
-
-/* .menu-toggle:hover {
-    background: #C74451;
-} */
 
 /* Ícone do hambúrguer */
 .hamburger {
@@ -868,11 +859,6 @@ p code, li code, span code {
     }
 }
 
-/* ===================================
-   CORREÇÃO: DATA NO CANTO DIREITO NA MESMA LINHA DO TÍTULO
-   SUBSTITUA o código anterior por este
-   =================================== */
-
 /* Container principal do post - usa flexbox para alinhar título e data */
 #posts-list .hentry {
     position: relative;
@@ -927,10 +913,6 @@ p code, li code, span code {
         margin-top: 5px;
     }
 }
-/* ===================================
-   POSTS CLICÁVEIS E MELHORIAS VISUAIS
-   Adicione este código no final do main.css
-   =================================== */
 
 /* Remove sublinhado dos títulos dos posts */
 #posts-list h1 a:link, 
@@ -967,7 +949,6 @@ p code, li code, span code {
 }
 
 .clickable-post:hover {
-    /* background-color: #f8f9fa !important; */
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15) !important;
     transform: translateY(-3px) !important;
 }
@@ -1002,7 +983,6 @@ p code, li code, span code {
         right: 15px;
         width: 30%;
         text-align: right;
-        /* color: #000000; */
         font-size: 0.8em; /* Fonte um pouco menor no mobile */
         margin: 0;
         padding: 0;
@@ -1017,5 +997,228 @@ p code, li code, span code {
         padding: 5px 0 !important;
         border-radius: 0 !important;
         border: none !important;
+    }
+}
+
+/* ===================================
+   BOTÕES DE NAVEGAÇÃO FLUTUANTES - VERSÃO FINAL
+   =================================== */
+
+.post-navigation {
+    position: relative;
+    z-index: 1000;
+    margin: 0 !important;
+    display: flex !important;
+    justify-content: unset !important;
+}
+
+.post-navigation a {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+/* Tema claro como padrão */
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.post-navigation a:hover {
+    background: rgba(255, 255, 255, 1) !important;
+    color: #333 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+    text-shadow: none !important;
+}
+
+/* TEMA ESCURO - Integra com [data-theme="dark"] */
+[data-theme="dark"] .post-navigation a {
+    background: rgba(44, 44, 44, 0.9);
+    color: #f5f5f5;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .post-navigation a:hover {
+    background: rgba(54, 54, 54, 1) !important;
+    color: #f5f5f5 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    text-shadow: none !important;
+}
+
+/* Ocultar texto, mostrar apenas setas */
+.post-navigation a {
+    font-size: 0;
+    line-height: 0;
+}
+
+.post-navigation a::before {
+    font-size: 32px;
+    line-height: 1;
+    font-weight: bold;
+}
+
+/* Setas para os botões */
+.post-navigation a[href*="prev_article"]::before,
+.post-navigation a:first-child::before {
+    content: "←";
+}
+
+.post-navigation a[href*="next_article"]::before,
+.post-navigation a:last-child::before {
+    content: "→";
+}
+
+/* Animação suave ao aparecer */
+.post-navigation a {
+    opacity: 0;
+    animation: fadeInFloat 0.6s ease forwards;
+}
+
+.post-navigation a:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+@keyframes fadeInFloat {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* RESPONSIVIDADE - SMARTPHONE (meias-bolas na parte SUPERIOR) */
+@media screen and (max-width: 767px) {
+    .post-navigation a {
+        width: 60px;
+        height: 30px; /* Metade da altura para criar meia-lua */
+        border-radius: 0 0 60px 60px; /* Arredondado apenas na parte inferior */
+        top: 58px !important;
+        bottom: auto !important;
+    }
+    
+    .post-navigation a[href*="prev_article"],
+    .post-navigation a:first-child {
+        left: -14px;
+    }
+    
+    .post-navigation a[href*="next_article"],
+    .post-navigation a:last-child {
+        right: -14px;
+    }
+
+    .post-navigation a::before {
+        font-size: 20px;
+        margin-top: 5px; /* Ajusta posição da seta na meia-lua */
+    }
+}
+
+/* RESPONSIVIDADE - TABLET (meias-bolas na parte INFERIOR) */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .post-navigation a {
+        width: 60px;
+        height: 30px; /* Metade da altura para criar meia-lua */
+        border-radius: 60px 60px 0 0; /* Arredondado apenas na parte superior */
+        bottom: 0px !important;
+        top: auto !important;
+    }
+    
+    .post-navigation a[href*="prev_article"],
+    .post-navigation a:first-child {
+        left: 20px;
+    }
+    
+    .post-navigation a[href*="next_article"],
+    .post-navigation a:last-child {
+        right: 20px;
+    }
+    
+    .post-navigation a::before {
+        font-size: 24px;
+        margin-bottom: 5px; /* Ajusta posição da seta na meia-lua */
+    }
+}
+
+/* RESPONSIVIDADE - DESKTOP (círculos completos no meio da tela) */
+@media screen and (min-width: 1025px) {
+    .post-navigation a {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%; /* Círculo completo no desktop */
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .post-navigation a[href*="prev_article"],
+    .post-navigation a:first-child {
+        left: 20px;
+    }
+    
+    .post-navigation a[href*="next_article"],
+    .post-navigation a:last-child {
+        right: 20px;
+    }
+    
+    .post-navigation a:hover {
+        transform: translateY(-50%) translateY(-2px);
+    }
+    
+    .post-navigation a::before {
+        font-size: 32px;
+    }
+}
+
+/* Versão alternativa - Meias-luas nas laterais (mais sutil) */
+@media screen and (max-width: 1024px) {
+    /* Opção alternativa: meias-luas saindo das laterais */
+    .post-navigation.side-semicircles a {
+        width: 30px;
+        height: 60px;
+    }
+    
+    .post-navigation.side-semicircles a[href*="prev_article"],
+    .post-navigation.side-semicircles a:first-child {
+        left: 0px;
+        border-radius: 0 60px 60px 0; /* Meia-lua saindo da esquerda */
+    }
+    
+    .post-navigation.side-semicircles a[href*="next_article"],
+    .post-navigation.side-semicircles a:last-child {
+        right: 0px;
+        border-radius: 60px 0 0 60px; /* Meia-lua saindo da direita */
+    }
+}
+
+/* Acessibilidade - Foco para navegação por teclado */
+    .post-navigation a:focus {
+    outline: 2px solid var(--link-color);
+    outline-offset: 2px;
+    }
+
+/* Ajustes específicos para as meias-luas */
+@media screen and (max-width: 1024px) {
+    .post-navigation a:hover {
+        transform: translateY(-2px);
+    }
+    
+/* Remove animação de entrada vertical para não conflitar com meias-luas */
+    @keyframes fadeInFloat {
+        from {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
     }
 }
