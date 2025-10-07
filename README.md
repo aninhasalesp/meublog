@@ -1,6 +1,6 @@
 # Ana Paula S. | Blog 🌻🤍
 
-Este é o repositório do meu blog pessoal, onde compartilho minhas experiências com tecnologia, desenvolvimento e outros temas que gosto e/ou acho importante falar. 💻✨
+Este é o repositório do meu blog, onde compartilho minhas experiências com tecnologia, desenvolvimento e outros temas que gosto e/ou acho importante falar. 💻✨
 
 > 📍 Você pode visitar o blog [aqui](https://anapaula.org)
 ---
