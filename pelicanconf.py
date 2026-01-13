@@ -41,6 +41,10 @@ TYPOGRIFY = True
 ARTICLE_URL = "{date:%Y}/{date:%m}/{date:%d}/{slug}/"
 ARTICLE_SAVE_AS = "{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html"
 
+# Plugins
+PLUGIN_PATHS = ["plugins"]
+PLUGINS = ["neighbors"]
+
 # Social widget
 SOCIAL = (
     ("linkedin", "https://www.linkedin.com/in/aninhasalesp/"),

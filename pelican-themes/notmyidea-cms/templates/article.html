@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block title %}{{ article.title|striptags }}{% endblock %}
 {% block content %}
+
 <div style="display: flex; flex-direction: column;">
+
   <section id="content" class="body">
     <article>
       <header>
@@ -9,14 +11,15 @@
           <a href="{{ article.url }}" rel="bookmark">
             {{ article.title }}
           </a>
-        </h1> {% include 'twitter.html' %}
+        </h1> 
+        {% include 'twitter.html' %}
       </header>
 
       <div class="entry-content">
         {% include 'article_infos.html' %}<!-- /.post-info -->
         {{ article.content }}
 
-         <!-- Botões de compartilhamento -->
+        <!-- Botões de compartilhamento -->
         <div class="compartilhar" style="margin-top: 2em; display: flex; gap: 1em; align-items: center;">
           <strong>Compartilhar:</strong>
 
@@ -41,6 +44,17 @@
       </div><!-- /.entry-content -->
     </article>
   </section>
+  {% if article %}
+  <div class="post-navigation" style="margin-top: 2em; display: flex; justify-content: space-between;">
+    {% if article.prev_article %}
+      <a href="{{ SITEURL }}/{{ article.prev_article.url }}"> Post anterior ↩ </a>
+    {% endif %}
+    {% if article.next_article %}
+      <a href="{{ SITEURL }}/{{ article.next_article.url }}"> Próximo post ↪ </a>
+    {% endif %}
+  </div>
+  {% endif %}
+
 
   {% if article %}
   <div id="comments" style="max-width: 700px;">
