@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>@aninhasalesp - Entendendo algoritmos</title><link href="/" rel="alternate"/><link href="/feeds/entendendo-algoritmos.atom.xml" rel="self"/><id>/</id><updated>2025-09-17T00:00:00-03:00</updated><entry><title>Recursão</title><link href="/2025/09/17/recursao/" rel="alternate"/><published>2025-09-17T00:00:00-03:00</published><updated>2025-09-17T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-09-17:/2025/09/17/recursao/</id><summary type="html">&lt;p&gt;Resumo &lt;strong&gt;capítulo 3&lt;/strong&gt; do livro &amp;#8220;Entendendo Algoritmos&amp;#8221;. Apresento o conceito de recursão e como pensar em problemas dividindo-os em partes menores. Mostro exemplos clássicos como cálculo de fatorial, além de discutir limitações como o risco de estouro de pilha&amp;nbsp;(StackOverflow).&lt;/p&gt;</summary><content type="html">&lt;p&gt;Terceiro capítulo da série de estudos sobre o livro &lt;a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf"&gt;Entendendo Algoritmos&lt;/a&gt; de Aditya Y.&amp;nbsp;Bhargava.&lt;/p&gt;
 &lt;p&gt;Se você está acompanhando a série, já resumi os capítulos anteriores 👀, então volta lá se tu tiver alguma dúvida:&lt;br&gt;
-- &lt;a href="https://anapaula.org/2025/08/12/explorando-o-livro-entendendo-algoritmos-cap1/"&gt;Capítulo 1 - Introdução a algoritmos&lt;/a&gt;&lt;br&gt;
-- &lt;a href="https://anapaula.org/2025/08/27/explorando-o-livro-entendendo-algoritmos-cap2/"&gt;Capítulo 2 - Ordenação por seleção&lt;/a&gt;&lt;br&gt;
+- &lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;Capítulo 1 - Introdução a algoritmos&lt;/a&gt;&lt;br&gt;
+- &lt;a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"&gt;Capítulo 2 - Ordenação por seleção&lt;/a&gt;&lt;br&gt;
 - &lt;a href="/2025/09/17/recursao/"&gt;Capítulo 3 - Recursão&lt;/a&gt; -📍 &lt;strong&gt;você está&amp;nbsp;aqui&lt;/strong&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;Oi, pessoal! Mais um resuminho do nosso livro querido&amp;nbsp;😊 &lt;/p&gt;
@@ -138,7 +138,7 @@ Hoje, sempre que vejo um código recursivo, tento imaginar essa pilha acontecend
 &lt;li&gt;&lt;a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"&gt;Capítulo 2 - Arrays, Listas e Ordenação por Seleção&lt;/a&gt; -📍 &lt;strong&gt;você está&amp;nbsp;aqui&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="/2025/09/17/recursao/"&gt;Capítulo 3 -&amp;nbsp;Recursão&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Espero que vocês tenham gostado da forma como estruturei o &lt;a href="https://anapaula.org/2025/08/12/explorando-o-livro-entendendo-algoritmos-cap1/"&gt;primeiro capítulo&lt;/a&gt;, seguirei naquela mesma linha de raciocínio e explicação. Se você tiver alguma sugestão de exercício ou melhoria na explicação, me conta aqui que eu ficarei feliz em receber esse feedback&amp;nbsp;🫂💕&lt;/p&gt;
+&lt;p&gt;Espero que vocês tenham gostado da forma como estruturei o &lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;primeiro capítulo&lt;/a&gt;, seguirei naquela mesma linha de raciocínio e explicação. Se você tiver alguma sugestão de exercício ou melhoria na explicação, me conta aqui que eu ficarei feliz em receber esse feedback&amp;nbsp;🫂💕&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;No capítulo 2, o autor aprofunda dois conceitos fundamentais: &lt;strong&gt;estruturas de dados&lt;/strong&gt; (como arrays e listas) e a &lt;strong&gt;eficiência dos algoritmos&lt;/strong&gt; (notação Big O). Para ilustrar isso, ele apresenta o algoritmo de &lt;strong&gt;ordenação por seleção&lt;/strong&gt;.&lt;/p&gt;
 &lt;h1&gt;Arrays e&amp;nbsp;Listas&lt;/h1&gt;
