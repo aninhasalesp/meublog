@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Recursão</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+        <link href="/" type="application/atom+xml" rel="alternate" title="@aninhasalesp ATOM Feed" />
+</head>
+
+<body id="index" class="home" style="margin: auto;">
+        <header id="banner" class="body">
+                <h1><a href="/">@aninhasalesp </a></h1>
+                <nav><ul>
+                    <li ><a href="/pages/contato.html">Contato</a></li>
+                    <li ><a href="/pages/sugestoes-de-leitura.html">Sugestões de&nbsp;leitura</a></li>
+                    <li ><a href="/pages/quem-sou-eu.html">Quem sou eu?&nbsp;🌿🌸</a></li>
+                <li><a href="/">Posts</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+<div style="display: flex; flex-direction: column;">
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="2025/09/17/recursao/" rel="bookmark">
+            Recursão
+          </a>
+        </h1>       </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-09-17T00:00:00-03:00">
+                qua 17 setembro 2025
+        </abbr>
+
+        <!-- <address class="vcard author">
+                By <a class="url fn" href="/author/ana-paula-sales.html">Ana Paula Sales</a>
+        </address> -->
+<!-- <p>In <a href="/category/entendendo-algoritmos.html">Entendendo algoritmos</a>. </p> -->
+</p></footer><!-- /.post-info --><!-- /.post-info -->
+        <p>Terceiro capítulo da série de estudos sobre o livro <a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf">Entendendo Algoritmos</a> de Aditya Y.&nbsp;Bhargava.</p>
+<p>Se você está acompanhando a série, já resumi os capítulos anteriores 👀, então volta lá se tu tiver alguma dúvida:<br>
+- <a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/">Capítulo 1 - Introdução e Busca Binária</a><br>
+- <a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/">Capítulo 2 - Arrays, Listas e Ordenação por Seleção</a><br>
+- <a href="/2025/09/17/recursao/">Capítulo 3 - Recursão</a> -📍 <strong>você está&nbsp;aqui</strong></p>
+<hr>
+<p>Oi, pessoal! Mais um resuminho do nosso livro querido&nbsp;😊 </p>
+<p>Esse capítulo foi um dos que mais me tirou a sensação de que programação é mágica. Bora entender recursão e pilhas sem&nbsp;medo?</p>
+<p>Neste capítulo, o autor explica de forma simples o conceito e o uso da <strong>recursão</strong>, dividindo a explicação em caso base e caso recursivo. 
+Ele sugere que você, ao menos uma vez, analise uma função recursiva com papel e caneta, acompanhando passo a passo, assim você entenderá como a função&nbsp;funciona.</p>
+<h1>Recursão</h1>
+<p>É a técnica onde uma função chama a si mesma para resolver um problema, dividindo-o em problemas menores. Devido ao fato de uma função recursiva chamar a si mesma, é mais fácil de escrevê-la de forma errada e acabar em um loop infinito. Para que a recursão funcione corretamente, ela deve conter um caso base para parar as chamadas e um caso recursivo que aproxime o problema da solução&nbsp;final. </p>
+<h2>Como a recursão&nbsp;funciona:</h2>
+<p>Antes de mostrar um exemplo de recursão, vamos entender como ela&nbsp;funciona.</p>
+<ol>
+<li>
+<p><strong>Caso base</strong>: define quando a função deve <strong>parar</strong> de se chamar. Sem ele, a recursão continuaria indefinidamente, causando&nbsp;erro.</p>
+</li>
+<li>
+<p><strong>Caso recursivo</strong>: é a parte em que a função <strong>se chama novamente</strong>, aproximando-se da solução final a cada&nbsp;passo.</p>
+</li>
+</ol>
+<p>Um exemplo clássico é o cálculo do fatorial de um&nbsp;número:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fatorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Caso Base</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># Caso Recursivo</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">fatorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">fatorial</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># Saída: 120</span>
+</code></pre></div>
+
+<p>Nesse&nbsp;exemplo:</p>
+<ul>
+<li><strong>Caso Base</strong>: <code>n</code> é 0 ou 1, o fatorial é&nbsp;1</li>
+<li><strong>Caso Recursivo</strong>:&nbsp;Se <code>n</code> é maior que 1, o fatorial&nbsp;é <code>n * fatorial(n-1)</code></li>
+</ul>
+<p>Olha como fica quase poético, cada número chama o próximo até o 1 dizer &#8220;chega, agora volta&#8221;. Aí a multiplicação acontece no caminho de&nbsp;volta.</p>
+<hr>
+<h1>Pilha</h1>
+<p>Suponha que você esteja fazendo um churrasco para os seus amigos. Você tem uma lista de afazeres em forma de uma pilha de notas adesivas. Quando você insere um item, ele é colocado no topo da pilha. Quando você lê um item, lê apenas o item do topo da pilha e ele é retirado da lista. Logo, sua lista de afazeres contém apenas duas ações: <em>push</em> (inserir) e <em>pop</em> (remover e&nbsp;ler).</p>
+<p><img src="/images/pilha.png" alt="pilha" width="700"/></p>
+<p>Esta estrutura de dados é chamada de pilha. A pilha é uma estrutura de dados simples e nós usamos o tempo todo sem&nbsp;perceber.</p>
+<hr>
+<h1>Pilha de&nbsp;chamadas</h1>
+<p>Sempre que uma função é chamada, o computador precisa “lembrar” de onde ela parou para poder continuar depois.
+Essa memória temporária é organizada numa <strong>pilha de chamadas</strong> (call&nbsp;stack).</p>
+<p>Funciona&nbsp;assim:</p>
+<ul>
+<li>A cada nova chamada de função, o computador empilha informações sobre essa execução (como parâmetros e variáveis&nbsp;locais).</li>
+<li>Quando a função termina, o computador desempilha esses dados e volta para o ponto&nbsp;anterior.</li>
+</ul>
+<p>A metáfora do livro é ótima, pense em uma pilha de pratos na cozinha. Você só consegue pegar (ou retirar) o prato que está por cima.  Assim também funciona com funções, o último que entrou é o primeiro que sai (<span class="caps">LIFO</span>: Last In, First&nbsp;Out).</p>
+<p>Podemos visualizar isso com um exemplo simples em&nbsp;Python:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cumprimenta</span><span class="p">(</span><span class="n">nome</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Oi,&quot;</span><span class="p">,</span> <span class="n">nome</span><span class="p">)</span>
+    <span class="n">despedida</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">despedida</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tchau!&quot;</span><span class="p">)</span>
+
+<span class="n">cumprimenta</span><span class="p">(</span><span class="s2">&quot;Ana&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Ordem de execução na&nbsp;pilha:</p>
+<ol>
+<li>cumprimenta(&#8220;Ana&#8221;) é chamada → vai para a&nbsp;pilha.</li>
+<li>Dentro dela, despedida() é chamada → fica no&nbsp;topo.</li>
+<li>despedida() roda e sai da&nbsp;pilha.</li>
+<li>cumprimenta(&#8220;Ana&#8221;) roda até o fim e sai da&nbsp;pilha.</li>
+</ol>
+<p>Ou seja, tudo organizado, prato por&nbsp;prato.</p>
+<p>Esse exemplo já mostra que não é só recursão que usa pilha, mas qualquer função. A diferença é que a recursão força a pilha a crescer muito mais&nbsp;rápido.</p>
+<hr>
+<h1>Pilha de chamadas com&nbsp;recursão</h1>
+<p>Com recursão, essa pilha pode crescer bastante, porque a função vai se chamando várias vezes até chegar no caso&nbsp;base.</p>
+<p>Exemplo simplificado&nbsp;com <code>fatorial(3)</code>:</p>
+<div class="highlight"><pre><span></span><code>O programa chama fatorial(3)
+    <span class="k">-</span> empilha fatorial(3)
+
+Para resolver, precisa de fatorial(2)
+    <span class="k">-</span> empilha fatorial(2)
+
+Para resolver, precisa de fatorial(1)
+    <span class="k">-</span> empilha fatorial(1)
+
+fatorial(1) chega no caso base e retorna 1
+    <span class="k">-</span> desempilha fatorial(1)
+
+Agora fatorial(2) consegue calcular 2 × 1 = 2
+    <span class="k">-</span> desempilha fatorial(2)
+
+Por fim, fatorial(3) calcula 3 × 2 = 6
+    <span class="k">-</span> desempilha fatorial(3)
+</code></pre></div>
+
+<p>No fim, cada chamada só consegue terminar depois que a chamada menor retorna. 
+É por isso que <strong>definir bem o caso base é tão importante</strong>, sem ele, a função nunca para de empilhar chamadas e acaba estourando a memória (stack&nbsp;overflow).</p>
+<p><img src="/images/coffee.gif" alt="overflow" width="400"/></p>
+<p>Esse “estouro da pilha” é justamente de onde veio o nome do site <a href="https://stackoverflow.com/questions">Stack Overflow</a>.</p>
+<p>Quando vi esse processo pela primeira vez, parecia uma espécie de “mágica”, como se o computador simplesmente soubesse de onde&nbsp;voltar.</p>
+<p>Foi nesse momento que percebi que entender programação é muito sobre desmistificar. Não é dom, não é gênio, é só empilhar e desempilhar com calma. 
+Hoje, sempre que vejo um código recursivo, tento imaginar essa pilha acontecendo em segundo plano, isso traz clareza e ainda transforma o “eu não nasci pra isso/nunca vou entender isso” para um “hihi que legal”&nbsp;😎</p>
+<p><img src="/images/chihuahua.gif" alt="cachorro" width="200"/></p>
+<p>Então, da próxima vez que você se perder num código recursivo, respira: desenha a pilha, segue os passos, e lembra que não é mágica, é só <strong>prática</strong>!!!</p>
+<hr>
+<h2>Curiosidades&nbsp;💡</h2>
+<ol>
+<li>Uma recursão muito comum fora da programação: bonecas russas (matryoshkas). Cada boneca guarda outra dentro, até que a última (caso base) não guarda mais&nbsp;nenhuma.</li>
+<li>Algumas linguagens aplicam otimização de recursão de cauda (tail call optimization), que reaproveita os quadros da pilha para não estourar a memória em funções recursivas muito profundas. Python, porém, não faz&nbsp;isso.</li>
+<li>A pilha de chamadas é invisível na maior parte do tempo, mas você já viu ela funcionando, quando o Python mostra um traceback (aquele erro cheio de setas, indicando em que função a execução&nbsp;estava).</li>
+<li>Muitas funções recursivas podem ser reescritas de forma iterativa (usando&nbsp;laços <code>for</code> ou <code>while</code>). Isso evita o risco de estouro da pilha em casos de chamadas muito&nbsp;profundas.</li>
+<li>Para entender recursão, você precisa primeiro entender recursão.&nbsp;😅</li>
+</ol>
+<hr>
+<h2>Exercícios recomendados&nbsp;👩🏻‍💻💞</h2>
+<p>Para reforçar o aprendizado, aqui vão alguns desafios&nbsp;práticos:</p>
+<p><strong>LeetCode</strong></p>
+<ul>
+<li><a href="https://leetcode.com/problems/merge-two-sorted-lists/description/">Merge two sorted lists</a> - Dá pra resolver recursivamente, tratando como o caso base quando uma lista chega ao&nbsp;fim.</li>
+<li><a href="https://leetcode.com/problems/climbing-stairs/description/">Climbing Stairs</a> - Um problema clássico de recursão + otimização (parecido com&nbsp;Fibonacci).</li>
+</ul>
+<p><strong>Exercism</strong></p>
+<ul>
+<li><a href="https://exercism.org/tracks/python/exercises/flatten-array">Flatten Array</a> - Recebe uma lista que pode conter sublistas e precisa retornar tudo “achatado” em uma única&nbsp;lista</li>
+<li><a href="https://exercism.org/tracks/python/concepts/recursion">Recursão com Python</a> - Reforça o conceito de recursão e tem o exercício “Luhn” que admite uma abordagem&nbsp;recursiva</li>
+</ul>
+<p><strong>Desafio&nbsp;extra</strong></p>
+<ul>
+<li>Crie uma função recursiva que percorre pastas e arquivos no seu computador (ou só numa lista aninhada simulada). Isso é literalmente como muitos sistemas de arquivos&nbsp;funcionam.</li>
+</ul>
+<hr>
+<p>Espero que tenha aproveitado o conteúdo!&nbsp;✨💕</p>
+<p>Se tiver alguma sugestão de exercício ou melhoria na explicação, me conta aqui&nbsp;🫂🌻</p>
+
+         <!-- Botões de compartilhamento -->
+        <div class="compartilhar" style="margin-top: 2em; display: flex; gap: 1em; align-items: center;">
+          <strong>Compartilhar:</strong>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anapaula.org/2025/09/17/recursao/"
+            target="_blank" rel="noopener noreferrer" title="Compartilhar no LinkedIn">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" width="24" height="24" style="vertical-align: middle;">
+          </a>
+
+          <!-- Telegram -->
+          <a href="https://t.me/share/url?url=https://anapaula.org/2025/09/17/recursao/"
+             target="_blank" rel="noopener noreferrer" title="Compartilhar no Telegram">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram" width="24" height="24" style="vertical-align: middle;">
+          </a>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/?text=https://anapaula.org/2025/09/17/recursao/"
+            target="_blank" rel="noopener noreferrer" title="Compartilhar no WhatsApp">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" width="24" height="24">
+          </a>
+        </div>
+      </div><!-- /.entry-content -->
+    </article>
+  </section>
+
+  <div id="comments" style="max-width: 700px;">
+    <script src="https://utteranc.es/client.js"
+      repo="aninhasalesp/meublog"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+        <footer id="footer" class="body">
+                <p>Feito com amor, por <a href="https://github.com/aninhasalesp"> Ana Paula</a> ❤️</p>
+        </footer><!-- /#footer -->
+
+</body>
+</html>

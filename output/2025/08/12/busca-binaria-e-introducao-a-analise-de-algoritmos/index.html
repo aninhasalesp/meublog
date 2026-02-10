@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Busca Binária e Introdução à Análise de Algoritmos</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+        <link href="/" type="application/atom+xml" rel="alternate" title="@aninhasalesp ATOM Feed" />
+</head>
+
+<body id="index" class="home" style="margin: auto;">
+        <header id="banner" class="body">
+                <h1><a href="/">@aninhasalesp </a></h1>
+                <nav><ul>
+                    <li ><a href="/pages/contato.html">Contato</a></li>
+                    <li ><a href="/pages/sugestoes-de-leitura.html">Sugestões de&nbsp;leitura</a></li>
+                    <li ><a href="/pages/quem-sou-eu.html">Quem sou eu?&nbsp;🌿🌸</a></li>
+                <li><a href="/">Posts</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+<div style="display: flex; flex-direction: column;">
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/" rel="bookmark">
+            Busca Binária e Introdução à Análise de&nbsp;Algoritmos
+          </a>
+        </h1>       </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-08-12T00:00:00-03:00">
+                ter 12 agosto 2025
+        </abbr>
+
+        <!-- <address class="vcard author">
+                By <a class="url fn" href="/author/ana-paula-sales.html">Ana Paula Sales</a>
+        </address> -->
+<!-- <p>In <a href="/category/entendendo-algoritmos.html">Entendendo algoritmos</a>. </p> -->
+</p></footer><!-- /.post-info --><!-- /.post-info -->
+        <p>Início de uma série de estudos sobre o livro <a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf">Entendendo Algoritmos</a> de Aditya Y.&nbsp;Bhargava. </p>
+<ul>
+<li><a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/">Capítulo 1 - Introdução e Busca Binária</a> -📍 <strong>você está&nbsp;aqui</strong></li>
+<li><a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/">Capítulo 2 - Arrays, Listas e Ordenação por&nbsp;Seleção</a></li>
+<li><a href="/2025/09/17/recursao/">Capítulo 3 -&nbsp;Recursão</a></li>
+</ul>
+<p>Esse livro foi indicado por uma amiga, <a href="https://github.com/anapaulamendes">Ana Paula Mendes</a>, e eu não imaginava o quanto iria gostar. A leitura é leve, clara e muito acessível. Se você, como eu, tem dificuldade em manter a constância em leituras técnicas, esse livro é um achado, fácil de entender, ótimo para aprender ou revisar&nbsp;conceitos. </p>
+<p>Ele apresenta ideias da ciência da computação que estão no nosso dia a dia, muitas vezes sem que a gente&nbsp;perceba.</p>
+<p><img src="/images/livro1.jpg" alt="capa do livro" width="400"/></p>
+<p>Uma das coisas que mais me chamam atenção nesse livro é o jeito como o autor ensina, sempre com exemplos. Em vez de encher de símbolos e fórmulas, ele quer que a gente visualize os conceitos. Ele acredita, e eu concordo, que aprendemos melhor quando conseguimos relacionar o conteúdo com algo que já conhecemos. E, pra isso, os exemplos ajudam&nbsp;muito. </p>
+<p>E o melhor é que ele desenha 🤩! 
+Sabe aquela frase “quer que eu desenhe pra você entender”? Eu respondo “sim, por favorrrrr!” e ele realmente desenha. É maravilhoso&nbsp;✨. </p>
+<p>Dá pra sentir que tudo foi pensado com cuidado, desde o conteúdo, os exemplos ilustrados até a recapitulação no fim de cada&nbsp;capítulo. </p>
+<p>Depois dessa introdução, bora ver o que o capítulo 1&nbsp;ensina.</p>
+<p><img src="/images/hahahaha-gif.gif" alt="gif" width="100"/></p>
+<hr>
+<h1>A busca binária em&nbsp;resumo</h1>
+<p>Pensa numa lista telefônica com <strong>1 milhão de nomes</strong>. Olhar folha por folha seria um pesadelo, né? 
+Agora, e se eu te dissesse que dá para encontrar qualquer nome em no <strong>máximo 20 tentativas</strong>?&nbsp;👀</p>
+<p>O truque é simples: a cada etapa, tu elimina metade das opções. Comece considerando o elemento que está bem no meio da sequência. Em uma lista telefônica, isso seria abrir o livro bem no meio. Em uma lista com 10 itens, isso seria pegar o 5o item. Agora compare esse item do meio com o que você está buscando: se eles forem iguais, parabéns, você encontrou o que procurava! Agora, se o item que você encontrou for <span class="caps">MAIOR</span> que o item que você procura (no caso de nomes em uma lista telefônica, pense em qual nome vem primeiro na ordem alfabética), quer dizer que o item buscado está na primeira metade da lista. Caso contrário, o item está na segunda metade da lista. E assim você consegue cortar a lista pela <em>metade</em> apenas comparando o item procurado com o item do meio. Depois disso, basta pegar a parte que você selecionou e aplicar a mesma estratégia, checando o item do meio e descartando metade da lista.
+<strong>Observação</strong>: Essa técnica só funciona se a lista de itens estiver&nbsp;ordenada!</p>
+<p>E o mais legal é que, mesmo que a lista dobre de tamanho, tu só precisa de <strong>mais uma</strong> etapa para chegar ao resultado.&nbsp;🤓</p>
+<p><strong>Exemplo</strong>:
+Para facilitar a conta, vamos pegar uma lista menor de 128 nomes e calcular o número máximo de etapas que levaríamos para encontrar um nome específico. Logo em seguida, dobramos o tamanho da lista e vemos que isso adiciona apenas mais uma&nbsp;etapa:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">max_etapas</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">etapas</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">//=</span> <span class="mi">2</span>
+        <span class="n">etapas</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">etapas</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">max_etapas</span><span class="p">(</span><span class="mi">128</span><span class="p">))</span> <span class="c1"># 7</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">max_etapas</span><span class="p">(</span><span class="mi">128</span><span class="o">*</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># 8</span>
+</code></pre></div>
+
+<p><strong>Observação importante</strong>: numa lista telefônica física, a gente já sabe pular quase direto para a letra certa, o que lembra mais o funcionamento de um hashmap (ou dict no Python), que encontra um item em tempo constante. Mas no computador, quando temos apenas uma lista ordenada&nbsp;(como <code>[1, 3, 5, 7, 9, 11, 13]</code>), não existe esse “pulo mágico”, é aí que a busca binária pode ajudar, cortando a lista ao meio de forma sistemática até encontrar (ou concluir que o elemento não está&nbsp;lá).</p>
+<p>Legal né? Isso é ciência da computação!!&nbsp;💁‍♀️✨</p>
+<hr>
+<h2>Exemplos básicos de busca&nbsp;binária:</h2>
+<p>Pense em um número entre 1 e 100. Dá para adivinhar em, no máximo, 7&nbsp;tentativas:</p>
+<p>Minha primeira pergunta: &#8220;É&nbsp;50?&#8221;</p>
+<ul>
+<li>Se você disser &#8220;maior&#8221;, eu sei que está entre 51 e&nbsp;100</li>
+<li>Se disser &#8220;menor&#8221;, está entre 1 e&nbsp;49</li>
+</ul>
+<p>Segunda pergunta: Digamos que seja maior que 50. &#8220;É 75?&#8221; (meio entre 51 e&nbsp;100)</p>
+<ul>
+<li>Maior? Está entre 76 e&nbsp;100</li>
+<li>Menor? Está entre 51 e&nbsp;74</li>
+</ul>
+<p>E assim por diante, sempre eliminando metade das&nbsp;possibilidades.</p>
+<h3>Vamos ver como fica com uma quantidade maior de&nbsp;números:</h3>
+<table>
+<thead>
+<tr>
+<th>Itens na lista</th>
+<th>Busca linear (tentativas)</th>
+<th>Busca binária (tentativas)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1.000</td>
+<td>até 1.000</td>
+<td>até 10</td>
+</tr>
+<tr>
+<td>1.000.000</td>
+<td>até 1.000.000</td>
+<td>até 20</td>
+</tr>
+</tbody>
+</table>
+<p>Sim, 20 tentativas para encontrar algo entre 1 milhão de opções!&nbsp;🚀</p>
+<p>Esse “milagre” da busca binária acontece por causa de um conceito chamado <strong>logaritmo</strong>, e já já eu te mostro o&nbsp;porquê.</p>
+<hr>
+<p>Agora que você já entendeu a busca binária, vamos entrar em mais três pontos que andam de mãos dadas: <strong>logaritmos, tempo de execução e notação Big O</strong>.</p>
+<p>Preparei um resumo rápido de cada um, do jeito que fez sentido pra mim.
+Se em algum momento ficar confuso, não tem problema, dá uma olhada no livro que é sucesso&nbsp;🫂💖</p>
+<hr>
+<h2>Logaritmos:</h2>
+<p>O número máximo de tentativas na busca binária é dado por log₂(n), logaritmo na base 2 de&nbsp;n.</p>
+<p>Se o nome assusta, pensa&nbsp;assim:</p>
+<blockquote>
+<p><strong>log₂(n) é o número de vezes que você precisa dividir n por 2 até chegar em&nbsp;1</strong></p>
+</blockquote>
+<p><strong>Exemplo</strong>:</p>
+<ul>
+<li>log₂(128) = 7, 7 cortes ao meio até sobrar 1&nbsp;item</li>
+<li>log₂(256) = 8, só mais uma etapa, mesmo dobrando o tamanho da&nbsp;lista</li>
+</ul>
+<p>A base &#8220;2&#8221; vem justamente porque a cada passo cortamos a lista <strong>pela metade</strong>.</p>
+<hr>
+<h2>Tempo de&nbsp;execução:</h2>
+<p>Sempre que falamos sobre um algoritmo, é importante pensar no tempo de execução, quanto esforço (ou quantos passos) ele precisa para chegar ao&nbsp;resultado.</p>
+<p>Na <strong>busca linear</strong> (a pesquisa simples), verificamos item por&nbsp;item:</p>
+<ul>
+<li>Lista com 100 números → até 100&nbsp;tentativas</li>
+<li>Lista com 4 bilhões de números → até 4 bilhões de&nbsp;tentativas</li>
+</ul>
+<p>O tempo de execução cresce na mesma proporção que o tamanho da lista. Chamamos isso de <strong>tempo linear</strong>.</p>
+<p>A <strong>busca binária</strong> é um outro&nbsp;mundo:</p>
+<ul>
+<li>Lista com 100 números → no máximo 7&nbsp;tentativas</li>
+<li>Lista com 4 bilhões → no máximo 32&nbsp;tentativas</li>
+</ul>
+<p>Isso acontece porque a busca binária corta as possibilidades pela metade a cada passo. Esse tipo de crescimento é chamado de <strong>tempo logarítmico</strong>.</p>
+<p><img src="/images/image-4.png" alt="tempo de execução" width="400"/></p>
+<hr>
+<h2>Notação Big&nbsp;O</h2>
+<p>A <strong>notação Big O</strong> é um jeito de medir a eficiência de um algoritmo, mostrando como o <strong>tempo de execução</strong> cresce conforme aumentamos o tamanho da&nbsp;entrada.</p>
+<ul>
+<li>O(log n), tempo logarítmico (ex: pesquisa&nbsp;binária)</li>
+<li>O(n), tempo linear (ex: pesquisa&nbsp;simples)</li>
+<li>O(n * log n), um algoritmo rápido de ordenação, como quicksort (Capítulo&nbsp;4)</li>
+<li>O(n²), um algoritmo de ordenação mais lenta, como ordenação por seleção (Capítulo&nbsp;2).</li>
+<li>O(n!), um algoritmo extremamente lento, como o do caixeiro viajante (Capítulo&nbsp;1).</li>
+</ul>
+<p>O livro ilustra isso de forma bem visual e intuitiva: cresce linearmente, cresce em log, cresce muito, cresce lento&#8230; e por aí&nbsp;vai. </p>
+<hr>
+<p><strong>Agora que vimos como a busca binária funciona, vale notar que ela não está restrita a livros, ela aparece em várias situações do nosso dia a&nbsp;dia</strong></p>
+<ul>
+<li><strong>Sistemas de busca (Google, WhatsApp, Spotify)</strong>: por trás, usam variações de busca binária em listas ordenadas ou&nbsp;índices.</li>
+<li><strong>Filtragem de dados</strong>: encontrar rapidamente um registro específico em planilhas ou bases de dados&nbsp;grandes.</li>
+<li><strong>Depuração de código</strong>: reduzir o espaço do problema pela metade a cada teste para achar onde o bug&nbsp;está.</li>
+</ul>
+<p><strong>Observação</strong>: para que a busca binária funcione, os dados precisam estar&nbsp;ordenados.</p>
+<h2>Vamos praticar&nbsp;rapidinho?</h2>
+<p>Aqui está uma lista ordenada de&nbsp;números: <code>[2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]</code></p>
+<p>Tente encontrar o número 22 de duas&nbsp;formas:</p>
+<ol>
+<li><strong>Busca linear:</strong> Vá um a um desde o&nbsp;2.  </li>
+<li><strong>Busca binária:</strong> Comece no meio, elimine metade a cada&nbsp;passo.</li>
+</ol>
+<p>Compare quantos passos cada método&nbsp;precisou</p>
+<hr>
+<h2>Curiosidades</h2>
+<ul>
+<li>O git tem uma funcionalidade chamada <a href="https://git-scm.com/docs/git-bisect"><code>git bisect</code></a> que usa busca binária para ajudar desenvolvedores a encontrarem&nbsp;bug</li>
+<li>Se o item que estamos buscando for o primeiro item da lista, esse é o melhor caso na busca linear e o pior caso na busca&nbsp;binária</li>
+<li>A implementação&nbsp;do <code>sortedcontainers</code> usa busca binária (a partir do módulo bisect), <a href="https://grantjenks.com/docs/sortedcontainers/_modules/sortedcontainers/sortedlist.html#SortedList">veja&nbsp;aqui</a></li>
+</ul>
+<hr>
+<h2>Exercícios recomendados&nbsp;👩🏻‍💻💞</h2>
+<p>Para reforçar o aprendizado, aqui vão alguns desafios&nbsp;práticos:</p>
+<p><strong>LeetCode</strong></p>
+<ul>
+<li>
+<p><a href="https://leetcode.com/problems/binary-search/description/">Binary Search</a> — implementação&nbsp;direta.</p>
+</li>
+<li>
+<p><a href="https://leetcode.com/problems/search-insert-position/description/">Search Insert Position</a> — variação para encontrar onde inserir um&nbsp;número.</p>
+</li>
+<li>
+<p><a href="https://leetcode.com/problems/first-bad-version/description/">First Bad Version</a> — busca binária aplicada em <span class="caps">API</span>.</p>
+</li>
+</ul>
+<p><strong>Exercism</strong></p>
+<ul>
+<li><a href="https://exercism.org/tracks/python/exercises/binary-search">Binary Search (Python Track)</a> — implementação e&nbsp;testes.</li>
+</ul>
+<p><strong>Dica: resolva primeiro o problema sem olhar a solução e depois compare com implementações&nbsp;otimizadas.</strong></p>
+<p>E assim começa meu roadmap de estudo: cada capítulo do livro vem acompanhado de exercícios para fixar o&nbsp;conteúdo.</p>
+
+         <!-- Botões de compartilhamento -->
+        <div class="compartilhar" style="margin-top: 2em; display: flex; gap: 1em; align-items: center;">
+          <strong>Compartilhar:</strong>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anapaula.org/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"
+            target="_blank" rel="noopener noreferrer" title="Compartilhar no LinkedIn">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" width="24" height="24" style="vertical-align: middle;">
+          </a>
+
+          <!-- Telegram -->
+          <a href="https://t.me/share/url?url=https://anapaula.org/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"
+             target="_blank" rel="noopener noreferrer" title="Compartilhar no Telegram">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram" width="24" height="24" style="vertical-align: middle;">
+          </a>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/?text=https://anapaula.org/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"
+            target="_blank" rel="noopener noreferrer" title="Compartilhar no WhatsApp">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" width="24" height="24">
+          </a>
+        </div>
+      </div><!-- /.entry-content -->
+    </article>
+  </section>
+
+  <div id="comments" style="max-width: 700px;">
+    <script src="https://utteranc.es/client.js"
+      repo="aninhasalesp/meublog"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+        <footer id="footer" class="body">
+                <p>Feito com amor, por <a href="https://github.com/aninhasalesp"> Ana Paula</a> ❤️</p>
+        </footer><!-- /#footer -->
+
+</body>
+</html>
