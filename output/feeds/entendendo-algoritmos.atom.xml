@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>@aninhasalesp - Entendendo algoritmos</title><link href="/" rel="alternate"/><link href="/feeds/entendendo-algoritmos.atom.xml" rel="self"/><id>/</id><updated>2025-09-17T00:00:00-03:00</updated><entry><title>Recursão</title><link href="/2025/09/17/recursao/" rel="alternate"/><published>2025-09-17T00:00:00-03:00</published><updated>2025-09-17T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-09-17:/2025/09/17/recursao/</id><summary type="html">&lt;p&gt;Resumo &lt;strong&gt;capítulo 3&lt;/strong&gt; do livro &amp;#8220;Entendendo Algoritmos&amp;#8221;. Apresento o conceito de recursão e como pensar em problemas dividindo-os em partes menores. Mostro exemplos clássicos como cálculo de fatorial, além de discutir limitações como o risco de estouro da pilha&amp;nbsp;(StackOverflow).&lt;/p&gt;</summary><content type="html">&lt;p&gt;Terceiro capítulo da série de estudos sobre o livro &lt;a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf"&gt;Entendendo Algoritmos&lt;/a&gt; de Aditya Y.&amp;nbsp;Bhargava.&lt;/p&gt;
+&lt;p&gt;Se você está acompanhando a série, já resumi os capítulos anteriores 👀, então volta lá se tu tiver alguma dúvida:&lt;br&gt;
+- &lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;Capítulo 1 - Introdução e Busca Binária&lt;/a&gt;&lt;br&gt;
+- &lt;a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"&gt;Capítulo 2 - Arrays, Listas e Ordenação por Seleção&lt;/a&gt;&lt;br&gt;
+- &lt;a href="/2025/09/17/recursao/"&gt;Capítulo 3 - Recursão&lt;/a&gt; -📍 &lt;strong&gt;você está&amp;nbsp;aqui&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Oi, pessoal! Mais um resuminho do nosso livro querido&amp;nbsp;😊 &lt;/p&gt;
+&lt;p&gt;Esse capítulo foi um dos que mais me tirou a sensação de que programação é mágica. Bora entender recursão e pilhas sem&amp;nbsp;medo?&lt;/p&gt;
+&lt;p&gt;Neste capítulo, o autor explica de forma simples o conceito e o uso da &lt;strong&gt;recursão&lt;/strong&gt;, dividindo a explicação em caso base e caso recursivo. 
+Ele sugere que você, ao menos uma vez, analise uma função recursiva com papel e caneta, acompanhando passo a passo, assim você entenderá como a função&amp;nbsp;funciona.&lt;/p&gt;
+&lt;h1&gt;Recursão&lt;/h1&gt;
+&lt;p&gt;É a técnica onde uma função chama a si mesma para resolver um problema, dividindo-o em problemas menores. Devido ao fato de uma função recursiva chamar a si mesma, é mais fácil de escrevê-la de forma errada e acabar em um loop infinito. Para que a recursão funcione corretamente, ela deve conter um caso base para parar as chamadas e um caso recursivo que aproxime o problema da solução&amp;nbsp;final. &lt;/p&gt;
+&lt;h2&gt;Como a recursão&amp;nbsp;funciona:&lt;/h2&gt;
+&lt;p&gt;Antes de mostrar um exemplo de recursão, vamos entender como ela&amp;nbsp;funciona.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Caso base&lt;/strong&gt;: define quando a função deve &lt;strong&gt;parar&lt;/strong&gt; de se chamar. Sem ele, a recursão continuaria indefinidamente, causando&amp;nbsp;erro.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Caso recursivo&lt;/strong&gt;: é a parte em que a função &lt;strong&gt;se chama novamente&lt;/strong&gt;, aproximando-se da solução final a cada&amp;nbsp;passo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Um exemplo clássico é o cálculo do fatorial de um&amp;nbsp;número::&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fatorial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# Caso Base&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# Caso Recursivo&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;fatorial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fatorial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  &lt;span class="c1"&gt;# Saída: 120&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Nesse&amp;nbsp;exemplo:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Caso Base&lt;/strong&gt;: &lt;code&gt;n&lt;/code&gt; é 0 ou 1, o fatorial é&amp;nbsp;1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Caso Recursivo&lt;/strong&gt;:&amp;nbsp;Se &lt;code&gt;n&lt;/code&gt; é maior que 1, o fatorial&amp;nbsp;é &lt;code&gt;n * fatorial(n-1)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Olha como fica quase poético, cada número chama o próximo até o 1 dizer &amp;#8220;chega, agora volta&amp;#8221;. Aí a multiplicação acontece no caminho de&amp;nbsp;volta.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Pilha&lt;/h1&gt;
+&lt;p&gt;Suponha que você esteja fazendo um churrasco para os seus amigos. Você tem uma lista de afazeres em forma de uma pilha de notas adesivas. Quando você insere um item, ele é colocado no topo da pilha. Quando você lê um item, lê apenas o item do topo da pilha e ele é retirado da lista. Logo, sua lista de afazeres contém apenas duas ações: &lt;em&gt;push&lt;/em&gt; (inserir) e &lt;em&gt;pop&lt;/em&gt; (remover e&amp;nbsp;ler).&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/pilha.png" alt="pilha" width="700"/&gt;&lt;/p&gt;
+&lt;p&gt;Esta estrutura de dados é chamada de pilha. A pilha é uma estrutura de dados simples e nós usamos o tempo todo sem&amp;nbsp;perceber.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Pilha de&amp;nbsp;chamadas&lt;/h1&gt;
+&lt;p&gt;Sempre que uma função é chamada, o computador precisa “lembrar” de onde ela parou para poder continuar depois.
+Essa memória temporária é organizada numa &lt;strong&gt;pilha de chamadas&lt;/strong&gt; (call&amp;nbsp;stack).&lt;/p&gt;
+&lt;p&gt;Funciona&amp;nbsp;assim:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A cada nova chamada de função, o computador empilha informações sobre essa execução (como parâmetros e variáveis&amp;nbsp;locais).&lt;/li&gt;
+&lt;li&gt;Quando a função termina, o computador desempilha esses dados e volta para o ponto&amp;nbsp;anterior.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A metáfora do livro é ótima, pense em uma pilha de pratos na cozinha. Você só consegue pegar (ou retirar) o prato que está por cima.  Assim também funciona com funções, o último que entrou é o primeiro que sai (&lt;span class="caps"&gt;LIFO&lt;/span&gt;: Last In, First&amp;nbsp;Out).&lt;/p&gt;
+&lt;p&gt;Podemos visualizar isso com um exemplo simples em&amp;nbsp;Python:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;cumprimenta&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Oi,&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;despedida&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;despedida&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Tchau!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;cumprimenta&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Ana&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Ordem de execução na&amp;nbsp;pilha:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;cumprimenta(&amp;#8220;Ana&amp;#8221;) é chamada → vai para a&amp;nbsp;pilha.&lt;/li&gt;
+&lt;li&gt;Dentro dela, despedida() é chamada → fica no&amp;nbsp;topo.&lt;/li&gt;
+&lt;li&gt;despedida() roda e sai da&amp;nbsp;pilha.&lt;/li&gt;
+&lt;li&gt;cumprimenta(&amp;#8220;Ana&amp;#8221;) roda até o fim e sai da&amp;nbsp;pilha.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Ou seja, tudo organizado, prato por&amp;nbsp;prato.&lt;/p&gt;
+&lt;p&gt;Esse exemplo já mostra que não é só recursão que usa pilha, mas qualquer função. A diferença é que a recursão força a pilha a crescer muito mais&amp;nbsp;rápido.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Pilha de chamadas com&amp;nbsp;recursão&lt;/h1&gt;
+&lt;p&gt;Com recursão, essa pilha pode crescer bastante, porque a função vai se chamando várias vezes até chegar no caso&amp;nbsp;base.&lt;/p&gt;
+&lt;p&gt;Exemplo simplificado&amp;nbsp;com &lt;code&gt;fatorial(3)&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;O programa chama fatorial(3)
+    &lt;span class="k"&gt;-&lt;/span&gt; empilha fatorial(3)
+
+Para resolver, precisa de fatorial(2)
+    &lt;span class="k"&gt;-&lt;/span&gt; empilha fatorial(2)
+
+Para resolver, precisa de fatorial(1)
+    &lt;span class="k"&gt;-&lt;/span&gt; empilha fatorial(1)
+
+fatorial(1) chega no caso base e retorna 1
+    &lt;span class="k"&gt;-&lt;/span&gt; desempilha fatorial(1)
+
+Agora fatorial(2) consegue calcular 2 × 1 = 2
+    &lt;span class="k"&gt;-&lt;/span&gt; desempilha fatorial(2)
+
+Por fim, fatorial(3) calcula 3 × 2 = 6
+    &lt;span class="k"&gt;-&lt;/span&gt; desempilha fatorial(3)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;No fim, cada chamada só consegue terminar depois que a chamada menor retorna. 
+É por isso que &lt;strong&gt;definir bem o caso base é tão importante&lt;/strong&gt;, sem ele, a função nunca para de empilhar chamadas e acaba estourando a memória (stack&amp;nbsp;overflow).&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/coffee.gif" alt="overflow" width="400"/&gt;&lt;/p&gt;
+&lt;p&gt;Esse “estouro da pilha” é justamente de onde veio o nome do site &lt;a href="https://stackoverflow.com/questions"&gt;Stack Overflow&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Quando vi esse processo pela primeira vez, parecia uma espécie de “mágica”, como se o computador simplesmente soubesse de onde&amp;nbsp;voltar.&lt;/p&gt;
+&lt;p&gt;Foi nesse momento que percebi que entender programação é muito sobre desmistificar. Não é dom, não é gênio, é só empilhar e desempilhar com calma. 
+Hoje, sempre que vejo um código recursivo, tento imaginar essa pilha acontecendo em segundo plano, isso traz clareza e ainda transforma o “eu não nasci pra isso/nunca vou entender isso” para um “hihi que legal”&amp;nbsp;😎&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/chihuahua.gif" alt="cachorro" width="200"/&gt;&lt;/p&gt;
+&lt;p&gt;Então, da próxima vez que você se perder num código recursivo, respira: desenha a pilha, segue os passos, e lembra que não é mágica, é só &lt;strong&gt;prática&lt;/strong&gt;!!!&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Curiosidades&amp;nbsp;💡&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Uma recursão muito comum fora da programação: bonecas russas (matryoshkas). Cada boneca guarda outra dentro, até que a última (caso base) não guarda mais&amp;nbsp;nenhuma.&lt;/li&gt;
+&lt;li&gt;Algumas linguagens aplicam otimização de recursão de cauda (tail call optimization), que reaproveita os quadros da pilha para não estourar a memória em funções recursivas muito profundas. Python, porém, não faz&amp;nbsp;isso.&lt;/li&gt;
+&lt;li&gt;A pilha de chamadas é invisível na maior parte do tempo, mas você já viu ela funcionando, quando o Python mostra um traceback (aquele erro cheio de setas, indicando em que função a execução&amp;nbsp;estava).&lt;/li&gt;
+&lt;li&gt;Muitas funções recursivas podem ser reescritas de forma iterativa (usando&amp;nbsp;laços &lt;code&gt;for&lt;/code&gt; ou &lt;code&gt;while&lt;/code&gt;). Isso evita o risco de estouro da pilha em casos de chamadas muito&amp;nbsp;profundas.&lt;/li&gt;
+&lt;li&gt;Para entender recursão, você precisa primeiro entender recursão.&amp;nbsp;😅&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Exercícios recomendados&amp;nbsp;👩🏻‍💻💞&lt;/h2&gt;
+&lt;p&gt;Para reforçar o aprendizado, aqui vão alguns desafios&amp;nbsp;práticos:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LeetCode&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/merge-two-sorted-lists/description/"&gt;Merge two sorted lists&lt;/a&gt; - Dá pra resolver recursivamente, tratando como o caso base quando uma lista chega ao&amp;nbsp;fim.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/climbing-stairs/description/"&gt;Climbing Stairs&lt;/a&gt; - Um problema clássico de recursão + otimização (parecido com&amp;nbsp;Fibonacci).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Exercism&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/exercises/flatten-array"&gt;Flatten Array&lt;/a&gt; - Recebe uma lista que pode conter sublistas e precisa retornar tudo “achatado” em uma única&amp;nbsp;lista&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/concepts/recursion"&gt;Recursão com Python&lt;/a&gt; - Reforça o conceito de recursão e tem o exercício “Luhn” que admite uma abordagem&amp;nbsp;recursiva&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Desafio&amp;nbsp;extra&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Crie uma função recursiva que percorre pastas e arquivos no seu computador (ou só numa lista aninhada simulada). Isso é literalmente como muitos sistemas de arquivos&amp;nbsp;funcionam.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;Espero que tenha aproveitado o conteúdo!&amp;nbsp;✨💕&lt;/p&gt;
+&lt;p&gt;Se tiver alguma sugestão de exercício ou melhoria na explicação, me conta aqui&amp;nbsp;🫂🌻&lt;/p&gt;</content><category term="Entendendo algoritmos"/></entry><entry><title>Ordenação por Seleção, Arrays e Listas</title><link href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/" rel="alternate"/><published>2025-08-27T00:00:00-03:00</published><updated>2025-08-27T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-08-27:/2025/08/27/ordenacao-por-selecao-arrays-e-listas/</id><summary type="html">&lt;p&gt;Resumo do &lt;strong&gt;capítulo 2&lt;/strong&gt; do livro &amp;#8220;Entendendo Algoritmos&amp;#8221;. Mostra o funcionamento do algoritmo de ordenação por seleção e compara arrays e listas em termos de operações e eficiência, reforçando o uso da notação Big&amp;nbsp;O.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Segundo capítulo da série de estudos sobre o livro &lt;a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf"&gt;Entendendo Algoritmos&lt;/a&gt; de Aditya Y.&amp;nbsp;Bhargava.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;Capítulo 1 - Introdução e Busca&amp;nbsp;Binária&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"&gt;Capítulo 2 - Arrays, Listas e Ordenação por Seleção&lt;/a&gt; -📍 &lt;strong&gt;você está&amp;nbsp;aqui&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/09/17/recursao/"&gt;Capítulo 3 -&amp;nbsp;Recursão&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Espero que vocês tenham gostado da forma como estruturei o &lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;primeiro capítulo&lt;/a&gt;, seguirei naquela mesma linha de raciocínio e explicação. Se você tiver alguma sugestão de exercício ou melhoria na explicação, me conta aqui que eu ficarei feliz em receber esse feedback&amp;nbsp;🫂💕&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;No capítulo 2, o autor aprofunda dois conceitos fundamentais: &lt;strong&gt;estruturas de dados&lt;/strong&gt; (como arrays e listas) e a &lt;strong&gt;eficiência dos algoritmos&lt;/strong&gt; (notação Big O). Para ilustrar isso, ele apresenta o algoritmo de &lt;strong&gt;ordenação por seleção&lt;/strong&gt;.&lt;/p&gt;
+&lt;h1&gt;Arrays e&amp;nbsp;Listas&lt;/h1&gt;
+&lt;p&gt;Antes de falar em ordenação, é importante entender como os dados podem ser armazenados na memória.&amp;nbsp;👀&lt;/p&gt;
+&lt;p&gt;O autor traz uma analogia que faz o entendimento ficar muuuito mais fácil. Em resumo, a ideia é algo&amp;nbsp;assim:&lt;/p&gt;
+&lt;p&gt;Imagine que você vai a um show e precisa guardar suas coisas na chapelaria (eu nem sabia que isso existia 🤔). Apenas algumas gavetas estão disponíveis e você pode guardar um item por gaveta. Você pega e guarda suas coisas nessas gavetas, fecha, e está pronto para ir ao&amp;nbsp;show.&lt;/p&gt;
+&lt;p&gt;A memória do computador funciona mais ou menos assim. O computador parece um grande conjunto de gavetas, e cada gaveta tem um endereço. Cada vez que tu armazena um item na memória, o computador fornece um endereço para guardar esse&amp;nbsp;item.&lt;/p&gt;
+&lt;p&gt;E aí, se tu quiser armazenar múltiplos itens, existem duas maneiras principais de fazer isso: &lt;strong&gt;arrays&lt;/strong&gt; e &lt;strong&gt;listas&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Arrays&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;São blocos contíguos de memória (um ao lado do&amp;nbsp;outro).&lt;/li&gt;
+&lt;li&gt;Cada elemento pode ser acessado &lt;strong&gt;diretamente&lt;/strong&gt; pelo índice, permitindo uma leitura rápida.&lt;ul&gt;
+&lt;li&gt;Isso significa que a operação de busca por posição é O(1), ou seja,&amp;nbsp;constante.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;arr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;  &lt;span class="c1"&gt;# acesso direto ao 20&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;O lado ruim do array é que, se tu quiser adicionar mais um item e a gaveta seguinte estiver ocupada, será necessário solicitar ao computador uma área de memória maior para armazenar todos os itens e mover os existentes para&amp;nbsp;lá.&lt;/li&gt;
+&lt;li&gt;Então adicionar novos itens a um array é algo que pode ser muito&amp;nbsp;lento.&lt;/li&gt;
+&lt;li&gt;Deletar um elemento é tão custoso quanto adicionar, todos os elementos seguintes precisam ser&amp;nbsp;movidos.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Listas&amp;nbsp;encadeadas&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Seus itens podem estar &lt;strong&gt;em qualquer lugar da memória&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Cada item armazena o endereço do próximo item da&amp;nbsp;lista.&lt;/li&gt;
+&lt;li&gt;Semelhante a uma caça ao tesouro, cada pista encontrada indica onde está a próxima&amp;nbsp;etapa.&lt;/li&gt;
+&lt;li&gt;Adicionar um item é simples, você coloca o item em qualquer lugar da memória e atualiza o endereço do item&amp;nbsp;anterior.&lt;/li&gt;
+&lt;li&gt;Para deletar, é tão simples quanto, basta alterar o endereço do item anterior para apontar para o próximo&amp;nbsp;item.&lt;/li&gt;
+&lt;li&gt;O lado ruim da lista encadeada é que, para acessar um elemento específico (por exemplo, o último), você não pode ir direto, precisa percorrer a lista &lt;strong&gt;item por item&lt;/strong&gt; até chegar&amp;nbsp;lá.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;  &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;valor&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+          &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;valor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;valor&lt;/span&gt;
+          &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proximo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+
+  &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proximo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+
+  &lt;span class="c1"&gt;# Percorrendo&lt;/span&gt;
+  &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+  &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;valor&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proximo&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Explicando o código acima:
+1. Crio a&amp;nbsp;classe &lt;code&gt;Node&lt;/code&gt;, que armazena um valor&amp;nbsp;(&lt;code&gt;valor&lt;/code&gt;) e um ponteiro para o próximo nó&amp;nbsp;(&lt;code&gt;proximo&lt;/code&gt;).
+2. Crio dois&amp;nbsp;nós: &lt;code&gt;a&lt;/code&gt; com valor 10&amp;nbsp;e &lt;code&gt;b&lt;/code&gt; com valor 20.
+3.&amp;nbsp;Ligo &lt;code&gt;a&lt;/code&gt; ao &lt;code&gt;b&lt;/code&gt; com &lt;code&gt;a.proximo = b&lt;/code&gt;.
+4. Percorro a lista&amp;nbsp;com &lt;code&gt;while n:&lt;/code&gt; imprimindo &lt;code&gt;n.valor&lt;/code&gt; até chegar no final&amp;nbsp;(&lt;code&gt;None&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;A saída pra esse&amp;nbsp;código:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;span class="mi"&gt;20&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;Não sei vocês, mas &lt;strong&gt;entender a diferença entre arrays e listas&lt;/strong&gt; foi um verdadeiro estalo para mim. Como aprendi Python primeiro, eu meio que usava essas estruturas no automático… 🥲 
+Pode parecer algo óbvio ou até desnecessário, afinal, lidamos com arrays e listas o tempo todo, mas foi incrível compreender &lt;strong&gt;por que as coisas funcionam do jeito que funcionam&lt;/strong&gt;. Minha cabeça finalmente começou a encaixar as peças e perceber a lógica por trás das operações. Fiquei meio&amp;nbsp;que:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/cat-in-shock-surprises.gif" alt="gato surpreso" width="150"/&gt;&lt;/p&gt;
+&lt;p&gt;Aqui estão os tempos de execução para as operações mais comuns em arrays e listas&amp;nbsp;encadeadas&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/array_lista.png" alt="tempo de execução" width="400"/&gt;&lt;/p&gt;
+&lt;p&gt;Acho importante trazer essa tabela, para que o entendimento sobre notação Big O se consolide e pra todos entenderem o impacto das nossas escolhas em diferentes&amp;nbsp;situações.&lt;/p&gt;
+&lt;p&gt;A interpretação pra essa tabela de uma forma mais explícita&amp;nbsp;seria:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Leitura&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Array → O(1)&lt;/strong&gt;:
+    Em um array, cada posição tem um endereço fixo na memória. Então, se você quiser o 5º elemento, o computador vai direto nele de uma forma super rápida e em tempo&amp;nbsp;constante.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Lista → O(n)&lt;/strong&gt;:
+    uma lista encadeada, cada elemento sabe apenas quem é o próximo. Então, para achar o 5º elemento, você precisa começar do 1º, depois o 2º, depois o 3º… até chegar no 5º. Quanto maior a lista, mais tempo&amp;nbsp;demora.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Inserção&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Array → O(n)&lt;/strong&gt;:
+    Se o array estiver cheio e você quiser enfiar um novo item no meio, tem que “empurrar” todos os outros elementos uma posição para frente. Isso pode levar bastante&amp;nbsp;tempo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Lista → O(1)&lt;/strong&gt;:
+    Se você já sabe a posição, inserir numa lista é rapidinho, basta mudar quem aponta pra quem e&amp;nbsp;pronto.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Deleção&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Array → O(n)&lt;/strong&gt;:
+    Se você remove um item no meio do array, precisa “puxar” todos os elementos da frente uma posição pra trás para fechar o&amp;nbsp;buraco.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Lista → O(1)&lt;/strong&gt;:
+    Assim como na inserção, basta mudar os ponteiros para pular o item que você quer remover. Não mexe em mais&amp;nbsp;ninguém.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1&gt;Ordenação por&amp;nbsp;seleção&lt;/h1&gt;
+&lt;p&gt;O autor apresenta o algoritmo Selection Sort, que é simples de implementar, mas não muito eficiente.
+A diferença entre arrays e listas em Python torna importante entender como o algoritmo percorre e manipula os&amp;nbsp;elementos.&lt;/p&gt;
+&lt;h3&gt;Ideia do&amp;nbsp;algoritmo&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Encontrar o menor elemento da&amp;nbsp;lista&lt;/li&gt;
+&lt;li&gt;Colocá-lo na primeira&amp;nbsp;posição&lt;/li&gt;
+&lt;li&gt;Repetir para as posições seguintes até ordenar toda a&amp;nbsp;lista&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;Implementação em&amp;nbsp;Python:&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;busca_menor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;    Encontra o índice do menor elemento em um array.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Parâmetros:&lt;/span&gt;
+&lt;span class="sd"&gt;    arr (list): Lista de elementos comparáveis.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Retorna:&lt;/span&gt;
+&lt;span class="sd"&gt;    int: Índice do menor elemento encontrado.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;menor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;menor_indice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;menor&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;menor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="n"&gt;menor_indice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;menor_indice&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;ordenacao_por_selecao&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;    Ordena uma lista usando o algoritmo de ordenação por seleção.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    A função cria uma nova lista, removendo o menor elemento&lt;/span&gt;
+&lt;span class="sd"&gt;    da lista original a cada iteração e adicionando-o à lista ordenada.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Parâmetros:&lt;/span&gt;
+&lt;span class="sd"&gt;    arr (list): Lista de números a serem ordenados.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Retorna:&lt;/span&gt;
+&lt;span class="sd"&gt;    list: Nova lista ordenada em ordem crescente.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;novo_arr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+        &lt;span class="n"&gt;menor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;busca_menor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;novo_arr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;menor&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;novo_arr&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ordenacao_por_selecao&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt; &lt;span class="c1"&gt;# Saída: [2, 3, 5, 6, 10]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;Complexidade e Big&amp;nbsp;O&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;O selection sort precisa percorrer todos os elementos várias&amp;nbsp;vezes.&lt;/li&gt;
+&lt;li&gt;Para n elementos, ele faz aproximadamente n × n&amp;nbsp;operações.&lt;/li&gt;
+&lt;li&gt;Isso significa que seu desempenho é&amp;nbsp;O(n²).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Este é um exemplo clássico que mostra como &lt;strong&gt;algoritmos diferentes podem resolver o mesmo problema com eficiências diferentes&lt;/strong&gt;, destacando a importância de escolher o algoritmo certo dependendo do tamanho e da estrutura dos&amp;nbsp;dados.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Curiosidades&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;As listas em Python são, na verdade, &lt;strong&gt;arrays&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;O&amp;nbsp;método &lt;code&gt;append&lt;/code&gt; (adicionar no final) é considerado de complexidade &lt;strong&gt;O(1)&lt;/strong&gt; na média. Isso porque adicionar um item no final geralmente é bem barato: só colocar no próximo espaço&amp;nbsp;livre.&lt;/li&gt;
+&lt;li&gt;O “custo alto” aparece em operações&amp;nbsp;como &lt;code&gt;insert&lt;/code&gt; ou &lt;code&gt;remove&lt;/code&gt; no meio da lista. Aí é preciso deslocar todos os elementos seguintes, o que pode ser &lt;strong&gt;O(n)&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Uma forma de visualizar: pense numa pilha de pratos. Colocar ou tirar um prato do topo&amp;nbsp;(como &lt;code&gt;append&lt;/code&gt; e &lt;code&gt;pop&lt;/code&gt;) é fácil. Mas se você quiser enfiar ou tirar um prato do meio da pilha&amp;nbsp;(&lt;code&gt;insert&lt;/code&gt; ou &lt;code&gt;remove&lt;/code&gt;), vai ter que mover todos os pratos que estavam em cima&amp;nbsp;primeiro.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Exercícios recomendados&amp;nbsp;👩🏻‍💻💞&lt;/h2&gt;
+&lt;p&gt;Para reforçar o aprendizado, aqui vão alguns desafios&amp;nbsp;práticos:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LeetCode&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/two-sum/description/"&gt;Two Sum&lt;/a&gt; - clássico de&amp;nbsp;arrays&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/"&gt;Best Time to Buy and Sell Stock&lt;/a&gt; - Percorrer array com análise de&amp;nbsp;tempo&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/merge-sorted-array/description/"&gt;Merge Sorted Array&lt;/a&gt; - Manipulação de listas&amp;nbsp;ordenadas&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Exercism&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/exercises/isogram"&gt;Isogram&lt;/a&gt; - Percorre strings/arrays verificando&amp;nbsp;duplicatas&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;E assim, fechamos o segundo capítulo!
+Espero que tenha sido útil e leve de ler&amp;nbsp;💁🏻‍♀️✨&lt;/p&gt;</content><category term="Entendendo algoritmos"/></entry><entry><title>Busca Binária e Introdução à Análise de Algoritmos</title><link href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/" rel="alternate"/><published>2025-08-12T00:00:00-03:00</published><updated>2025-08-12T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-08-12:/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/</id><summary type="html">&lt;p&gt;Resumo do &lt;strong&gt;capítulo 1&lt;/strong&gt; do livro &amp;#8220;Entendendo Algoritmos&amp;#8221;. Apresenta a busca binária como exemplo inicial e introduz o conceito de eficiência dos algoritmos, explicando a notação Big O de forma&amp;nbsp;simples.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Início de uma série de estudos sobre o livro &lt;a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf"&gt;Entendendo Algoritmos&lt;/a&gt; de Aditya Y.&amp;nbsp;Bhargava. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;Capítulo 1 - Introdução e Busca Binária&lt;/a&gt; -📍 &lt;strong&gt;você está&amp;nbsp;aqui&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"&gt;Capítulo 2 - Arrays, Listas e Ordenação por&amp;nbsp;Seleção&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/09/17/recursao/"&gt;Capítulo 3 -&amp;nbsp;Recursão&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Esse livro foi indicado por uma amiga, &lt;a href="https://github.com/anapaulamendes"&gt;Ana Paula Mendes&lt;/a&gt;, e eu não imaginava o quanto iria gostar. A leitura é leve, clara e muito acessível. Se você, como eu, tem dificuldade em manter a constância em leituras técnicas, esse livro é um achado, fácil de entender, ótimo para aprender ou revisar&amp;nbsp;conceitos. &lt;/p&gt;
+&lt;p&gt;Ele apresenta ideias da ciência da computação que estão no nosso dia a dia, muitas vezes sem que a gente&amp;nbsp;perceba.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/livro1.jpg" alt="capa do livro" width="400"/&gt;&lt;/p&gt;
+&lt;p&gt;Uma das coisas que mais me chamam atenção nesse livro é o jeito como o autor ensina, sempre com exemplos. Em vez de encher de símbolos e fórmulas, ele quer que a gente visualize os conceitos. Ele acredita, e eu concordo, que aprendemos melhor quando conseguimos relacionar o conteúdo com algo que já conhecemos. E, pra isso, os exemplos ajudam&amp;nbsp;muito. &lt;/p&gt;
+&lt;p&gt;E o melhor é que ele desenha 🤩! 
+Sabe aquela frase “quer que eu desenhe pra você entender”? Eu respondo “sim, por favorrrrr!” e ele realmente desenha. É maravilhoso&amp;nbsp;✨. &lt;/p&gt;
+&lt;p&gt;Dá pra sentir que tudo foi pensado com cuidado, desde o conteúdo, os exemplos ilustrados até a recapitulação no fim de cada&amp;nbsp;capítulo. &lt;/p&gt;
+&lt;p&gt;Depois dessa introdução, bora ver o que o capítulo 1&amp;nbsp;ensina.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/hahahaha-gif.gif" alt="gif" width="100"/&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;A busca binária em&amp;nbsp;resumo&lt;/h1&gt;
+&lt;p&gt;Pensa numa lista telefônica com &lt;strong&gt;1 milhão de nomes&lt;/strong&gt;. Olhar folha por folha seria um pesadelo, né? 
+Agora, e se eu te dissesse que dá para encontrar qualquer nome em no &lt;strong&gt;máximo 20 tentativas&lt;/strong&gt;?&amp;nbsp;👀&lt;/p&gt;
+&lt;p&gt;O truque é simples: a cada etapa, tu elimina metade das opções. Comece considerando o elemento que está bem no meio da sequência. Em uma lista telefônica, isso seria abrir o livro bem no meio. Em uma lista com 10 itens, isso seria pegar o 5o item. Agora compare esse item do meio com o que você está buscando: se eles forem iguais, parabéns, você encontrou o que procurava! Agora, se o item que você encontrou for &lt;span class="caps"&gt;MAIOR&lt;/span&gt; que o item que você procura (no caso de nomes em uma lista telefônica, pense em qual nome vem primeiro na ordem alfabética), quer dizer que o item buscado está na primeira metade da lista. Caso contrário, o item está na segunda metade da lista. E assim você consegue cortar a lista pela &lt;em&gt;metade&lt;/em&gt; apenas comparando o item procurado com o item do meio. Depois disso, basta pegar a parte que você selecionou e aplicar a mesma estratégia, checando o item do meio e descartando metade da lista.
+&lt;strong&gt;Observação&lt;/strong&gt;: Essa técnica só funciona se a lista de itens estiver&amp;nbsp;ordenada!&lt;/p&gt;
+&lt;p&gt;E o mais legal é que, mesmo que a lista dobre de tamanho, tu só precisa de &lt;strong&gt;mais uma&lt;/strong&gt; etapa para chegar ao resultado.&amp;nbsp;🤓&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Exemplo&lt;/strong&gt;:
+Para facilitar a conta, vamos pegar uma lista menor de 128 nomes e calcular o número máximo de etapas que levaríamos para encontrar um nome específico. Logo em seguida, dobramos o tamanho da lista e vemos que isso adiciona apenas mais uma&amp;nbsp;etapa:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;max_etapas&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;etapas&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;//=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="n"&gt;etapas&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;etapas&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_etapas&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;# 7&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_etapas&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;# 8&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Observação importante&lt;/strong&gt;: numa lista telefônica física, a gente já sabe pular quase direto para a letra certa, o que lembra mais o funcionamento de um hashmap (ou dict no Python), que encontra um item em tempo constante. Mas no computador, quando temos apenas uma lista ordenada&amp;nbsp;(como &lt;code&gt;[1, 3, 5, 7, 9, 11, 13]&lt;/code&gt;), não existe esse “pulo mágico”, é aí que a busca binária pode ajudar, cortando a lista ao meio de forma sistemática até encontrar (ou concluir que o elemento não está&amp;nbsp;lá).&lt;/p&gt;
+&lt;p&gt;Legal né? Isso é ciência da computação!!&amp;nbsp;💁‍♀️✨&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Exemplos básicos de busca&amp;nbsp;binária:&lt;/h2&gt;
+&lt;p&gt;Pense em um número entre 1 e 100. Dá para adivinhar em, no máximo, 7&amp;nbsp;tentativas:&lt;/p&gt;
+&lt;p&gt;Minha primeira pergunta: &amp;#8220;É&amp;nbsp;50?&amp;#8221;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Se você disser &amp;#8220;maior&amp;#8221;, eu sei que está entre 51 e&amp;nbsp;100&lt;/li&gt;
+&lt;li&gt;Se disser &amp;#8220;menor&amp;#8221;, está entre 1 e&amp;nbsp;49&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Segunda pergunta: Digamos que seja maior que 50. &amp;#8220;É 75?&amp;#8221; (meio entre 51 e&amp;nbsp;100)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Maior? Está entre 76 e&amp;nbsp;100&lt;/li&gt;
+&lt;li&gt;Menor? Está entre 51 e&amp;nbsp;74&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;E assim por diante, sempre eliminando metade das&amp;nbsp;possibilidades.&lt;/p&gt;
+&lt;h3&gt;Vamos ver como fica com uma quantidade maior de&amp;nbsp;números:&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Itens na lista&lt;/th&gt;
+&lt;th&gt;Busca linear (tentativas)&lt;/th&gt;
+&lt;th&gt;Busca binária (tentativas)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1.000&lt;/td&gt;
+&lt;td&gt;até 1.000&lt;/td&gt;
+&lt;td&gt;até 10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1.000.000&lt;/td&gt;
+&lt;td&gt;até 1.000.000&lt;/td&gt;
+&lt;td&gt;até 20&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Sim, 20 tentativas para encontrar algo entre 1 milhão de opções!&amp;nbsp;🚀&lt;/p&gt;
+&lt;p&gt;Esse “milagre” da busca binária acontece por causa de um conceito chamado &lt;strong&gt;logaritmo&lt;/strong&gt;, e já já eu te mostro o&amp;nbsp;porquê.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Agora que você já entendeu a busca binária, vamos entrar em mais três pontos que andam de mãos dadas: &lt;strong&gt;logaritmos, tempo de execução e notação Big O&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Preparei um resumo rápido de cada um, do jeito que fez sentido pra mim.
+Se em algum momento ficar confuso, não tem problema, dá uma olhada no livro que é sucesso&amp;nbsp;🫂💖&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Logaritmos:&lt;/h2&gt;
+&lt;p&gt;O número máximo de tentativas na busca binária é dado por log₂(n), logaritmo na base 2 de&amp;nbsp;n.&lt;/p&gt;
+&lt;p&gt;Se o nome assusta, pensa&amp;nbsp;assim:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;log₂(n) é o número de vezes que você precisa dividir n por 2 até chegar em&amp;nbsp;1&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Exemplo&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;log₂(128) = 7, 7 cortes ao meio até sobrar 1&amp;nbsp;item&lt;/li&gt;
+&lt;li&gt;log₂(256) = 8, só mais uma etapa, mesmo dobrando o tamanho da&amp;nbsp;lista&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A base &amp;#8220;2&amp;#8221; vem justamente porque a cada passo cortamos a lista &lt;strong&gt;pela metade&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Tempo de&amp;nbsp;execução:&lt;/h2&gt;
+&lt;p&gt;Sempre que falamos sobre um algoritmo, é importante pensar no tempo de execução, quanto esforço (ou quantos passos) ele precisa para chegar ao&amp;nbsp;resultado.&lt;/p&gt;
+&lt;p&gt;Na &lt;strong&gt;busca linear&lt;/strong&gt; (a pesquisa simples), verificamos item por&amp;nbsp;item:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lista com 100 números → até 100&amp;nbsp;tentativas&lt;/li&gt;
+&lt;li&gt;Lista com 4 bilhões de números → até 4 bilhões de&amp;nbsp;tentativas&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;O tempo de execução cresce na mesma proporção que o tamanho da lista. Chamamos isso de &lt;strong&gt;tempo linear&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;busca binária&lt;/strong&gt; é um outro&amp;nbsp;mundo:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lista com 100 números → no máximo 7&amp;nbsp;tentativas&lt;/li&gt;
+&lt;li&gt;Lista com 4 bilhões → no máximo 32&amp;nbsp;tentativas&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Isso acontece porque a busca binária corta as possibilidades pela metade a cada passo. Esse tipo de crescimento é chamado de &lt;strong&gt;tempo logarítmico&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/images/image-4.png" alt="tempo de execução" width="400"/&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Notação Big&amp;nbsp;O&lt;/h2&gt;
+&lt;p&gt;A &lt;strong&gt;notação Big O&lt;/strong&gt; é um jeito de medir a eficiência de um algoritmo, mostrando como o &lt;strong&gt;tempo de execução&lt;/strong&gt; cresce conforme aumentamos o tamanho da&amp;nbsp;entrada.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;O(log n), tempo logarítmico (ex: pesquisa&amp;nbsp;binária)&lt;/li&gt;
+&lt;li&gt;O(n), tempo linear (ex: pesquisa&amp;nbsp;simples)&lt;/li&gt;
+&lt;li&gt;O(n * log n), um algoritmo rápido de ordenação, como quicksort (Capítulo&amp;nbsp;4)&lt;/li&gt;
+&lt;li&gt;O(n²), um algoritmo de ordenação mais lenta, como ordenação por seleção (Capítulo&amp;nbsp;2).&lt;/li&gt;
+&lt;li&gt;O(n!), um algoritmo extremamente lento, como o do caixeiro viajante (Capítulo&amp;nbsp;1).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;O livro ilustra isso de forma bem visual e intuitiva: cresce linearmente, cresce em log, cresce muito, cresce lento&amp;#8230; e por aí&amp;nbsp;vai. &lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Agora que vimos como a busca binária funciona, vale notar que ela não está restrita a livros, ela aparece em várias situações do nosso dia a&amp;nbsp;dia&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sistemas de busca (Google, WhatsApp, Spotify)&lt;/strong&gt;: por trás, usam variações de busca binária em listas ordenadas ou&amp;nbsp;índices.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Filtragem de dados&lt;/strong&gt;: encontrar rapidamente um registro específico em planilhas ou bases de dados&amp;nbsp;grandes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Depuração de código&lt;/strong&gt;: reduzir o espaço do problema pela metade a cada teste para achar onde o bug&amp;nbsp;está.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Observação&lt;/strong&gt;: para que a busca binária funcione, os dados precisam estar&amp;nbsp;ordenados.&lt;/p&gt;
+&lt;h2&gt;Vamos praticar&amp;nbsp;rapidinho?&lt;/h2&gt;
+&lt;p&gt;Aqui está uma lista ordenada de&amp;nbsp;números: &lt;code&gt;[2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Tente encontrar o número 22 de duas&amp;nbsp;formas:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Busca linear:&lt;/strong&gt; Vá um a um desde o&amp;nbsp;2.  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Busca binária:&lt;/strong&gt; Comece no meio, elimine metade a cada&amp;nbsp;passo.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Compare quantos passos cada método&amp;nbsp;precisou&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Curiosidades&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;O git tem uma funcionalidade chamada &lt;a href="https://git-scm.com/docs/git-bisect"&gt;&lt;code&gt;git bisect&lt;/code&gt;&lt;/a&gt; que usa busca binária para ajudar desenvolvedores a encontrarem&amp;nbsp;bug&lt;/li&gt;
+&lt;li&gt;Se o item que estamos buscando for o primeiro item da lista, esse é o melhor caso na busca linear e o pior caso na busca&amp;nbsp;binária&lt;/li&gt;
+&lt;li&gt;A implementação&amp;nbsp;do &lt;code&gt;sortedcontainers&lt;/code&gt; usa busca binária (a partir do módulo bisect), &lt;a href="https://grantjenks.com/docs/sortedcontainers/_modules/sortedcontainers/sortedlist.html#SortedList"&gt;veja&amp;nbsp;aqui&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Exercícios recomendados&amp;nbsp;👩🏻‍💻💞&lt;/h2&gt;
+&lt;p&gt;Para reforçar o aprendizado, aqui vão alguns desafios&amp;nbsp;práticos:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LeetCode&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/binary-search/description/"&gt;Binary Search&lt;/a&gt; — implementação&amp;nbsp;direta.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/search-insert-position/description/"&gt;Search Insert Position&lt;/a&gt; — variação para encontrar onde inserir um&amp;nbsp;número.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/first-bad-version/description/"&gt;First Bad Version&lt;/a&gt; — busca binária aplicada em &lt;span class="caps"&gt;API&lt;/span&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Exercism&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/exercises/binary-search"&gt;Binary Search (Python Track)&lt;/a&gt; — implementação e&amp;nbsp;testes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Dica: resolva primeiro o problema sem olhar a solução e depois compare com implementações&amp;nbsp;otimizadas.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;E assim começa meu roadmap de estudo: cada capítulo do livro vem acompanhado de exercícios para fixar o&amp;nbsp;conteúdo.&lt;/p&gt;</content><category term="Entendendo algoritmos"/></entry></feed>

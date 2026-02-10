@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Ordenação por Seleção, Arrays e Listas</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="@aninhasalesp Atom Feed" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-toggles@4.10.1/css/classic.min.css">
+</head>
+
+<body id="index" class="home" style="margin: auto;">
+    <header id="banner" class="body">
+        <h1><a href="/">@aninhasalesp </a></h1>
+        <nav>
+            <!-- BOTÃO HAMBÚRGUER FORA DA UL -->
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <!-- SÓ UMA UL COM ID="menu" -->
+            <ul id="menu">
+                    <li ><a href="/pages/contato.html">Contato</a></li>
+                    <li ><a href="/pages/sugestoes-de-leitura.html">Sugestões de&nbsp;leitura</a></li>
+                    <li ><a href="/pages/quem-sou-eu.html">Quem sou eu?&nbsp;🌿🌸</a></li>
+            <li id="posts-link">
+                <a href="/">Posts</a>
+            </li>
+            <li>
+                <a href="/feeds/all.atom.xml" title="Assinar RSS">
+                    <img src="/images/rss-icon.png" alt="RSS" style="width:20px;height:20px;vertical-align:middle;">
+                </a>
+            </li>
+
+            <li style="float: right;">
+                <a href="#" id="theme-toggle" class="theme-toggle theme-toggle--toggled" aria-label="Toggle theme">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        width="22px"
+                        height="22px"
+                        fill="currentColor"
+                        stroke-linecap="round"
+                        class="theme-toggle__classic"
+                        viewBox="0 0 32 32"
+                    >
+                        <clipPath id="theme-toggle__classic__cutout">
+                        <path d="M0-5h30a1 1 0 0 0 9 13v24H0Z" />
+                        </clipPath>
+                        <g clip-path="url(#theme-toggle__classic__cutout)">
+                        <circle cx="16" cy="16" r="9.34" />
+                        <g stroke="currentColor" stroke-width="1.5">
+                            <path d="M16 5.5v-4" />
+                            <path d="M16 30.5v-4" />
+                            <path d="M1.5 16h4" />
+                            <path d="M26.5 16h4" />
+                            <path d="m23.4 8.6 2.8-2.8" />
+                            <path d="m5.7 26.3 2.9-2.9" />
+                            <path d="m5.8 5.8 2.8 2.8" />
+                            <path d="m23.4 23.4 2.9 2.9" />
+                        </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+
+            </ul>
+        </nav>
+    </header><!-- /#banner -->
+
+<div style="display: flex; flex-direction: column;">
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="2025/08/27/ordenacao-por-selecao-arrays-e-listas/" rel="bookmark">
+            Ordenação por Seleção, Arrays e&nbsp;Listas
+          </a>
+        </h1>       </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-08-27T00:00:00-03:00">
+                qua 27 agosto 2025
+        </abbr>
+
+        <!-- <address class="vcard author">
+                By <a class="url fn" href="/author/ana-paula-sales.html">Ana Paula Sales</a>
+        </address> -->
+<!-- <p>In <a href="/category/entendendo-algoritmos.html">Entendendo algoritmos</a>. </p> -->
+</p></footer><!-- /.post-info --><!-- /.post-info -->
+        <p>Segundo capítulo da série de estudos sobre o livro <a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf">Entendendo Algoritmos</a> de Aditya Y.&nbsp;Bhargava.</p>
+<ul>
+<li><a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/">Capítulo 1 - Introdução e Busca&nbsp;Binária</a></li>
+<li><a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/">Capítulo 2 - Arrays, Listas e Ordenação por Seleção</a> -📍 <strong>você está&nbsp;aqui</strong></li>
+<li><a href="/2025/09/17/recursao/">Capítulo 3 -&nbsp;Recursão</a></li>
+</ul>
+<p>Espero que vocês tenham gostado da forma como estruturei o <a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/">primeiro capítulo</a>, seguirei naquela mesma linha de raciocínio e explicação. Se você tiver alguma sugestão de exercício ou melhoria na explicação, me conta aqui que eu ficarei feliz em receber esse feedback&nbsp;🫂💕</p>
+<hr>
+<p>No capítulo 2, o autor aprofunda dois conceitos fundamentais: <strong>estruturas de dados</strong> (como arrays e listas) e a <strong>eficiência dos algoritmos</strong> (notação Big O). Para ilustrar isso, ele apresenta o algoritmo de <strong>ordenação por seleção</strong>.</p>
+<h1>Arrays e&nbsp;Listas</h1>
+<p>Antes de falar em ordenação, é importante entender como os dados podem ser armazenados na memória.&nbsp;👀</p>
+<p>O autor traz uma analogia que faz o entendimento ficar muuuito mais fácil. Em resumo, a ideia é algo&nbsp;assim:</p>
+<p>Imagine que você vai a um show e precisa guardar suas coisas na chapelaria (eu nem sabia que isso existia 🤔). Apenas algumas gavetas estão disponíveis e você pode guardar um item por gaveta. Você pega e guarda suas coisas nessas gavetas, fecha, e está pronto para ir ao&nbsp;show.</p>
+<p>A memória do computador funciona mais ou menos assim. O computador parece um grande conjunto de gavetas, e cada gaveta tem um endereço. Cada vez que tu armazena um item na memória, o computador fornece um endereço para guardar esse&nbsp;item.</p>
+<p>E aí, se tu quiser armazenar múltiplos itens, existem duas maneiras principais de fazer isso: <strong>arrays</strong> e <strong>listas</strong>.</p>
+<hr>
+<h2>Arrays</h2>
+<ul>
+<li>São blocos contíguos de memória (um ao lado do&nbsp;outro).</li>
+<li>Cada elemento pode ser acessado <strong>diretamente</strong> pelo índice, permitindo uma leitura rápida.<ul>
+<li>Isso significa que a operação de busca por posição é O(1), ou seja,&nbsp;constante.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># acesso direto ao 20</span>
+</code></pre></div>
+
+<ul>
+<li>O lado ruim do array é que, se tu quiser adicionar mais um item e a gaveta seguinte estiver ocupada, será necessário solicitar ao computador uma área de memória maior para armazenar todos os itens e mover os existentes para&nbsp;lá.</li>
+<li>Então adicionar novos itens a um array é algo que pode ser muito&nbsp;lento.</li>
+<li>Deletar um elemento é tão custoso quanto adicionar, todos os elementos seguintes precisam ser&nbsp;movidos.</li>
+</ul>
+<hr>
+<h2>Listas&nbsp;encadeadas</h2>
+<ul>
+<li>Seus itens podem estar <strong>em qualquer lugar da memória</strong>.</li>
+<li>Cada item armazena o endereço do próximo item da&nbsp;lista.</li>
+<li>Semelhante a uma caça ao tesouro, cada pista encontrada indica onde está a próxima&nbsp;etapa.</li>
+<li>Adicionar um item é simples, você coloca o item em qualquer lugar da memória e atualiza o endereço do item&nbsp;anterior.</li>
+<li>Para deletar, é tão simples quanto, basta alterar o endereço do item anterior para apontar para o próximo&nbsp;item.</li>
+<li>O lado ruim da lista encadeada é que, para acessar um elemento específico (por exemplo, o último), você não pode ir direto, precisa percorrer a lista <strong>item por item</strong> até chegar&nbsp;lá.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>  <span class="k">class</span> <span class="nc">Node</span><span class="p">:</span>
+      <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valor</span><span class="p">):</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">valor</span> <span class="o">=</span> <span class="n">valor</span>
+          <span class="bp">self</span><span class="o">.</span><span class="n">proximo</span> <span class="o">=</span> <span class="kc">None</span>
+
+  <span class="n">a</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  <span class="n">b</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+  <span class="n">a</span><span class="o">.</span><span class="n">proximo</span> <span class="o">=</span> <span class="n">b</span>
+
+  <span class="c1"># Percorrendo</span>
+  <span class="n">n</span> <span class="o">=</span> <span class="n">a</span>
+  <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">valor</span><span class="p">)</span>
+      <span class="n">n</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">proximo</span>
+</code></pre></div>
+
+<p>Explicando o código acima:
+1. Crio a&nbsp;classe <code>Node</code>, que armazena um valor&nbsp;(<code>valor</code>) e um ponteiro para o próximo nó&nbsp;(<code>proximo</code>).
+2. Crio dois&nbsp;nós: <code>a</code> com valor 10&nbsp;e <code>b</code> com valor 20.
+3.&nbsp;Ligo <code>a</code> ao <code>b</code> com <code>a.proximo = b</code>.
+4. Percorro a lista&nbsp;com <code>while n:</code> imprimindo <code>n.valor</code> até chegar no final&nbsp;(<code>None</code>).</p>
+<p>A saída pra esse&nbsp;código:</p>
+<div class="highlight"><pre><span></span><code><span class="mi">10</span>
+<span class="mi">20</span>
+</code></pre></div>
+
+<hr>
+<p>Não sei vocês, mas <strong>entender a diferença entre arrays e listas</strong> foi um verdadeiro estalo para mim. Como aprendi Python primeiro, eu meio que usava essas estruturas no automático… 🥲 
+Pode parecer algo óbvio ou até desnecessário, afinal, lidamos com arrays e listas o tempo todo, mas foi incrível compreender <strong>por que as coisas funcionam do jeito que funcionam</strong>. Minha cabeça finalmente começou a encaixar as peças e perceber a lógica por trás das operações. Fiquei meio&nbsp;que:</p>
+<p><img src="/images/cat-in-shock-surprises.gif" alt="gato surpreso" width="150"/></p>
+<p>Aqui estão os tempos de execução para as operações mais comuns em arrays e listas&nbsp;encadeadas</p>
+<p><img src="/images/array_lista.png" alt="tempo de execução" width="400"/></p>
+<p>Acho importante trazer essa tabela, para que o entendimento sobre notação Big O se consolide e pra todos entenderem o impacto das nossas escolhas em diferentes&nbsp;situações.</p>
+<p>A interpretação pra essa tabela de uma forma mais explícita&nbsp;seria:</p>
+<ul>
+<li>
+<p><strong>Leitura</strong>:</p>
+<ul>
+<li>
+<p><strong>Array → O(1)</strong>:
+    Em um array, cada posição tem um endereço fixo na memória. Então, se você quiser o 5º elemento, o computador vai direto nele de uma forma super rápida e em tempo&nbsp;constante.</p>
+</li>
+<li>
+<p><strong>Lista → O(n)</strong>:
+    uma lista encadeada, cada elemento sabe apenas quem é o próximo. Então, para achar o 5º elemento, você precisa começar do 1º, depois o 2º, depois o 3º… até chegar no 5º. Quanto maior a lista, mais tempo&nbsp;demora.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Inserção</strong>:</p>
+<ul>
+<li>
+<p><strong>Array → O(n)</strong>:
+    Se o array estiver cheio e você quiser enfiar um novo item no meio, tem que “empurrar” todos os outros elementos uma posição para frente. Isso pode levar bastante&nbsp;tempo.</p>
+</li>
+<li>
+<p><strong>Lista → O(1)</strong>:
+    Se você já sabe a posição, inserir numa lista é rapidinho, basta mudar quem aponta pra quem e&nbsp;pronto.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Deleção</strong>:</p>
+<ul>
+<li>
+<p><strong>Array → O(n)</strong>:
+    Se você remove um item no meio do array, precisa “puxar” todos os elementos da frente uma posição pra trás para fechar o&nbsp;buraco.</p>
+</li>
+<li>
+<p><strong>Lista → O(1)</strong>:
+    Assim como na inserção, basta mudar os ponteiros para pular o item que você quer remover. Não mexe em mais&nbsp;ninguém.</p>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1>Ordenação por&nbsp;seleção</h1>
+<p>O autor apresenta o algoritmo Selection Sort, que é simples de implementar, mas não muito eficiente.
+A diferença entre arrays e listas em Python torna importante entender como o algoritmo percorre e manipula os&nbsp;elementos.</p>
+<h3>Ideia do&nbsp;algoritmo</h3>
+<ol>
+<li>Encontrar o menor elemento da&nbsp;lista</li>
+<li>Colocá-lo na primeira&nbsp;posição</li>
+<li>Repetir para as posições seguintes até ordenar toda a&nbsp;lista</li>
+</ol>
+<h4>Implementação em&nbsp;Python:</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">busca_menor</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Encontra o índice do menor elemento em um array.</span>
+
+<span class="sd">    Parâmetros:</span>
+<span class="sd">    arr (list): Lista de elementos comparáveis.</span>
+
+<span class="sd">    Retorna:</span>
+<span class="sd">    int: Índice do menor elemento encontrado.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">menor</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">menor_indice</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">menor</span><span class="p">:</span>
+            <span class="n">menor</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">menor_indice</span> <span class="o">=</span> <span class="n">i</span>
+    <span class="k">return</span> <span class="n">menor_indice</span>
+
+<span class="k">def</span> <span class="nf">ordenacao_por_selecao</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ordena uma lista usando o algoritmo de ordenação por seleção.</span>
+
+<span class="sd">    A função cria uma nova lista, removendo o menor elemento</span>
+<span class="sd">    da lista original a cada iteração e adicionando-o à lista ordenada.</span>
+
+<span class="sd">    Parâmetros:</span>
+<span class="sd">    arr (list): Lista de números a serem ordenados.</span>
+
+<span class="sd">    Retorna:</span>
+<span class="sd">    list: Nova lista ordenada em ordem crescente.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">novo_arr</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)):</span>
+        <span class="n">menor</span> <span class="o">=</span> <span class="n">busca_menor</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+        <span class="n">novo_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">menor</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">novo_arr</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ordenacao_por_selecao</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]))</span> <span class="c1"># Saída: [2, 3, 5, 6, 10]</span>
+</code></pre></div>
+
+<hr>
+<h3>Complexidade e Big&nbsp;O</h3>
+<ul>
+<li>O selection sort precisa percorrer todos os elementos várias&nbsp;vezes.</li>
+<li>Para n elementos, ele faz aproximadamente n × n&nbsp;operações.</li>
+<li>Isso significa que seu desempenho é&nbsp;O(n²).</li>
+</ul>
+<p>Este é um exemplo clássico que mostra como <strong>algoritmos diferentes podem resolver o mesmo problema com eficiências diferentes</strong>, destacando a importância de escolher o algoritmo certo dependendo do tamanho e da estrutura dos&nbsp;dados.</p>
+<hr>
+<h2>Curiosidades</h2>
+<ul>
+<li>As listas em Python são, na verdade, <strong>arrays</strong>.</li>
+<li>O&nbsp;método <code>append</code> (adicionar no final) é considerado de complexidade <strong>O(1)</strong> na média. Isso porque adicionar um item no final geralmente é bem barato: só colocar no próximo espaço&nbsp;livre.</li>
+<li>O “custo alto” aparece em operações&nbsp;como <code>insert</code> ou <code>remove</code> no meio da lista. Aí é preciso deslocar todos os elementos seguintes, o que pode ser <strong>O(n)</strong>.</li>
+<li>Uma forma de visualizar: pense numa pilha de pratos. Colocar ou tirar um prato do topo&nbsp;(como <code>append</code> e <code>pop</code>) é fácil. Mas se você quiser enfiar ou tirar um prato do meio da pilha&nbsp;(<code>insert</code> ou <code>remove</code>), vai ter que mover todos os pratos que estavam em cima&nbsp;primeiro.</li>
+</ul>
+<hr>
+<h2>Exercícios recomendados&nbsp;👩🏻‍💻💞</h2>
+<p>Para reforçar o aprendizado, aqui vão alguns desafios&nbsp;práticos:</p>
+<p><strong>LeetCode</strong></p>
+<ul>
+<li>
+<p><a href="https://leetcode.com/problems/two-sum/description/">Two Sum</a> - clássico de&nbsp;arrays</p>
+</li>
+<li>
+<p><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/">Best Time to Buy and Sell Stock</a> - Percorrer array com análise de&nbsp;tempo</p>
+</li>
+<li>
+<p><a href="https://leetcode.com/problems/merge-sorted-array/description/">Merge Sorted Array</a> - Manipulação de listas&nbsp;ordenadas</p>
+</li>
+</ul>
+<p><strong>Exercism</strong></p>
+<ul>
+<li><a href="https://exercism.org/tracks/python/exercises/isogram">Isogram</a> - Percorre strings/arrays verificando&nbsp;duplicatas</li>
+</ul>
+<hr>
+<p>E assim, fechamos o segundo capítulo!
+Espero que tenha sido útil e leve de ler&nbsp;💁🏻‍♀️✨</p>
+
+         <!-- Botões de compartilhamento -->
+        <div class="compartilhar" style="margin-top: 2em; display: flex; gap: 1em; align-items: center;">
+          <strong>Compartilhar:</strong>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anapaula.org/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"
+            target="_blank" rel="noopener noreferrer" title="Compartilhar no LinkedIn">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" width="24" height="24" style="vertical-align: middle;">
+          </a>
+
+          <!-- Telegram -->
+          <a href="https://t.me/share/url?url=https://anapaula.org/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"
+             target="_blank" rel="noopener noreferrer" title="Compartilhar no Telegram">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram" width="24" height="24" style="vertical-align: middle;">
+          </a>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/?text=https://anapaula.org/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"
+            target="_blank" rel="noopener noreferrer" title="Compartilhar no WhatsApp">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" width="24" height="24">
+          </a>
+        </div>
+      </div><!-- /.entry-content -->
+    </article>
+  </section>
+
+  <div id="comments" style="max-width: 700px;">
+    <script src="https://utteranc.es/client.js"
+      repo="aninhasalesp/meublog"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+    <footer id="footer" class="body">
+        <p>Feito com amor, por <a href="https://github.com/aninhasalesp"> Ana Paula</a> ❤️</p>
+    </footer><!-- /#footer -->
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            const toggle = document.querySelector('.menu-toggle');
+
+            menu.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+        const toggle = document.getElementById("theme-toggle");
+        const currentTheme = localStorage.getItem("theme") || "light";
+
+        document.documentElement.setAttribute("data-theme", currentTheme);
+
+        function setThemeToggleIcon(theme) {
+            const themeToggle = document.getElementById("theme-toggle");
+            if (theme === "light") {
+                themeToggle.classList.add("theme-toggle--toggled");
+            } else {
+                themeToggle.classList.remove("theme-toggle--toggled");
+            }
+        }
+
+        setThemeToggleIcon(currentTheme);
+
+        toggle.addEventListener("click", () => {
+            const theme = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+            document.documentElement.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+
+            setThemeToggleIcon(theme);
+
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (menuToggle.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+                document.getElementById('posts-link').classList.add('active');
+            }
+        });
+    </script>
+
+</body>
+</html>

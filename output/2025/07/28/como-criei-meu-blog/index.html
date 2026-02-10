@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Como criei meu blog 💁‍♀️✨</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="@aninhasalesp Atom Feed" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-toggles@4.10.1/css/classic.min.css">
+</head>
+
+<body id="index" class="home" style="margin: auto;">
+    <header id="banner" class="body">
+        <h1><a href="/">@aninhasalesp </a></h1>
+        <nav>
+            <!-- BOTÃO HAMBÚRGUER FORA DA UL -->
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <!-- SÓ UMA UL COM ID="menu" -->
+            <ul id="menu">
+                    <li ><a href="/pages/contato.html">Contato</a></li>
+                    <li ><a href="/pages/sugestoes-de-leitura.html">Sugestões de&nbsp;leitura</a></li>
+                    <li ><a href="/pages/quem-sou-eu.html">Quem sou eu?&nbsp;🌿🌸</a></li>
+            <li id="posts-link">
+                <a href="/">Posts</a>
+            </li>
+            <li>
+                <a href="/feeds/all.atom.xml" title="Assinar RSS">
+                    <img src="/images/rss-icon.png" alt="RSS" style="width:20px;height:20px;vertical-align:middle;">
+                </a>
+            </li>
+
+            <li style="float: right;">
+                <a href="#" id="theme-toggle" class="theme-toggle theme-toggle--toggled" aria-label="Toggle theme">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        width="22px"
+                        height="22px"
+                        fill="currentColor"
+                        stroke-linecap="round"
+                        class="theme-toggle__classic"
+                        viewBox="0 0 32 32"
+                    >
+                        <clipPath id="theme-toggle__classic__cutout">
+                        <path d="M0-5h30a1 1 0 0 0 9 13v24H0Z" />
+                        </clipPath>
+                        <g clip-path="url(#theme-toggle__classic__cutout)">
+                        <circle cx="16" cy="16" r="9.34" />
+                        <g stroke="currentColor" stroke-width="1.5">
+                            <path d="M16 5.5v-4" />
+                            <path d="M16 30.5v-4" />
+                            <path d="M1.5 16h4" />
+                            <path d="M26.5 16h4" />
+                            <path d="m23.4 8.6 2.8-2.8" />
+                            <path d="m5.7 26.3 2.9-2.9" />
+                            <path d="m5.8 5.8 2.8 2.8" />
+                            <path d="m23.4 23.4 2.9 2.9" />
+                        </g>
+                        </g>
+                    </svg>
+                </a>
+            </li>
+
+            </ul>
+        </nav>
+    </header><!-- /#banner -->
+
+<div style="display: flex; flex-direction: column;">
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="2025/07/28/como-criei-meu-blog/" rel="bookmark">
+            Como criei meu blog&nbsp;💁‍♀️✨
+          </a>
+        </h1>       </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-07-28T00:00:00-03:00">
+                seg 28 julho 2025
+        </abbr>
+
+        <!-- <address class="vcard author">
+                By <a class="url fn" href="/author/ana-paula-sales.html">Ana Paula Sales</a>
+        </address> -->
+<!-- <p>In <a href="/category/dev.html">dev</a>. </p> -->
+</p></footer><!-- /.post-info --><!-- /.post-info -->
+        <hr>
+<p>Ter um espaço só meu, fora de redes sociais, longe dos algoritmos, era um desejo antigo. Um cantinho para escrever sobre o que gosto, do meu jeito, sem pressa. 
+E foi assim que nasceu o <a href="https://anapaula.org/">meu blog</a>.&nbsp;💛</p>
+<p>Neste post, compartilho como tirei a ideia do papel, desde a escolha da stack até o&nbsp;deploy.</p>
+<h2>A stack que&nbsp;escolhi</h2>
+<p>Optei por usar o <a href="https://blog.getpelican.com/">Pelican</a>, um gerador de site estático escrito em Python. Ele me atraiu por vários&nbsp;motivos:</p>
+<ul>
+<li>É feito com Python&nbsp;🐍</li>
+<li>Gera <span class="caps">HTML</span> puro (leve, rápido e fácil de hospedar)<ul>
+<li>Ou seja: não tem nada sendo processado dinamicamente no servidor; Isso deixa o site mais rápido, seguro e barato/fácil de hospedar (como no GitHub Pages, que só serve arquivos&nbsp;estáticos).</li>
+</ul>
+</li>
+<li>A estrutura é simples de&nbsp;customizar</li>
+<li>Permite escrever os posts em Markdown&nbsp;📝</li>
+<li>A documentação&#8230; é meio confusa, mas fui até o fim mesmo assim&nbsp;😅</li>
+</ul>
+<p>Além do Pelican, usei o <a href="https://github.com/astral-sh/uv">uv</a> como gerenciador de pacotes e ambientes virtuais, ele é rápido e prático, e tem substituído o uso manual do venv e do&nbsp;pip.</p>
+<hr>
+<h2>🛠️ Passo a&nbsp;passo</h2>
+<h3>1. Criar o ambiente e instalar o&nbsp;Pelican</h3>
+<p>Usei o uv para criar meu ambiente virtual&nbsp;com:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>venv
+</code></pre></div>
+
+<p>Depois disso, ativei o ambiente manualmente&nbsp;com:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+</code></pre></div>
+
+<p>O <code>uv venv</code> já cria o ambiente e ativa os pacotes com isolamento, mas, por hábito (e um pouco de força do costume),&nbsp;usei <code>source .venv/bin/activate</code> logo depois. O uv também poderia dispensar esse&nbsp;passo.</p>
+<p>Esse passo não é automático, o uv venv cria o ambiente, mas não o ativa. Eu fiz isso por hábito, já que é o modo tradicional que muitos de nós usamos com&nbsp;venv.</p>
+<p>No entanto, o uv também oferece uma forma mais moderna (e prática!) de lidar com ambientes virtuais: você pode pular o uv venv e o source, e simplesmente deixar que ele gerencie tudo pra&nbsp;você:</p>
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>add<span class="w"> </span>pelican<span class="o">[</span>markdown<span class="o">]</span><span class="w"> </span><span class="c1"># declara o `pelican` como uma dependência do projeto</span>
+
+uv<span class="w"> </span>run<span class="w"> </span>pelican-quickstart<span class="w"> </span><span class="c1"># executa o comando `pelican-quickstart` dentro do ambiente virtual gerenciado automaticamente pelo `uv`</span>
+</code></pre></div>
+
+<p>Assim, o uv cria o ambiente e executa os comandos dentro dele automaticamente, sem precisar ativar nada &#8220;na&nbsp;mão</p>
+<p>Só uma observação: se você preferir usar a&nbsp;forma <code>uv add ...</code> e <code>uv run ...</code>, o arquivo Makefile precisaria ser alterado, substituindo a&nbsp;linha <code>PELICAN=pelican</code> por <code>PELICAN=uv run pelican</code> - ou todas as referências&nbsp;a <code>make &lt;rule&gt;</code> precisariam&nbsp;virar <code>PELICAN="uv run pelican" make &lt;rule&gt;</code>.</p>
+<hr>
+<h3>2. Organização do&nbsp;projeto</h3>
+<p>Segui as perguntas do setup e logo já tinha uma estrutura básica criada. A partir disso, organizei o repositório com o seguinte&nbsp;foco:</p>
+<ul>
+<li><code>content/</code> → onde ficam os posts em&nbsp;Markdown</li>
+<li><code>output/</code> → site gerado (<span class="caps">HTML</span>)</li>
+<li><code>theme/</code> → arquivos do tema e&nbsp;personalizações</li>
+</ul>
+<p>O repositório está disponível aqui: <a href="https://github.com/aninhasalesp/meublog">github.com/aninhasalesp/meublog</a></p>
+<p>A&nbsp;pasta <code>pelican-themes/</code> foi criada por mim manualmente pra colocar o tema clonado e fazer as&nbsp;modificações.</p>
+<hr>
+<h3>3. Escolhendo e personalizando o tema&nbsp;🎨</h3>
+<p>Usei o&nbsp;tema <code>notmyidea-cms</code>, que vem com o Pelican, e fui personalizando aos&nbsp;poucos.</p>
+<p>No <code>pelicanconf.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">THEME</span> <span class="o">=</span> <span class="s2">&quot;pelican-themes/notmyidea-cms&quot;</span>
+</code></pre></div>
+
+<p>Fiz as seguintes&nbsp;mudanças:</p>
+<ul>
+<li>Rodapé com meu nome e link pro GitHub&nbsp;❤️</li>
+<li>Comentários com <a href="https://utteranc.es">Utterances</a></li>
+<li>Botões de compartilhamento (LinkedIn, WhatsApp e&nbsp;Telegram)</li>
+<li>Ajustes no <span class="caps">CSS</span> para espaçamentos, layout e&nbsp;cores</li>
+</ul>
+<hr>
+<h3>4. Comentários com Utterances&nbsp;💬</h3>
+<p>Usei o <a href="https://utteranc.es/">Utterances</a> para habilitar comentários nos posts. É leve, usa issues do GitHub, é simples e&nbsp;eficiente:</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;comments&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://utteranc.es/client.js&quot;</span>
+    <span class="na">repo</span><span class="o">=</span><span class="s">&quot;aninhasalesp/meublog&quot;</span>
+    <span class="na">issue-term</span><span class="o">=</span><span class="s">&quot;pathname&quot;</span>
+    <span class="na">theme</span><span class="o">=</span><span class="s">&quot;github-light&quot;</span>
+    <span class="na">crossorigin</span><span class="o">=</span><span class="s">&quot;anonymous&quot;</span>
+    <span class="na">async</span><span class="p">&gt;</span>
+<span class="w">  </span><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<hr>
+<h3>5. Escrevendo os posts&nbsp;✍️</h3>
+<p>Os posts ficam&nbsp;em <code>content/</code> e são escritos&nbsp;assim:</p>
+<div class="highlight"><pre><span></span><code>Title: Primeiro post
+Date: 2025-07-20
+Category: pessoal
+Summary: Um breve texto pra dar boas-vindas ao blog.
+
+---
+
+Esse é o primeiro post do blog! 🎉
+</code></pre></div>
+
+<hr>
+<h3>6. Customizações no&nbsp;tema</h3>
+<p>Editei os arquivos dentro&nbsp;de <code>pelican-themes/notmyidea-cms/</code> e deixei o blog com mais&nbsp;identidade.</p>
+<p>No <span class="caps">CSS</span>:</p>
+<ul>
+<li>Ajustei padding e&nbsp;margin</li>
+<li>Alinhei melhor os&nbsp;elementos</li>
+<li>Adicionei ícones e links&nbsp;visuais</li>
+</ul>
+<p>No <span class="caps">HTML</span> (como&nbsp;o <code>base.html</code>):</p>
+<ul>
+<li>Adicionei o&nbsp;rodapé</li>
+<li>Posicionei os botões de&nbsp;compartilhamento</li>
+</ul>
+<p>💡 <em>Fazer as edições direto no tema funcionou bem pra mim, mesmo que não seja o ideal a longo&nbsp;prazo.</em></p>
+<hr>
+<h3>7. Gerando os arquivos&nbsp;estáticos</h3>
+<p>Para compilar o blog e gerar os arquivos <span class="caps">HTML</span>:</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>html
+</code></pre></div>
+
+<p>Durante o desenvolvimento, usei o servidor local pra visualizar as&nbsp;mudanças:</p>
+<div class="highlight"><pre><span></span><code>pelican<span class="w"> </span>--listen
+</code></pre></div>
+
+<hr>
+<h3>8. Deploy no GitHub Pages&nbsp;🚀</h3>
+<p>Usei GitHub Pages pra hospedar o blog. O processo&nbsp;foi:</p>
+<ol>
+<li>Gerei os arquivos&nbsp;com <code>pelican content</code> ou <code>make html</code></li>
+<li>Subi a&nbsp;pasta <code>output/</code> para o&nbsp;branch <code>gh-pages</code></li>
+<li>Configurei o domínio personalizado no GitHub e apontei o <span class="caps">DNS</span> para os servidores do&nbsp;GitHub</li>
+</ol>
+<p>O <code>Makefile</code> ajuda bastante, publiquei&nbsp;com:</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span>github
+</code></pre></div>
+
+<p>Esse comando está no meu Makefile e automatiza a geração e envio do conteúdo. Se quiser ver, ele basicamente&nbsp;faz:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>output
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>gh-pages
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Deploy&quot;</span>
+git<span class="w"> </span>push<span class="w"> </span>-f<span class="w"> </span>origin<span class="w"> </span>gh-pages
+</code></pre></div>
+
+<ol>
+<li>No GitHub, fui na aba Settings &gt; Pages e configurei pra servir o site a partir do branch gh-pages, pasta raiz&nbsp;(/).</li>
+<li>Adicionei um arquivo <span class="caps">CNAME</span> com meu domínio personalizado&nbsp;(anapaula.org)</li>
+<li>Apontei os DNSs da minha hospedagem pro GitHub&nbsp;Pages</li>
+<li>Ativei o <span class="caps">HTTPS</span> no&nbsp;painel</li>
+</ol>
+<p>Se você quiser automatizar esse deploy com GitHub Actions, também dá. Mas como é um blog pessoal que não atualizo todos os dias, preferi o método&nbsp;manual.</p>
+<hr>
+<h3>9. Domínio personalizado&nbsp;🌐</h3>
+<p>Registrei o&nbsp;domínio <code>anapaula.org</code> e configurei para ser usado no meu blog hospedado via GitHub&nbsp;Pages.</p>
+<p>O que eu fiz:
+No painel da empresa onde registrei o domínio, adicionei os seguintes registros <span class="caps">DNS</span>:</p>
+<p>Tipo A (IPv4): apontando para os IPs do GitHub&nbsp;Pages:</p>
+<div class="highlight"><pre><span></span><code><span class="mf">185.199.108.153</span>
+<span class="mf">185.199.109.153</span>
+<span class="mf">185.199.110.153</span>
+<span class="mf">185.199.111.153</span>
+</code></pre></div>
+
+<ul>
+<li><span class="caps">CNAME</span> (se quiser usar subdomínio): apontando para&nbsp;suaconta.github.io</li>
+</ul>
+<p>Dentro da&nbsp;pasta <code>output/</code> (que é a que vai para o GitHub Pages no branch gh-pages), criei um arquivo <span class="caps">CNAME</span> com o&nbsp;conteúdo:</p>
+<div class="highlight"><pre><span></span><code>anapaula.org
+</code></pre></div>
+
+<p>Isso é necessário para que o GitHub saiba qual domínio deve ser vinculado ao seu site. Esse arquivo é incluído automaticamente no deploy quando&nbsp;rodo <code>make github</code>.</p>
+<p>No repositório no GitHub, fui em Settings &gt; Pages&nbsp;e:</p>
+<ul>
+<li>Marquei a opção &#8220;Use a custom domain&#8221; e coloquei&nbsp;anapaula.org</li>
+<li>Ativei o <span class="caps">HTTPS</span> (pra garantir navegação&nbsp;segura)</li>
+</ul>
+<p>Segui a documentação oficial do GitHub Pages para configurar tudo isso:
+👉 <a href="https://docs.github.com/pt/pages/configuring-a-custom-domain-for-your-github-pages-site">documentação&nbsp;github-pages</a></p>
+<hr>
+<h1>Conclusão</h1>
+<p>O processo teve tropeços (a documentação do Pelican podia ser melhor 😅), mas valeu demais. Ter um espaço meu, com o meu nome e com a minha cara, era um desejo antigo que finalmente saiu do&nbsp;papel.</p>
+<p>Se você também pensa em criar um blog, seja técnico ou pessoal, recomendo muito! E se eu puder ajudar de alguma forma, é só me chamar.&nbsp;💛</p>
+<p>O código-fonte do blog está no GitHub: <a href="https://github.com/aninhasalesp/meublog">aninhasalesp/meublog</a>&nbsp;🌱</p>
+
+         <!-- Botões de compartilhamento -->
+        <div class="compartilhar" style="margin-top: 2em; display: flex; gap: 1em; align-items: center;">
+          <strong>Compartilhar:</strong>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anapaula.org/2025/07/28/como-criei-meu-blog/"
+            target="_blank" rel="noopener noreferrer" title="Compartilhar no LinkedIn">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" width="24" height="24" style="vertical-align: middle;">
+          </a>
+
+          <!-- Telegram -->
+          <a href="https://t.me/share/url?url=https://anapaula.org/2025/07/28/como-criei-meu-blog/"
+             target="_blank" rel="noopener noreferrer" title="Compartilhar no Telegram">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram" width="24" height="24" style="vertical-align: middle;">
+          </a>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/?text=https://anapaula.org/2025/07/28/como-criei-meu-blog/"
+            target="_blank" rel="noopener noreferrer" title="Compartilhar no WhatsApp">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" width="24" height="24">
+          </a>
+        </div>
+      </div><!-- /.entry-content -->
+    </article>
+  </section>
+
+  <div id="comments" style="max-width: 700px;">
+    <script src="https://utteranc.es/client.js"
+      repo="aninhasalesp/meublog"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+    <footer id="footer" class="body">
+        <p>Feito com amor, por <a href="https://github.com/aninhasalesp"> Ana Paula</a> ❤️</p>
+    </footer><!-- /#footer -->
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            const toggle = document.querySelector('.menu-toggle');
+
+            menu.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+        const toggle = document.getElementById("theme-toggle");
+        const currentTheme = localStorage.getItem("theme") || "light";
+
+        document.documentElement.setAttribute("data-theme", currentTheme);
+
+        function setThemeToggleIcon(theme) {
+            const themeToggle = document.getElementById("theme-toggle");
+            if (theme === "light") {
+                themeToggle.classList.add("theme-toggle--toggled");
+            } else {
+                themeToggle.classList.remove("theme-toggle--toggled");
+            }
+        }
+
+        setThemeToggleIcon(currentTheme);
+
+        toggle.addEventListener("click", () => {
+            const theme = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+            document.documentElement.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+
+            setThemeToggleIcon(theme);
+
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (menuToggle.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+                document.getElementById('posts-link').classList.add('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
