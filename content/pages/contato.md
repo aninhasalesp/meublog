@@ -1,4 +1,6 @@
 Title: Contato
+Lang: pt
+Slug: contato
 
 Oi! 🤍🌻
 
