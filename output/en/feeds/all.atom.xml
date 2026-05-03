@@ -1,0 +1,1562 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>@aninhasalesp</title><link href="/en/" rel="alternate"/><link href="/feeds/all.atom.xml" rel="self"/><id>/en/</id><updated>2025-09-17T00:00:00-03:00</updated><entry><title>Recursion</title><link href="/en/2025/09/17/recursao/" rel="alternate"/><published>2025-09-17T00:00:00-03:00</published><updated>2025-09-17T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-09-17:/en/2025/09/17/recursao/</id><summary type="html">&lt;p&gt;Summary of &lt;strong&gt;chapter 3&lt;/strong&gt; of &amp;#8220;Grokking Algorithms&amp;#8221;. I introduce the concept of recursion and how to think about problems by breaking them into smaller pieces. Classic examples like factorial, plus a look at the risks of stack&amp;nbsp;overflow.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Third chapter of my study series on &lt;a href="https://www.manning.com/books/grokking-algorithms"&gt;Grokking Algorithms&lt;/a&gt; by Aditya Y.&amp;nbsp;Bhargava.&lt;/p&gt;
+&lt;p&gt;If you&amp;#8217;ve been following along, I&amp;#8217;ve already summarized the previous chapters 👀, go back if you have any&amp;nbsp;questions:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;Chapter 1 - Introduction and Binary&amp;nbsp;Search&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"&gt;Chapter 2 - Arrays, Linked Lists and Selection&amp;nbsp;Sort&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/09/17/recursao/"&gt;Chapter 3 - Recursion&lt;/a&gt; 📍 &lt;strong&gt;you are&amp;nbsp;here&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;Hey everyone! Another little summary of our beloved book&amp;nbsp;😊&lt;/p&gt;
+&lt;p&gt;This was one of the chapters that did the most to take away the feeling that programming is magic. Ready to understand recursion and stacks without&amp;nbsp;fear?&lt;/p&gt;
+&lt;p&gt;In this chapter, the author explains the concept and use of &lt;strong&gt;recursion&lt;/strong&gt; in a simple way, breaking it down into base case and recursive case.
+He suggests that at least once, you trace through a recursive function with pen and paper, step by step that&amp;#8217;s how you truly understand how it&amp;nbsp;works.&lt;/p&gt;
+&lt;h1&gt;Recursion&lt;/h1&gt;
+&lt;p&gt;It&amp;#8217;s the technique where a function calls itself to solve a problem, breaking it down into smaller subproblems. Because a recursive function calls itself, it&amp;#8217;s easy to write it incorrectly and end up in an infinite loop. For recursion to work correctly, it must have a base case to stop the calls, and a recursive case that moves the problem closer to the final&amp;nbsp;solution.&lt;/p&gt;
+&lt;h2&gt;How recursion&amp;nbsp;works&lt;/h2&gt;
+&lt;p&gt;Before showing an example, let&amp;#8217;s understand how it&amp;nbsp;works.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Base case&lt;/strong&gt;: defines when the function should &lt;strong&gt;stop&lt;/strong&gt; calling itself. Without it, the recursion would go on forever and cause an&amp;nbsp;error.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Recursive case&lt;/strong&gt;: the part where the function &lt;strong&gt;calls itself again&lt;/strong&gt;, getting one step closer to the final solution each&amp;nbsp;time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A classic example is calculating the factorial of a&amp;nbsp;number:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;factorial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# Base Case&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# Recursive Case&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;factorial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;factorial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  &lt;span class="c1"&gt;# Output: 120&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In this&amp;nbsp;example:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Base Case&lt;/strong&gt;: &lt;code&gt;n&lt;/code&gt; is 0 or 1, so the factorial is&amp;nbsp;1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Recursive Case&lt;/strong&gt;:&amp;nbsp;if &lt;code&gt;n&lt;/code&gt; is greater than 1, the factorial&amp;nbsp;is &lt;code&gt;n * factorial(n-1)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;See how it&amp;#8217;s almost poetic each number calls the next until 1 says &amp;#8220;okay, stop, now go back.&amp;#8221; Then the multiplication happens on the way back&amp;nbsp;up.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Stack&lt;/h1&gt;
+&lt;p&gt;Imagine you&amp;#8217;re hosting a barbecue for your friends. You have a to-do list in the form of a stack of sticky notes. When you add an item, it goes on top of the stack. When you read an item, you only read the one on top and it gets removed. So your to-do list has only two actions: &lt;em&gt;push&lt;/em&gt; (add) and &lt;em&gt;pop&lt;/em&gt; (remove and&amp;nbsp;read).&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/pilha.png" alt="stack" width="700"/&gt;&lt;/p&gt;
+&lt;p&gt;This data structure is called a &lt;strong&gt;stack&lt;/strong&gt;. It&amp;#8217;s a simple structure and we use it all the time without even realizing&amp;nbsp;it.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;The call&amp;nbsp;stack&lt;/h1&gt;
+&lt;p&gt;Every time a function is called, the computer needs to &amp;#8220;remember&amp;#8221; where it left off so it can continue later.
+This temporary memory is organized in a &lt;strong&gt;call stack&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Here&amp;#8217;s how it&amp;nbsp;works:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;With each new function call, the computer pushes information about that execution (like parameters and local variables) onto the&amp;nbsp;stack.&lt;/li&gt;
+&lt;li&gt;When the function finishes, the computer pops that data and returns to the previous&amp;nbsp;point.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The book&amp;#8217;s metaphor is great think of a stack of plates in the kitchen. You can only grab (or remove) the plate on top. Functions work the same way: the last one in is the first one out (&lt;span class="caps"&gt;LIFO&lt;/span&gt;: Last In, First&amp;nbsp;Out).&lt;/p&gt;
+&lt;p&gt;We can visualize this with a simple Python&amp;nbsp;example:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hi,&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;farewell&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;farewell&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Goodbye!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;greet&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Ana&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Execution order on the&amp;nbsp;stack:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;greet("Ana")&lt;/code&gt; is called → pushed onto the&amp;nbsp;stack.&lt;/li&gt;
+&lt;li&gt;Inside&amp;nbsp;it, &lt;code&gt;farewell()&lt;/code&gt; is called → sits on&amp;nbsp;top.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;farewell()&lt;/code&gt; runs and is popped from the&amp;nbsp;stack.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;greet("Ana")&lt;/code&gt; finishes and is popped from the&amp;nbsp;stack.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Everything organized, one plate at a&amp;nbsp;time.&lt;/p&gt;
+&lt;p&gt;This example already shows that it&amp;#8217;s not just recursion that uses a stack any function does. The difference is that recursion forces the stack to grow much&amp;nbsp;faster.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;The call stack with&amp;nbsp;recursion&lt;/h1&gt;
+&lt;p&gt;With recursion, the stack can grow quite a bit, because the function keeps calling itself until it hits the base&amp;nbsp;case.&lt;/p&gt;
+&lt;p&gt;Simplified example&amp;nbsp;with &lt;code&gt;factorial(3)&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;The program calls factorial(3)
+    &lt;span class="k"&gt;-&lt;/span&gt; pushes factorial(3)
+
+To solve it, it needs factorial(2)
+    &lt;span class="k"&gt;-&lt;/span&gt; pushes factorial(2)
+
+To solve that, it needs factorial(1)
+    &lt;span class="k"&gt;-&lt;/span&gt; pushes factorial(1)
+
+factorial(1) hits the base case and returns 1
+    &lt;span class="k"&gt;-&lt;/span&gt; pops factorial(1)
+
+Now factorial(2) can calculate 2 × 1 = 2
+    &lt;span class="k"&gt;-&lt;/span&gt; pops factorial(2)
+
+Finally, factorial(3) calculates 3 × 2 = 6
+    &lt;span class="k"&gt;-&lt;/span&gt; pops factorial(3)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In the end, each call can only finish after the smaller one returns.
+That&amp;#8217;s why &lt;strong&gt;defining the base case well is so important&lt;/strong&gt; without it, the function never stops stacking calls and eventually crashes the memory (stack&amp;nbsp;overflow).&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/coffee.gif" alt="overflow" width="400"/&gt;&lt;/p&gt;
+&lt;p&gt;That &amp;#8220;stack overflow&amp;#8221; is literally where the &lt;a href="https://stackoverflow.com/questions"&gt;Stack Overflow&lt;/a&gt; website got its&amp;nbsp;name.&lt;/p&gt;
+&lt;p&gt;When I first saw this process, it felt like some kind of magic as if the computer just &lt;em&gt;knew&lt;/em&gt; where to go back&amp;nbsp;to.&lt;/p&gt;
+&lt;p&gt;That&amp;#8217;s when I realized that understanding programming is a lot about demystifying things. It&amp;#8217;s not a gift, it&amp;#8217;s not genius it&amp;#8217;s just pushing and popping, calmly.
+Now whenever I see a recursive function, I try to picture that stack running in the background. It brings clarity and turns &amp;#8220;I wasn&amp;#8217;t born for this / I&amp;#8217;ll never get this&amp;#8221; into &amp;#8220;hehe, that&amp;#8217;s actually cool&amp;#8221;&amp;nbsp;😎&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/chihuahua.gif" alt="dog" width="200"/&gt;&lt;/p&gt;
+&lt;p&gt;So next time you get lost in a recursive piece of code breathe. Draw the stack, follow the steps, and remember: it&amp;#8217;s not magic, it&amp;#8217;s just &lt;strong&gt;practice&lt;/strong&gt;!!!&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Fun facts&amp;nbsp;💡&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;A very common recursion outside of programming: Russian dolls (matryoshkas). Each doll holds another inside it, until the smallest one (the base case) holds nothing at&amp;nbsp;all.&lt;/li&gt;
+&lt;li&gt;Some languages apply tail call optimization, which reuses stack frames to avoid memory overflow in very deeply recursive functions. Python, however, does not do&amp;nbsp;this.&lt;/li&gt;
+&lt;li&gt;The call stack is invisible most of the time but you&amp;#8217;ve already seen it working: when Python shows a traceback (that error full of arrows, showing which function the execution was&amp;nbsp;in).&lt;/li&gt;
+&lt;li&gt;Many recursive functions can be rewritten iteratively&amp;nbsp;(using &lt;code&gt;for&lt;/code&gt; or &lt;code&gt;while&lt;/code&gt; loops). This avoids the risk of stack overflow in cases with very deep&amp;nbsp;calls.&lt;/li&gt;
+&lt;li&gt;To understand recursion, you must first understand recursion.&amp;nbsp;😅&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Recommended exercises&amp;nbsp;👩🏻‍💻💞&lt;/h2&gt;
+&lt;p&gt;Here are some practical challenges to reinforce what you&amp;nbsp;learned:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LeetCode&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/merge-two-sorted-lists/description/"&gt;Merge Two Sorted Lists&lt;/a&gt; can be solved recursively, treating the base case as when one list reaches the&amp;nbsp;end.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/climbing-stairs/description/"&gt;Climbing Stairs&lt;/a&gt; a classic recursion + optimization problem (similar to&amp;nbsp;Fibonacci).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Exercism&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/exercises/flatten-array"&gt;Flatten Array&lt;/a&gt; receives a list that may contain sublists and needs to return everything &amp;#8220;flattened&amp;#8221; into a single&amp;nbsp;list.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/concepts/recursion"&gt;Recursion with Python&lt;/a&gt; reinforces the concept and includes the &amp;#8220;Luhn&amp;#8221; exercise, which works well with a recursive&amp;nbsp;approach.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Extra&amp;nbsp;challenge&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Write a recursive function that walks through folders and files on your computer (or just a simulated nested list). That&amp;#8217;s literally how many file systems&amp;nbsp;work.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;I hope you enjoyed the content!&amp;nbsp;✨💕&lt;/p&gt;
+&lt;p&gt;If you have any exercise suggestions or improvements for the explanation, let me know&amp;nbsp;🫂🌻&lt;/p&gt;</content><category term="Grokking Algorithms"/></entry><entry><title>Recursão</title><link href="/2025/09/17/recursao/" rel="alternate"/><published>2025-09-17T00:00:00-03:00</published><updated>2025-09-17T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-09-17:/2025/09/17/recursao/</id><summary type="html">&lt;p&gt;Resumo &lt;strong&gt;capítulo 3&lt;/strong&gt; do livro &amp;#8220;Entendendo Algoritmos&amp;#8221;. Apresento o conceito de recursão e como pensar em problemas dividindo-os em partes menores. Mostro exemplos clássicos como cálculo de fatorial, além de discutir limitações como o risco de estouro da pilha&amp;nbsp;(StackOverflow).&lt;/p&gt;</summary><content type="html">&lt;p&gt;Terceiro capítulo da série de estudos sobre o livro &lt;a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf"&gt;Entendendo Algoritmos&lt;/a&gt; de Aditya Y.&amp;nbsp;Bhargava.&lt;/p&gt;
+&lt;p&gt;Se você está acompanhando a série, já resumi os capítulos anteriores 👀, então volta lá se tu tiver alguma dúvida:&lt;br&gt;
+- &lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;Capítulo 1 - Introdução e Busca Binária&lt;/a&gt;&lt;br&gt;
+- &lt;a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"&gt;Capítulo 2 - Arrays, Listas e Ordenação por Seleção&lt;/a&gt;&lt;br&gt;
+- &lt;a href="/2025/09/17/recursao/"&gt;Capítulo 3 - Recursão&lt;/a&gt; -📍 &lt;strong&gt;você está&amp;nbsp;aqui&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Oi, pessoal! Mais um resuminho do nosso livro querido&amp;nbsp;😊 &lt;/p&gt;
+&lt;p&gt;Esse capítulo foi um dos que mais me tirou a sensação de que programação é mágica. Bora entender recursão e pilhas sem&amp;nbsp;medo?&lt;/p&gt;
+&lt;p&gt;Neste capítulo, o autor explica de forma simples o conceito e o uso da &lt;strong&gt;recursão&lt;/strong&gt;, dividindo a explicação em caso base e caso recursivo. 
+Ele sugere que você, ao menos uma vez, analise uma função recursiva com papel e caneta, acompanhando passo a passo, assim você entenderá como a função&amp;nbsp;funciona.&lt;/p&gt;
+&lt;h1&gt;Recursão&lt;/h1&gt;
+&lt;p&gt;É a técnica onde uma função chama a si mesma para resolver um problema, dividindo-o em problemas menores. Devido ao fato de uma função recursiva chamar a si mesma, é mais fácil de escrevê-la de forma errada e acabar em um loop infinito. Para que a recursão funcione corretamente, ela deve conter um caso base para parar as chamadas e um caso recursivo que aproxime o problema da solução&amp;nbsp;final. &lt;/p&gt;
+&lt;h2&gt;Como a recursão&amp;nbsp;funciona:&lt;/h2&gt;
+&lt;p&gt;Antes de mostrar um exemplo de recursão, vamos entender como ela&amp;nbsp;funciona.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Caso base&lt;/strong&gt;: define quando a função deve &lt;strong&gt;parar&lt;/strong&gt; de se chamar. Sem ele, a recursão continuaria indefinidamente, causando&amp;nbsp;erro.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Caso recursivo&lt;/strong&gt;: é a parte em que a função &lt;strong&gt;se chama novamente&lt;/strong&gt;, aproximando-se da solução final a cada&amp;nbsp;passo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Um exemplo clássico é o cálculo do fatorial de um&amp;nbsp;número:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;fatorial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# Caso Base&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="c1"&gt;# Caso Recursivo&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;fatorial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fatorial&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  &lt;span class="c1"&gt;# Saída: 120&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Nesse&amp;nbsp;exemplo:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Caso Base&lt;/strong&gt;: &lt;code&gt;n&lt;/code&gt; é 0 ou 1, o fatorial é&amp;nbsp;1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Caso Recursivo&lt;/strong&gt;:&amp;nbsp;Se &lt;code&gt;n&lt;/code&gt; é maior que 1, o fatorial&amp;nbsp;é &lt;code&gt;n * fatorial(n-1)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Olha como fica quase poético, cada número chama o próximo até o 1 dizer &amp;#8220;chega, agora volta&amp;#8221;. Aí a multiplicação acontece no caminho de&amp;nbsp;volta.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Pilha&lt;/h1&gt;
+&lt;p&gt;Suponha que você esteja fazendo um churrasco para os seus amigos. Você tem uma lista de afazeres em forma de uma pilha de notas adesivas. Quando você insere um item, ele é colocado no topo da pilha. Quando você lê um item, lê apenas o item do topo da pilha e ele é retirado da lista. Logo, sua lista de afazeres contém apenas duas ações: &lt;em&gt;push&lt;/em&gt; (inserir) e &lt;em&gt;pop&lt;/em&gt; (remover e&amp;nbsp;ler).&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/pilha.png" alt="pilha" width="700"/&gt;&lt;/p&gt;
+&lt;p&gt;Esta estrutura de dados é chamada de pilha. A pilha é uma estrutura de dados simples e nós usamos o tempo todo sem&amp;nbsp;perceber.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Pilha de&amp;nbsp;chamadas&lt;/h1&gt;
+&lt;p&gt;Sempre que uma função é chamada, o computador precisa “lembrar” de onde ela parou para poder continuar depois.
+Essa memória temporária é organizada numa &lt;strong&gt;pilha de chamadas&lt;/strong&gt; (call&amp;nbsp;stack).&lt;/p&gt;
+&lt;p&gt;Funciona&amp;nbsp;assim:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A cada nova chamada de função, o computador empilha informações sobre essa execução (como parâmetros e variáveis&amp;nbsp;locais).&lt;/li&gt;
+&lt;li&gt;Quando a função termina, o computador desempilha esses dados e volta para o ponto&amp;nbsp;anterior.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A metáfora do livro é ótima, pense em uma pilha de pratos na cozinha. Você só consegue pegar (ou retirar) o prato que está por cima.  Assim também funciona com funções, o último que entrou é o primeiro que sai (&lt;span class="caps"&gt;LIFO&lt;/span&gt;: Last In, First&amp;nbsp;Out).&lt;/p&gt;
+&lt;p&gt;Podemos visualizar isso com um exemplo simples em&amp;nbsp;Python:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;cumprimenta&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Oi,&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nome&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;despedida&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;despedida&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Tchau!&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;cumprimenta&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Ana&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Ordem de execução na&amp;nbsp;pilha:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;cumprimenta(&amp;#8220;Ana&amp;#8221;) é chamada → vai para a&amp;nbsp;pilha.&lt;/li&gt;
+&lt;li&gt;Dentro dela, despedida() é chamada → fica no&amp;nbsp;topo.&lt;/li&gt;
+&lt;li&gt;despedida() roda e sai da&amp;nbsp;pilha.&lt;/li&gt;
+&lt;li&gt;cumprimenta(&amp;#8220;Ana&amp;#8221;) roda até o fim e sai da&amp;nbsp;pilha.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Ou seja, tudo organizado, prato por&amp;nbsp;prato.&lt;/p&gt;
+&lt;p&gt;Esse exemplo já mostra que não é só recursão que usa pilha, mas qualquer função. A diferença é que a recursão força a pilha a crescer muito mais&amp;nbsp;rápido.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Pilha de chamadas com&amp;nbsp;recursão&lt;/h1&gt;
+&lt;p&gt;Com recursão, essa pilha pode crescer bastante, porque a função vai se chamando várias vezes até chegar no caso&amp;nbsp;base.&lt;/p&gt;
+&lt;p&gt;Exemplo simplificado&amp;nbsp;com &lt;code&gt;fatorial(3)&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;O programa chama fatorial(3)
+    &lt;span class="k"&gt;-&lt;/span&gt; empilha fatorial(3)
+
+Para resolver, precisa de fatorial(2)
+    &lt;span class="k"&gt;-&lt;/span&gt; empilha fatorial(2)
+
+Para resolver, precisa de fatorial(1)
+    &lt;span class="k"&gt;-&lt;/span&gt; empilha fatorial(1)
+
+fatorial(1) chega no caso base e retorna 1
+    &lt;span class="k"&gt;-&lt;/span&gt; desempilha fatorial(1)
+
+Agora fatorial(2) consegue calcular 2 × 1 = 2
+    &lt;span class="k"&gt;-&lt;/span&gt; desempilha fatorial(2)
+
+Por fim, fatorial(3) calcula 3 × 2 = 6
+    &lt;span class="k"&gt;-&lt;/span&gt; desempilha fatorial(3)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;No fim, cada chamada só consegue terminar depois que a chamada menor retorna. 
+É por isso que &lt;strong&gt;definir bem o caso base é tão importante&lt;/strong&gt;, sem ele, a função nunca para de empilhar chamadas e acaba estourando a memória (stack&amp;nbsp;overflow).&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/coffee.gif" alt="overflow" width="400"/&gt;&lt;/p&gt;
+&lt;p&gt;Esse “estouro da pilha” é justamente de onde veio o nome do site &lt;a href="https://stackoverflow.com/questions"&gt;Stack Overflow&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Quando vi esse processo pela primeira vez, parecia uma espécie de “mágica”, como se o computador simplesmente soubesse de onde&amp;nbsp;voltar.&lt;/p&gt;
+&lt;p&gt;Foi nesse momento que percebi que entender programação é muito sobre desmistificar. Não é dom, não é gênio, é só empilhar e desempilhar com calma. 
+Hoje, sempre que vejo um código recursivo, tento imaginar essa pilha acontecendo em segundo plano, isso traz clareza e ainda transforma o “eu não nasci pra isso/nunca vou entender isso” para um “hihi que legal”&amp;nbsp;😎&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/chihuahua.gif" alt="cachorro" width="200"/&gt;&lt;/p&gt;
+&lt;p&gt;Então, da próxima vez que você se perder num código recursivo, respira: desenha a pilha, segue os passos, e lembra que não é mágica, é só &lt;strong&gt;prática&lt;/strong&gt;!!!&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Curiosidades&amp;nbsp;💡&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Uma recursão muito comum fora da programação: bonecas russas (matryoshkas). Cada boneca guarda outra dentro, até que a última (caso base) não guarda mais&amp;nbsp;nenhuma.&lt;/li&gt;
+&lt;li&gt;Algumas linguagens aplicam otimização de recursão de cauda (tail call optimization), que reaproveita os quadros da pilha para não estourar a memória em funções recursivas muito profundas. Python, porém, não faz&amp;nbsp;isso.&lt;/li&gt;
+&lt;li&gt;A pilha de chamadas é invisível na maior parte do tempo, mas você já viu ela funcionando, quando o Python mostra um traceback (aquele erro cheio de setas, indicando em que função a execução&amp;nbsp;estava).&lt;/li&gt;
+&lt;li&gt;Muitas funções recursivas podem ser reescritas de forma iterativa (usando&amp;nbsp;laços &lt;code&gt;for&lt;/code&gt; ou &lt;code&gt;while&lt;/code&gt;). Isso evita o risco de estouro da pilha em casos de chamadas muito&amp;nbsp;profundas.&lt;/li&gt;
+&lt;li&gt;Para entender recursão, você precisa primeiro entender recursão.&amp;nbsp;😅&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;Exercícios recomendados&amp;nbsp;👩🏻‍💻💞&lt;/h2&gt;
+&lt;p&gt;Para reforçar o aprendizado, aqui vão alguns desafios&amp;nbsp;práticos:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LeetCode&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/merge-two-sorted-lists/description/"&gt;Merge two sorted lists&lt;/a&gt; - Dá pra resolver recursivamente, tratando como o caso base quando uma lista chega ao&amp;nbsp;fim.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/climbing-stairs/description/"&gt;Climbing Stairs&lt;/a&gt; - Um problema clássico de recursão + otimização (parecido com&amp;nbsp;Fibonacci).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Exercism&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/exercises/flatten-array"&gt;Flatten Array&lt;/a&gt; - Recebe uma lista que pode conter sublistas e precisa retornar tudo “achatado” em uma única&amp;nbsp;lista&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/concepts/recursion"&gt;Recursão com Python&lt;/a&gt; - Reforça o conceito de recursão e tem o exercício “Luhn” que admite uma abordagem&amp;nbsp;recursiva&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Desafio&amp;nbsp;extra&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Crie uma função recursiva que percorre pastas e arquivos no seu computador (ou só numa lista aninhada simulada). Isso é literalmente como muitos sistemas de arquivos&amp;nbsp;funcionam.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;Espero que tenha aproveitado o conteúdo!&amp;nbsp;✨💕&lt;/p&gt;
+&lt;p&gt;Se tiver alguma sugestão de exercício ou melhoria na explicação, me conta aqui&amp;nbsp;🫂🌻&lt;/p&gt;</content><category term="Entendendo algoritmos"/></entry><entry><title>Selection Sort, Arrays and Linked Lists</title><link href="/en/2025/08/27/ordenacao-por-selecao-arrays-e-listas/" rel="alternate"/><published>2025-08-27T00:00:00-03:00</published><updated>2025-08-27T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-08-27:/en/2025/08/27/ordenacao-por-selecao-arrays-e-listas/</id><summary type="html">&lt;p&gt;Summary of &lt;strong&gt;chapter 2&lt;/strong&gt; of &amp;#8220;Grokking Algorithms&amp;#8221;. It covers the selection sort algorithm and compares arrays and linked lists in terms of operations and efficiency, reinforcing Big O&amp;nbsp;notation.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Second chapter of my study series on &lt;a href="https://www.manning.com/books/grokking-algorithms"&gt;Grokking Algorithms&lt;/a&gt; by Aditya Y.&amp;nbsp;Bhargava.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;Chapter 1 - Introduction and Binary&amp;nbsp;Search&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"&gt;Chapter 2 - Arrays, Linked Lists and Selection Sort&lt;/a&gt; 📍 &lt;strong&gt;you are&amp;nbsp;here&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/09/17/recursao/"&gt;Chapter 3 -&amp;nbsp;Recursion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I hope you enjoyed the structure from &lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;chapter 1&lt;/a&gt; I&amp;#8217;ll be keeping the same vibe here. If you have any exercise suggestions or improvements for the explanation, let me know! I&amp;#8217;d love the feedback&amp;nbsp;🫂💕&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;In chapter 2, the author dives deeper into two fundamental concepts: &lt;strong&gt;data structures&lt;/strong&gt; (like arrays and linked lists) and &lt;strong&gt;algorithm efficiency&lt;/strong&gt; (Big O notation). To illustrate this, he introduces the &lt;strong&gt;selection sort&lt;/strong&gt;&amp;nbsp;algorithm.&lt;/p&gt;
+&lt;h1&gt;Arrays and Linked&amp;nbsp;Lists&lt;/h1&gt;
+&lt;p&gt;Before talking about sorting, it&amp;#8217;s important to understand how data can be stored in memory.&amp;nbsp;👀&lt;/p&gt;
+&lt;p&gt;The author brings an analogy that makes everything muuuch easier to understand. The idea goes something like&amp;nbsp;this:&lt;/p&gt;
+&lt;p&gt;Imagine you&amp;#8217;re going to a concert and need to leave your things at the coat check (I didn&amp;#8217;t even know that was a thing 🤔). Only a few slots are available and you can store one item per slot. You drop your stuff off, close up, and you&amp;#8217;re ready to enjoy the&amp;nbsp;show.&lt;/p&gt;
+&lt;p&gt;Computer memory works a lot like this. The computer is like a huge set of slots, and each slot has an address. Every time you store an item in memory, the computer gives you an address to put it&amp;nbsp;in.&lt;/p&gt;
+&lt;p&gt;Now, if you want to store multiple items, there are two main ways to do it: &lt;strong&gt;arrays&lt;/strong&gt; and &lt;strong&gt;linked lists&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Arrays&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Contiguous blocks of memory each slot is right next to the&amp;nbsp;other.&lt;/li&gt;
+&lt;li&gt;Each element can be accessed &lt;strong&gt;directly&lt;/strong&gt; by its index, which makes reading fast.&lt;ul&gt;
+&lt;li&gt;This means the lookup-by-position operation is O(1) constant&amp;nbsp;time.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;arr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;  &lt;span class="c1"&gt;# direct access to 20&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The downside of arrays is that if you want to add one more item and the next slot is taken, the computer has to find a bigger block of memory and move all existing items&amp;nbsp;there.&lt;/li&gt;
+&lt;li&gt;So adding items to an array can be very&amp;nbsp;slow.&lt;/li&gt;
+&lt;li&gt;Deleting an element is just as costly all following elements need to be&amp;nbsp;shifted.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Linked&amp;nbsp;Lists&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Items can be stored &lt;strong&gt;anywhere in memory&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Each item stores the address of the next item in the&amp;nbsp;list.&lt;/li&gt;
+&lt;li&gt;Kind of like a treasure hunt each clue tells you where the next one&amp;nbsp;is.&lt;/li&gt;
+&lt;li&gt;Adding an item is simple: just put it anywhere in memory and update the previous item&amp;#8217;s&amp;nbsp;pointer.&lt;/li&gt;
+&lt;li&gt;Deleting is just as easy: just change the previous item&amp;#8217;s pointer to skip over the one you want to&amp;nbsp;remove.&lt;/li&gt;
+&lt;li&gt;The downside of linked lists is that to access a specific element (say, the last one), you can&amp;#8217;t jump straight to it you have to walk through the list &lt;strong&gt;one item at a time&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+
+&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+
+&lt;span class="c1"&gt;# Traversing&lt;/span&gt;
+&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+&lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;next&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Breaking down the code above:
+1. I create&amp;nbsp;the &lt;code&gt;Node&lt;/code&gt; class, which stores a value&amp;nbsp;(&lt;code&gt;value&lt;/code&gt;) and a pointer to the next node&amp;nbsp;(&lt;code&gt;next&lt;/code&gt;).
+2. I create two&amp;nbsp;nodes: &lt;code&gt;a&lt;/code&gt; with value 10&amp;nbsp;and &lt;code&gt;b&lt;/code&gt; with value 20.
+3. I&amp;nbsp;link &lt;code&gt;a&lt;/code&gt; to &lt;code&gt;b&lt;/code&gt; with &lt;code&gt;a.next = b&lt;/code&gt;.
+4. I traverse the list&amp;nbsp;with &lt;code&gt;while n:&lt;/code&gt;,&amp;nbsp;printing &lt;code&gt;n.value&lt;/code&gt; until I reach the end&amp;nbsp;(&lt;code&gt;None&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Output:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mf"&gt;10&lt;/span&gt;
+&lt;span class="mf"&gt;20&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;I don&amp;#8217;t know about you, but &lt;strong&gt;understanding the difference between arrays and linked lists&lt;/strong&gt; was a real lightbulb moment for me. Since I learned Python first, I kind of used these structures on autopilot… 🥲
+It might seem obvious or even unnecessary after all, we deal with arrays and lists all the time but it was incredible to finally understand &lt;strong&gt;why things work the way they do&lt;/strong&gt;. My brain finally started connecting the dots and seeing the logic behind it all. I was kind of&amp;nbsp;like:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/cat-in-shock-surprises.gif" alt="shocked cat" width="150"/&gt;&lt;/p&gt;
+&lt;p&gt;Here are the running times for the most common operations on arrays and linked&amp;nbsp;lists:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/array_lista.png" alt="running time table" width="400"/&gt;&lt;/p&gt;
+&lt;p&gt;I think it&amp;#8217;s important to have this table handy to reinforce Big O notation and help everyone understand the impact of our choices in different&amp;nbsp;situations.&lt;/p&gt;
+&lt;p&gt;A more explicit&amp;nbsp;breakdown:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Reading&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Array → O(1)&lt;/strong&gt;:
+    In an array, each position has a fixed address in memory. So if you want the 5th element, the computer goes straight to it super fast, constant&amp;nbsp;time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Linked List → O(n)&lt;/strong&gt;:
+    In a linked list, each element only knows who comes next. So to find the 5th element, you have to start from the 1st, then the 2nd, then the 3rd… all the way to the 5th. The bigger the list, the longer it&amp;nbsp;takes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Insertion&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Array → O(n)&lt;/strong&gt;:
+    If the array is full and you want to insert a new item in the middle, you have to &amp;#8220;push&amp;#8221; all other elements one position forward. That can take a&amp;nbsp;while.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Linked List → O(1)&lt;/strong&gt;:
+    If you already know the position, inserting into a linked list is quick just change who points to whom, and you&amp;#8217;re&amp;nbsp;done.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Deletion&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Array → O(n)&lt;/strong&gt;:
+    If you remove an item from the middle of an array, you have to &amp;#8220;pull&amp;#8221; all the elements after it one position back to close the&amp;nbsp;gap.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Linked List → O(1)&lt;/strong&gt;:
+    Just like insertion, you just update the pointers to skip the item you want to remove. Nothing else needs to&amp;nbsp;move.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1&gt;Selection&amp;nbsp;Sort&lt;/h1&gt;
+&lt;p&gt;The author presents the Selection Sort algorithm simple to implement, but not very efficient.
+Understanding the difference between arrays and linked lists makes it important to see how the algorithm traverses and manipulates&amp;nbsp;elements.&lt;/p&gt;
+&lt;h3&gt;How it&amp;nbsp;works&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Find the smallest element in the&amp;nbsp;list&lt;/li&gt;
+&lt;li&gt;Place it in the first&amp;nbsp;position&lt;/li&gt;
+&lt;li&gt;Repeat for the remaining positions until the whole list is&amp;nbsp;sorted&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;Python&amp;nbsp;implementation:&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;find_smallest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;    Finds the index of the smallest element in an array.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Parameters:&lt;/span&gt;
+&lt;span class="sd"&gt;    arr (list): A list of comparable elements.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Returns:&lt;/span&gt;
+&lt;span class="sd"&gt;    int: Index of the smallest element found.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;smallest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;smallest_index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;smallest&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;smallest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="n"&gt;smallest_index&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;smallest_index&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;selection_sort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;    Sorts a list using the selection sort algorithm.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    The function creates a new list by removing the smallest element&lt;/span&gt;
+&lt;span class="sd"&gt;    from the original list at each iteration and appending it to the sorted list.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Parameters:&lt;/span&gt;
+&lt;span class="sd"&gt;    arr (list): A list of numbers to sort.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Returns:&lt;/span&gt;
+&lt;span class="sd"&gt;    list: A new list sorted in ascending order.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;new_arr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+        &lt;span class="n"&gt;smallest&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;find_smallest&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;new_arr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;smallest&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;new_arr&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;selection_sort&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt;  &lt;span class="c1"&gt;# Output: [2, 3, 5, 6, 10]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;Complexity and Big&amp;nbsp;O&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Selection sort needs to traverse all elements multiple&amp;nbsp;times.&lt;/li&gt;
+&lt;li&gt;For n elements, it performs roughly n × n&amp;nbsp;operations.&lt;/li&gt;
+&lt;li&gt;This means its performance is&amp;nbsp;O(n²).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This is a classic example of how &lt;strong&gt;different algorithms can solve the same problem with different efficiencies&lt;/strong&gt;, highlighting the importance of choosing the right algorithm based on the size and structure of your&amp;nbsp;data.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Fun&amp;nbsp;facts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Lists in Python are actually &lt;strong&gt;arrays&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;append&lt;/code&gt; method (adding to the end) is considered &lt;strong&gt;O(1)&lt;/strong&gt; on average. That&amp;#8217;s because adding to the end is cheap: just place the item in the next available&amp;nbsp;slot.&lt;/li&gt;
+&lt;li&gt;The &amp;#8220;expensive&amp;#8221; part shows up with operations&amp;nbsp;like &lt;code&gt;insert&lt;/code&gt; or &lt;code&gt;remove&lt;/code&gt; in the middle. Those require shifting all following elements, which can be &lt;strong&gt;O(n)&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;A good way to visualize: think of a stack of plates. Putting or taking a plate from the top&amp;nbsp;(&lt;code&gt;append&lt;/code&gt; and &lt;code&gt;pop&lt;/code&gt;) is easy. But if you want to insert or remove one from the middle&amp;nbsp;(&lt;code&gt;insert&lt;/code&gt; or &lt;code&gt;remove&lt;/code&gt;), you have to move all the plates above it&amp;nbsp;first.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Recommended exercises&amp;nbsp;👩🏻‍💻💞&lt;/h2&gt;
+&lt;p&gt;Here are some practical challenges to reinforce what you&amp;nbsp;learned:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LeetCode&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/two-sum/description/"&gt;Two Sum&lt;/a&gt; classic array&amp;nbsp;problem&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/"&gt;Best Time to Buy and Sell Stock&lt;/a&gt; traversing an array with time&amp;nbsp;analysis&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/merge-sorted-array/description/"&gt;Merge Sorted Array&lt;/a&gt; sorted list&amp;nbsp;manipulation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Exercism&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/exercises/isogram"&gt;Isogram&lt;/a&gt; traverses strings/arrays checking for&amp;nbsp;duplicates&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;And that wraps up chapter 2!
+I hope it was useful and easy to read&amp;nbsp;💁🏻‍♀️✨&lt;/p&gt;</content><category term="Grokking Algorithms"/></entry><entry><title>Ordenação por Seleção, Arrays e Listas</title><link href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/" rel="alternate"/><published>2025-08-27T00:00:00-03:00</published><updated>2025-08-27T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-08-27:/2025/08/27/ordenacao-por-selecao-arrays-e-listas/</id><summary type="html">&lt;p&gt;Resumo do &lt;strong&gt;capítulo 2&lt;/strong&gt; do livro &amp;#8220;Entendendo Algoritmos&amp;#8221;. Mostra o funcionamento do algoritmo de ordenação por seleção e compara arrays e listas em termos de operações e eficiência, reforçando o uso da notação Big&amp;nbsp;O.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Segundo capítulo da série de estudos sobre o livro &lt;a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf"&gt;Entendendo Algoritmos&lt;/a&gt; de Aditya Y.&amp;nbsp;Bhargava.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;Capítulo 1 - Introdução e Busca&amp;nbsp;Binária&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"&gt;Capítulo 2 - Arrays, Listas e Ordenação por Seleção&lt;/a&gt; -📍 &lt;strong&gt;você está&amp;nbsp;aqui&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/09/17/recursao/"&gt;Capítulo 3 -&amp;nbsp;Recursão&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Espero que vocês tenham gostado da forma como estruturei o &lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;primeiro capítulo&lt;/a&gt;, seguirei naquela mesma linha de raciocínio e explicação. Se você tiver alguma sugestão de exercício ou melhoria na explicação, me conta aqui que eu ficarei feliz em receber esse feedback&amp;nbsp;🫂💕&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;No capítulo 2, o autor aprofunda dois conceitos fundamentais: &lt;strong&gt;estruturas de dados&lt;/strong&gt; (como arrays e listas) e a &lt;strong&gt;eficiência dos algoritmos&lt;/strong&gt; (notação Big O). Para ilustrar isso, ele apresenta o algoritmo de &lt;strong&gt;ordenação por seleção&lt;/strong&gt;.&lt;/p&gt;
+&lt;h1&gt;Arrays e&amp;nbsp;Listas&lt;/h1&gt;
+&lt;p&gt;Antes de falar em ordenação, é importante entender como os dados podem ser armazenados na memória.&amp;nbsp;👀&lt;/p&gt;
+&lt;p&gt;O autor traz uma analogia que faz o entendimento ficar muuuito mais fácil. Em resumo, a ideia é algo&amp;nbsp;assim:&lt;/p&gt;
+&lt;p&gt;Imagine que você vai a um show e precisa guardar suas coisas na chapelaria (eu nem sabia que isso existia 🤔). Apenas algumas gavetas estão disponíveis e você pode guardar um item por gaveta. Você pega e guarda suas coisas nessas gavetas, fecha, e está pronto para ir ao&amp;nbsp;show.&lt;/p&gt;
+&lt;p&gt;A memória do computador funciona mais ou menos assim. O computador parece um grande conjunto de gavetas, e cada gaveta tem um endereço. Cada vez que tu armazena um item na memória, o computador fornece um endereço para guardar esse&amp;nbsp;item.&lt;/p&gt;
+&lt;p&gt;E aí, se tu quiser armazenar múltiplos itens, existem duas maneiras principais de fazer isso: &lt;strong&gt;arrays&lt;/strong&gt; e &lt;strong&gt;listas&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Arrays&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;São blocos contíguos de memória (um ao lado do&amp;nbsp;outro).&lt;/li&gt;
+&lt;li&gt;Cada elemento pode ser acessado &lt;strong&gt;diretamente&lt;/strong&gt; pelo índice, permitindo uma leitura rápida.&lt;ul&gt;
+&lt;li&gt;Isso significa que a operação de busca por posição é O(1), ou seja,&amp;nbsp;constante.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;arr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;  &lt;span class="c1"&gt;# acesso direto ao 20&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;O lado ruim do array é que, se tu quiser adicionar mais um item e a gaveta seguinte estiver ocupada, será necessário solicitar ao computador uma área de memória maior para armazenar todos os itens e mover os existentes para&amp;nbsp;lá.&lt;/li&gt;
+&lt;li&gt;Então adicionar novos itens a um array é algo que pode ser muito&amp;nbsp;lento.&lt;/li&gt;
+&lt;li&gt;Deletar um elemento é tão custoso quanto adicionar, todos os elementos seguintes precisam ser&amp;nbsp;movidos.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Listas&amp;nbsp;encadeadas&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Seus itens podem estar &lt;strong&gt;em qualquer lugar da memória&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Cada item armazena o endereço do próximo item da&amp;nbsp;lista.&lt;/li&gt;
+&lt;li&gt;Semelhante a uma caça ao tesouro, cada pista encontrada indica onde está a próxima&amp;nbsp;etapa.&lt;/li&gt;
+&lt;li&gt;Adicionar um item é simples, você coloca o item em qualquer lugar da memória e atualiza o endereço do item&amp;nbsp;anterior.&lt;/li&gt;
+&lt;li&gt;Para deletar, é tão simples quanto, basta alterar o endereço do item anterior para apontar para o próximo&amp;nbsp;item.&lt;/li&gt;
+&lt;li&gt;O lado ruim da lista encadeada é que, para acessar um elemento específico (por exemplo, o último), você não pode ir direto, precisa percorrer a lista &lt;strong&gt;item por item&lt;/strong&gt; até chegar&amp;nbsp;lá.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;  &lt;span class="k"&gt;class&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;valor&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+          &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;valor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;valor&lt;/span&gt;
+          &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proximo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+
+  &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proximo&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;
+
+  &lt;span class="c1"&gt;# Percorrendo&lt;/span&gt;
+  &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;
+  &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+      &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;valor&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+      &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;proximo&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Explicando o código acima:
+1. Crio a&amp;nbsp;classe &lt;code&gt;Node&lt;/code&gt;, que armazena um valor&amp;nbsp;(&lt;code&gt;valor&lt;/code&gt;) e um ponteiro para o próximo nó&amp;nbsp;(&lt;code&gt;proximo&lt;/code&gt;).
+2. Crio dois&amp;nbsp;nós: &lt;code&gt;a&lt;/code&gt; com valor 10&amp;nbsp;e &lt;code&gt;b&lt;/code&gt; com valor 20.
+3.&amp;nbsp;Ligo &lt;code&gt;a&lt;/code&gt; ao &lt;code&gt;b&lt;/code&gt; com &lt;code&gt;a.proximo = b&lt;/code&gt;.
+4. Percorro a lista&amp;nbsp;com &lt;code&gt;while n:&lt;/code&gt; imprimindo &lt;code&gt;n.valor&lt;/code&gt; até chegar no final&amp;nbsp;(&lt;code&gt;None&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;A saída pra esse&amp;nbsp;código:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;span class="mi"&gt;20&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;Não sei vocês, mas &lt;strong&gt;entender a diferença entre arrays e listas&lt;/strong&gt; foi um verdadeiro estalo para mim. Como aprendi Python primeiro, eu meio que usava essas estruturas no automático… 🥲 
+Pode parecer algo óbvio ou até desnecessário, afinal, lidamos com arrays e listas o tempo todo, mas foi incrível compreender &lt;strong&gt;por que as coisas funcionam do jeito que funcionam&lt;/strong&gt;. Minha cabeça finalmente começou a encaixar as peças e perceber a lógica por trás das operações. Fiquei meio&amp;nbsp;que:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/cat-in-shock-surprises.gif" alt="gato surpreso" width="150"/&gt;&lt;/p&gt;
+&lt;p&gt;Aqui estão os tempos de execução para as operações mais comuns em arrays e listas&amp;nbsp;encadeadas&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/array_lista.png" alt="tempo de execução" width="400"/&gt;&lt;/p&gt;
+&lt;p&gt;Acho importante trazer essa tabela, para que o entendimento sobre notação Big O se consolide e pra todos entenderem o impacto das nossas escolhas em diferentes&amp;nbsp;situações.&lt;/p&gt;
+&lt;p&gt;A interpretação pra essa tabela de uma forma mais explícita&amp;nbsp;seria:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Leitura&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Array → O(1)&lt;/strong&gt;:
+    Em um array, cada posição tem um endereço fixo na memória. Então, se você quiser o 5º elemento, o computador vai direto nele de uma forma super rápida e em tempo&amp;nbsp;constante.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Lista → O(n)&lt;/strong&gt;:
+    uma lista encadeada, cada elemento sabe apenas quem é o próximo. Então, para achar o 5º elemento, você precisa começar do 1º, depois o 2º, depois o 3º… até chegar no 5º. Quanto maior a lista, mais tempo&amp;nbsp;demora.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Inserção&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Array → O(n)&lt;/strong&gt;:
+    Se o array estiver cheio e você quiser enfiar um novo item no meio, tem que “empurrar” todos os outros elementos uma posição para frente. Isso pode levar bastante&amp;nbsp;tempo.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Lista → O(1)&lt;/strong&gt;:
+    Se você já sabe a posição, inserir numa lista é rapidinho, basta mudar quem aponta pra quem e&amp;nbsp;pronto.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Deleção&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Array → O(n)&lt;/strong&gt;:
+    Se você remove um item no meio do array, precisa “puxar” todos os elementos da frente uma posição pra trás para fechar o&amp;nbsp;buraco.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Lista → O(1)&lt;/strong&gt;:
+    Assim como na inserção, basta mudar os ponteiros para pular o item que você quer remover. Não mexe em mais&amp;nbsp;ninguém.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1&gt;Ordenação por&amp;nbsp;seleção&lt;/h1&gt;
+&lt;p&gt;O autor apresenta o algoritmo Selection Sort, que é simples de implementar, mas não muito eficiente.
+A diferença entre arrays e listas em Python torna importante entender como o algoritmo percorre e manipula os&amp;nbsp;elementos.&lt;/p&gt;
+&lt;h3&gt;Ideia do&amp;nbsp;algoritmo&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Encontrar o menor elemento da&amp;nbsp;lista&lt;/li&gt;
+&lt;li&gt;Colocá-lo na primeira&amp;nbsp;posição&lt;/li&gt;
+&lt;li&gt;Repetir para as posições seguintes até ordenar toda a&amp;nbsp;lista&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;Implementação em&amp;nbsp;Python:&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;busca_menor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;    Encontra o índice do menor elemento em um array.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Parâmetros:&lt;/span&gt;
+&lt;span class="sd"&gt;    arr (list): Lista de elementos comparáveis.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Retorna:&lt;/span&gt;
+&lt;span class="sd"&gt;    int: Índice do menor elemento encontrado.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;menor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="n"&gt;menor_indice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;menor&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;menor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+            &lt;span class="n"&gt;menor_indice&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;menor_indice&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;ordenacao_por_selecao&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="sd"&gt;    Ordena uma lista usando o algoritmo de ordenação por seleção.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    A função cria uma nova lista, removendo o menor elemento&lt;/span&gt;
+&lt;span class="sd"&gt;    da lista original a cada iteração e adicionando-o à lista ordenada.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Parâmetros:&lt;/span&gt;
+&lt;span class="sd"&gt;    arr (list): Lista de números a serem ordenados.&lt;/span&gt;
+
+&lt;span class="sd"&gt;    Retorna:&lt;/span&gt;
+&lt;span class="sd"&gt;    list: Nova lista ordenada em ordem crescente.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;novo_arr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[]&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;)):&lt;/span&gt;
+        &lt;span class="n"&gt;menor&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;busca_menor&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;novo_arr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;arr&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pop&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;menor&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;novo_arr&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ordenacao_por_selecao&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;]))&lt;/span&gt; &lt;span class="c1"&gt;# Saída: [2, 3, 5, 6, 10]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;Complexidade e Big&amp;nbsp;O&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;O selection sort precisa percorrer todos os elementos várias&amp;nbsp;vezes.&lt;/li&gt;
+&lt;li&gt;Para n elementos, ele faz aproximadamente n × n&amp;nbsp;operações.&lt;/li&gt;
+&lt;li&gt;Isso significa que seu desempenho é&amp;nbsp;O(n²).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Este é um exemplo clássico que mostra como &lt;strong&gt;algoritmos diferentes podem resolver o mesmo problema com eficiências diferentes&lt;/strong&gt;, destacando a importância de escolher o algoritmo certo dependendo do tamanho e da estrutura dos&amp;nbsp;dados.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Curiosidades&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;As listas em Python são, na verdade, &lt;strong&gt;arrays&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;O&amp;nbsp;método &lt;code&gt;append&lt;/code&gt; (adicionar no final) é considerado de complexidade &lt;strong&gt;O(1)&lt;/strong&gt; na média. Isso porque adicionar um item no final geralmente é bem barato: só colocar no próximo espaço&amp;nbsp;livre.&lt;/li&gt;
+&lt;li&gt;O “custo alto” aparece em operações&amp;nbsp;como &lt;code&gt;insert&lt;/code&gt; ou &lt;code&gt;remove&lt;/code&gt; no meio da lista. Aí é preciso deslocar todos os elementos seguintes, o que pode ser &lt;strong&gt;O(n)&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Uma forma de visualizar: pense numa pilha de pratos. Colocar ou tirar um prato do topo&amp;nbsp;(como &lt;code&gt;append&lt;/code&gt; e &lt;code&gt;pop&lt;/code&gt;) é fácil. Mas se você quiser enfiar ou tirar um prato do meio da pilha&amp;nbsp;(&lt;code&gt;insert&lt;/code&gt; ou &lt;code&gt;remove&lt;/code&gt;), vai ter que mover todos os pratos que estavam em cima&amp;nbsp;primeiro.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Exercícios recomendados&amp;nbsp;👩🏻‍💻💞&lt;/h2&gt;
+&lt;p&gt;Para reforçar o aprendizado, aqui vão alguns desafios&amp;nbsp;práticos:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LeetCode&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/two-sum/description/"&gt;Two Sum&lt;/a&gt; - clássico de&amp;nbsp;arrays&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/"&gt;Best Time to Buy and Sell Stock&lt;/a&gt; - Percorrer array com análise de&amp;nbsp;tempo&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/merge-sorted-array/description/"&gt;Merge Sorted Array&lt;/a&gt; - Manipulação de listas&amp;nbsp;ordenadas&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Exercism&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/exercises/isogram"&gt;Isogram&lt;/a&gt; - Percorre strings/arrays verificando&amp;nbsp;duplicatas&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;E assim, fechamos o segundo capítulo!
+Espero que tenha sido útil e leve de ler&amp;nbsp;💁🏻‍♀️✨&lt;/p&gt;</content><category term="Entendendo algoritmos"/></entry><entry><title>Binary Search and Introduction to Algorithm Analysis</title><link href="/en/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/" rel="alternate"/><published>2025-08-12T00:00:00-03:00</published><updated>2025-08-12T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-08-12:/en/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/</id><summary type="html">&lt;p&gt;Summary of &lt;strong&gt;chapter 1&lt;/strong&gt; of &amp;#8220;Grokking Algorithms&amp;#8221;. It introduces binary search as the first example and explains the concept of algorithm efficiency using Big O notation in a simple&amp;nbsp;way.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Start of a study series on the book &lt;a href="https://www.manning.com/books/grokking-algorithms"&gt;Grokking Algorithms&lt;/a&gt; by Aditya Y.&amp;nbsp;Bhargava.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;Chapter 1 - Introduction and Binary Search&lt;/a&gt; 📍 &lt;strong&gt;you are&amp;nbsp;here&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"&gt;Chapter 2 - Arrays, Linked Lists and Selection&amp;nbsp;Sort&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/09/17/recursao/"&gt;Chapter 3 -&amp;nbsp;Recursion&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This book was recommended by a friend, &lt;a href="https://github.com/anapaulamendes"&gt;Ana Paula Mendes&lt;/a&gt;, and I had no idea how much I&amp;#8217;d love it. The writing is light, clear, and very accessible. If you, like me, have a hard time staying consistent with technical reading, this book is a gem easy to understand, great for learning or revisiting&amp;nbsp;concepts.&lt;/p&gt;
+&lt;p&gt;It presents computer science ideas that show up in our everyday lives, often without us even&amp;nbsp;noticing.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/livro1.jpg" alt="book cover" width="400"/&gt;&lt;/p&gt;
+&lt;p&gt;One of the things I love most about this book is how the author teaches always through examples. Instead of overwhelming you with symbols and formulas, he wants you to &lt;em&gt;visualize&lt;/em&gt; the concepts. He believes and I agree that we learn better when we can connect new content to something we already know. And examples are the best way to do&amp;nbsp;that.&lt;/p&gt;
+&lt;p&gt;And the best part? He literally draws 🤩!
+You know when someone says &amp;#8220;do you want me to draw it for you?&amp;#8221; I always say &amp;#8220;yes, please!&amp;#8221; and he actually does. It&amp;#8217;s wonderful&amp;nbsp;✨.&lt;/p&gt;
+&lt;p&gt;You can feel that everything was thought through carefully: the content, the illustrated examples, and the recap at the end of each&amp;nbsp;chapter.&lt;/p&gt;
+&lt;p&gt;With that intro out of the way, let&amp;#8217;s see what chapter 1 is all&amp;nbsp;about!&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/hahahaha-gif.gif" alt="gif" width="100"/&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Binary search in a&amp;nbsp;nutshell&lt;/h1&gt;
+&lt;p&gt;Imagine a phone book with &lt;strong&gt;1 million names&lt;/strong&gt;. Going page by page would be a nightmare, right?
+Now, what if I told you that you can find any name in &lt;strong&gt;at most 20 tries&lt;/strong&gt;?&amp;nbsp;👀&lt;/p&gt;
+&lt;p&gt;The trick is simple: at each step, you eliminate half the options. Start with the element right in the middle of the sequence. In a phone book, that would be opening it right in the middle. In a list of 10 items, that&amp;#8217;s picking the 5th one. Now compare that middle item with what you&amp;#8217;re looking for: if they match congrats, you found it! If the middle item is &lt;span class="caps"&gt;GREATER&lt;/span&gt; than what you&amp;#8217;re looking for (think alphabetical order for names), the item must be in the first half. Otherwise, it&amp;#8217;s in the second half. This way, you cut the list in &lt;em&gt;half&lt;/em&gt; with just one comparison. Then you take the selected half and repeat the same&amp;nbsp;strategy.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: This only works if the list is&amp;nbsp;sorted!&lt;/p&gt;
+&lt;p&gt;And the coolest part? Even if the list doubles in size, you only need &lt;strong&gt;one more&lt;/strong&gt; step to find the result.&amp;nbsp;🤓&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;:
+Let&amp;#8217;s use a smaller list of 128 names and calculate the maximum number of steps to find a specific one. Then we double the list and see it only adds one more&amp;nbsp;step:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;max_steps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;steps&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;//=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="n"&gt;steps&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;steps&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_steps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;    &lt;span class="c1"&gt;# 7&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_steps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;  &lt;span class="c1"&gt;# 8&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Important note&lt;/strong&gt;: with a physical phone book, we already know to jump almost directly to the right letter which is more like how a hashmap (or Python dict) works, finding an item in constant time. But in a computer, when you only have a sorted list&amp;nbsp;(like &lt;code&gt;[1, 3, 5, 7, 9, 11, 13]&lt;/code&gt;), there&amp;#8217;s no such &amp;#8220;magic jump&amp;#8221; that&amp;#8217;s where binary search helps, cutting the list in half systematically until it finds the item (or confirms it&amp;#8217;s not&amp;nbsp;there).&lt;/p&gt;
+&lt;p&gt;Pretty cool, right? That&amp;#8217;s computer science!!&amp;nbsp;💁‍♀️✨&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Basic binary search&amp;nbsp;examples&lt;/h2&gt;
+&lt;p&gt;Think of a number between 1 and 100. You can guess it in at most 7&amp;nbsp;tries:&lt;/p&gt;
+&lt;p&gt;My first question: &amp;#8220;Is it&amp;nbsp;50?&amp;#8221;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If you say &amp;#8220;higher&amp;#8221;, I know it&amp;#8217;s between 51 and&amp;nbsp;100&lt;/li&gt;
+&lt;li&gt;If you say &amp;#8220;lower&amp;#8221;, it&amp;#8217;s between 1 and&amp;nbsp;49&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Second question: Let&amp;#8217;s say it&amp;#8217;s higher than 50. &amp;#8220;Is it 75?&amp;#8221; (midpoint between 51 and&amp;nbsp;100)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Higher? It&amp;#8217;s between 76 and&amp;nbsp;100&lt;/li&gt;
+&lt;li&gt;Lower? It&amp;#8217;s between 51 and&amp;nbsp;74&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;And so on always cutting the possibilities in&amp;nbsp;half.&lt;/p&gt;
+&lt;h3&gt;Let&amp;#8217;s see how it scales with larger&amp;nbsp;numbers:&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Items in list&lt;/th&gt;
+&lt;th&gt;Linear search (tries)&lt;/th&gt;
+&lt;th&gt;Binary search (tries)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1,000&lt;/td&gt;
+&lt;td&gt;up to 1,000&lt;/td&gt;
+&lt;td&gt;up to 10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1,000,000&lt;/td&gt;
+&lt;td&gt;up to 1,000,000&lt;/td&gt;
+&lt;td&gt;up to 20&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Yes 20 tries to find something among 1 million options!&amp;nbsp;🚀&lt;/p&gt;
+&lt;p&gt;This &amp;#8220;miracle&amp;#8221; happens because of a concept called &lt;strong&gt;logarithms&lt;/strong&gt; and I&amp;#8217;ll show you why in just a&amp;nbsp;moment.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Now that you understand binary search, let&amp;#8217;s look at three things that go hand in hand with it: &lt;strong&gt;logarithms, running time, and Big O notation&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Here&amp;#8217;s a quick summary of each, broken down the way that made sense to me.
+If something gets confusing, no worries just check the book, it&amp;#8217;s great&amp;nbsp;🫂💖&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Logarithms&lt;/h2&gt;
+&lt;p&gt;The maximum number of tries in binary search is given by log₂(n) the base-2 logarithm of&amp;nbsp;n.&lt;/p&gt;
+&lt;p&gt;If the name sounds scary, think of it this&amp;nbsp;way:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;log₂(n) is how many times you need to divide n by 2 until you reach&amp;nbsp;1&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Example&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;log₂(128) = 7 7 halving steps until 1 item&amp;nbsp;remains&lt;/li&gt;
+&lt;li&gt;log₂(256) = 8 just one more step, even though the list&amp;nbsp;doubled&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The base &amp;#8220;2&amp;#8221; comes from the fact that at each step we cut the list &lt;strong&gt;in half&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Running&amp;nbsp;time&lt;/h2&gt;
+&lt;p&gt;Whenever we talk about an algorithm, it&amp;#8217;s important to think about running time how much effort (or how many steps) it needs to reach a&amp;nbsp;result.&lt;/p&gt;
+&lt;p&gt;With &lt;strong&gt;linear search&lt;/strong&gt; (simple search), we check item by&amp;nbsp;item:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;List with 100 numbers → up to 100&amp;nbsp;tries&lt;/li&gt;
+&lt;li&gt;List with 4 billion numbers → up to 4 billion&amp;nbsp;tries&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The running time grows in direct proportion to the list size. We call this &lt;strong&gt;linear time&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Binary search&lt;/strong&gt; is a different&amp;nbsp;story:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;List with 100 numbers → at most 7&amp;nbsp;tries&lt;/li&gt;
+&lt;li&gt;List with 4 billion → at most 32&amp;nbsp;tries&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;This happens because binary search cuts the possibilities in half at every step. This type of growth is called &lt;strong&gt;logarithmic time&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/image-4.png" alt="running time chart" width="400"/&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Big O&amp;nbsp;Notation&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;Big O notation&lt;/strong&gt; is a way to measure the efficiency of an algorithm showing how &lt;strong&gt;running time&lt;/strong&gt; grows as the input size&amp;nbsp;increases.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;O(log n) logarithmic time (e.g. binary&amp;nbsp;search)&lt;/li&gt;
+&lt;li&gt;O(n) linear time (e.g. simple&amp;nbsp;search)&lt;/li&gt;
+&lt;li&gt;O(n * log n) a fast sorting algorithm, like quicksort (Chapter&amp;nbsp;4)&lt;/li&gt;
+&lt;li&gt;O(n²) a slower sorting algorithm, like selection sort (Chapter&amp;nbsp;2)&lt;/li&gt;
+&lt;li&gt;O(n!) an extremely slow algorithm, like the traveling salesperson (Chapter&amp;nbsp;1)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The book illustrates this in a very visual and intuitive way: grows linearly, grows in log, grows a lot, grows slowly… and so&amp;nbsp;on.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Now that we&amp;#8217;ve seen how binary search works, it&amp;#8217;s worth noting that it&amp;#8217;s not just for phone books it shows up in many real-life&amp;nbsp;situations:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Search systems (Google, WhatsApp, Spotify)&lt;/strong&gt;: under the hood, they use variations of binary search on sorted lists or&amp;nbsp;indexes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data filtering&lt;/strong&gt;: quickly finding a specific record in large spreadsheets or&amp;nbsp;databases.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Debugging&lt;/strong&gt;: reducing the problem space by half at each test to find where the bug&amp;nbsp;is.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: for binary search to work, the data must be&amp;nbsp;sorted.&lt;/p&gt;
+&lt;h2&gt;Quick&amp;nbsp;practice?&lt;/h2&gt;
+&lt;p&gt;Here&amp;#8217;s a sorted list of&amp;nbsp;numbers: &lt;code&gt;[2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Try to find the number 22 in two&amp;nbsp;ways:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Linear search:&lt;/strong&gt; go one by one starting from&amp;nbsp;2.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Binary search:&lt;/strong&gt; start in the middle, eliminate half at each&amp;nbsp;step.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Compare how many steps each method&amp;nbsp;took!&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Fun&amp;nbsp;facts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Git has a feature called &lt;a href="https://git-scm.com/docs/git-bisect"&gt;&lt;code&gt;git bisect&lt;/code&gt;&lt;/a&gt; that uses binary search to help developers find&amp;nbsp;bugs&lt;/li&gt;
+&lt;li&gt;If the item we&amp;#8217;re looking for is the first in the list, that&amp;#8217;s the best case for linear search and the worst case for binary&amp;nbsp;search&lt;/li&gt;
+&lt;li&gt;The &lt;code&gt;sortedcontainers&lt;/code&gt; implementation uses binary search (via&amp;nbsp;the &lt;code&gt;bisect&lt;/code&gt; module) &lt;a href="https://grantjenks.com/docs/sortedcontainers/_modules/sortedcontainers/sortedlist.html#SortedList"&gt;see&amp;nbsp;here&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Recommended exercises&amp;nbsp;👩🏻‍💻💞&lt;/h2&gt;
+&lt;p&gt;Here are some practical challenges to reinforce what you&amp;nbsp;learned:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LeetCode&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/binary-search/description/"&gt;Binary Search&lt;/a&gt; straightforward&amp;nbsp;implementation.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/search-insert-position/description/"&gt;Search Insert Position&lt;/a&gt; variation to find where to insert a&amp;nbsp;number.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://leetcode.com/problems/first-bad-version/description/"&gt;First Bad Version&lt;/a&gt; binary search applied to an &lt;span class="caps"&gt;API&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Exercism&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/exercises/binary-search"&gt;Binary Search (Python Track)&lt;/a&gt; implementation and&amp;nbsp;tests.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Tip: try to solve the problem before looking at any solution, then compare your approach with optimized&amp;nbsp;implementations.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;And so begins my study roadmap: each chapter of the book comes with exercises to reinforce the&amp;nbsp;content.&lt;/p&gt;</content><category term="Grokking Algorithms"/></entry><entry><title>Busca Binária e Introdução à Análise de Algoritmos</title><link href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/" rel="alternate"/><published>2025-08-12T00:00:00-03:00</published><updated>2025-08-12T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-08-12:/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/</id><summary type="html">&lt;p&gt;Resumo do &lt;strong&gt;capítulo 1&lt;/strong&gt; do livro &amp;#8220;Entendendo Algoritmos&amp;#8221;. Apresenta a busca binária como exemplo inicial e introduz o conceito de eficiência dos algoritmos, explicando a notação Big O de forma&amp;nbsp;simples.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Início de uma série de estudos sobre o livro &lt;a href="https://www.kufunda.net/publicdocs/Entendendo%20Algoritmos%20Um%20guia%20ilustrado%20para%20programadores%20e%20outros%20curiosos%20(Aditya%20Y.%20Bhargava).pdf"&gt;Entendendo Algoritmos&lt;/a&gt; de Aditya Y.&amp;nbsp;Bhargava. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/"&gt;Capítulo 1 - Introdução e Busca Binária&lt;/a&gt; -📍 &lt;strong&gt;você está&amp;nbsp;aqui&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/"&gt;Capítulo 2 - Arrays, Listas e Ordenação por&amp;nbsp;Seleção&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/2025/09/17/recursao/"&gt;Capítulo 3 -&amp;nbsp;Recursão&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Esse livro foi indicado por uma amiga, &lt;a href="https://github.com/anapaulamendes"&gt;Ana Paula Mendes&lt;/a&gt;, e eu não imaginava o quanto iria gostar. A leitura é leve, clara e muito acessível. Se você, como eu, tem dificuldade em manter a constância em leituras técnicas, esse livro é um achado, fácil de entender, ótimo para aprender ou revisar&amp;nbsp;conceitos. &lt;/p&gt;
+&lt;p&gt;Ele apresenta ideias da ciência da computação que estão no nosso dia a dia, muitas vezes sem que a gente&amp;nbsp;perceba.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/livro1.jpg" alt="capa do livro" width="400"/&gt;&lt;/p&gt;
+&lt;p&gt;Uma das coisas que mais me chamam atenção nesse livro é o jeito como o autor ensina, sempre com exemplos. Em vez de encher de símbolos e fórmulas, ele quer que a gente visualize os conceitos. Ele acredita, e eu concordo, que aprendemos melhor quando conseguimos relacionar o conteúdo com algo que já conhecemos. E, pra isso, os exemplos ajudam&amp;nbsp;muito. &lt;/p&gt;
+&lt;p&gt;E o melhor é que ele desenha 🤩! 
+Sabe aquela frase “quer que eu desenhe pra você entender”? Eu respondo “sim, por favorrrrr!” e ele realmente desenha. É maravilhoso&amp;nbsp;✨. &lt;/p&gt;
+&lt;p&gt;Dá pra sentir que tudo foi pensado com cuidado, desde o conteúdo, os exemplos ilustrados até a recapitulação no fim de cada&amp;nbsp;capítulo. &lt;/p&gt;
+&lt;p&gt;Depois dessa introdução, bora ver o que o capítulo 1&amp;nbsp;ensina.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/hahahaha-gif.gif" alt="gif" width="100"/&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;A busca binária em&amp;nbsp;resumo&lt;/h1&gt;
+&lt;p&gt;Pensa numa lista telefônica com &lt;strong&gt;1 milhão de nomes&lt;/strong&gt;. Olhar folha por folha seria um pesadelo, né? 
+Agora, e se eu te dissesse que dá para encontrar qualquer nome em no &lt;strong&gt;máximo 20 tentativas&lt;/strong&gt;?&amp;nbsp;👀&lt;/p&gt;
+&lt;p&gt;O truque é simples: a cada etapa, tu elimina metade das opções. Comece considerando o elemento que está bem no meio da sequência. Em uma lista telefônica, isso seria abrir o livro bem no meio. Em uma lista com 10 itens, isso seria pegar o 5o item. Agora compare esse item do meio com o que você está buscando: se eles forem iguais, parabéns, você encontrou o que procurava! Agora, se o item que você encontrou for &lt;span class="caps"&gt;MAIOR&lt;/span&gt; que o item que você procura (no caso de nomes em uma lista telefônica, pense em qual nome vem primeiro na ordem alfabética), quer dizer que o item buscado está na primeira metade da lista. Caso contrário, o item está na segunda metade da lista. E assim você consegue cortar a lista pela &lt;em&gt;metade&lt;/em&gt; apenas comparando o item procurado com o item do meio. Depois disso, basta pegar a parte que você selecionou e aplicar a mesma estratégia, checando o item do meio e descartando metade da lista.
+&lt;strong&gt;Observação&lt;/strong&gt;: Essa técnica só funciona se a lista de itens estiver&amp;nbsp;ordenada!&lt;/p&gt;
+&lt;p&gt;E o mais legal é que, mesmo que a lista dobre de tamanho, tu só precisa de &lt;strong&gt;mais uma&lt;/strong&gt; etapa para chegar ao resultado.&amp;nbsp;🤓&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Exemplo&lt;/strong&gt;:
+Para facilitar a conta, vamos pegar uma lista menor de 128 nomes e calcular o número máximo de etapas que levaríamos para encontrar um nome específico. Logo em seguida, dobramos o tamanho da lista e vemos que isso adiciona apenas mais uma&amp;nbsp;etapa:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;max_etapas&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;etapas&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;//=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+        &lt;span class="n"&gt;etapas&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;etapas&lt;/span&gt;
+
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_etapas&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;# 7&lt;/span&gt;
+&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;max_etapas&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;128&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;# 8&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Observação importante&lt;/strong&gt;: numa lista telefônica física, a gente já sabe pular quase direto para a letra certa, o que lembra mais o funcionamento de um hashmap (ou dict no Python), que encontra um item em tempo constante. Mas no computador, quando temos apenas uma lista ordenada&amp;nbsp;(como &lt;code&gt;[1, 3, 5, 7, 9, 11, 13]&lt;/code&gt;), não existe esse “pulo mágico”, é aí que a busca binária pode ajudar, cortando a lista ao meio de forma sistemática até encontrar (ou concluir que o elemento não está&amp;nbsp;lá).&lt;/p&gt;
+&lt;p&gt;Legal né? Isso é ciência da computação!!&amp;nbsp;💁‍♀️✨&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Exemplos básicos de busca&amp;nbsp;binária:&lt;/h2&gt;
+&lt;p&gt;Pense em um número entre 1 e 100. Dá para adivinhar em, no máximo, 7&amp;nbsp;tentativas:&lt;/p&gt;
+&lt;p&gt;Minha primeira pergunta: &amp;#8220;É&amp;nbsp;50?&amp;#8221;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Se você disser &amp;#8220;maior&amp;#8221;, eu sei que está entre 51 e&amp;nbsp;100&lt;/li&gt;
+&lt;li&gt;Se disser &amp;#8220;menor&amp;#8221;, está entre 1 e&amp;nbsp;49&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Segunda pergunta: Digamos que seja maior que 50. &amp;#8220;É 75?&amp;#8221; (meio entre 51 e&amp;nbsp;100)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Maior? Está entre 76 e&amp;nbsp;100&lt;/li&gt;
+&lt;li&gt;Menor? Está entre 51 e&amp;nbsp;74&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;E assim por diante, sempre eliminando metade das&amp;nbsp;possibilidades.&lt;/p&gt;
+&lt;h3&gt;Vamos ver como fica com uma quantidade maior de&amp;nbsp;números:&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Itens na lista&lt;/th&gt;
+&lt;th&gt;Busca linear (tentativas)&lt;/th&gt;
+&lt;th&gt;Busca binária (tentativas)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1.000&lt;/td&gt;
+&lt;td&gt;até 1.000&lt;/td&gt;
+&lt;td&gt;até 10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1.000.000&lt;/td&gt;
+&lt;td&gt;até 1.000.000&lt;/td&gt;
+&lt;td&gt;até 20&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Sim, 20 tentativas para encontrar algo entre 1 milhão de opções!&amp;nbsp;🚀&lt;/p&gt;
+&lt;p&gt;Esse “milagre” da busca binária acontece por causa de um conceito chamado &lt;strong&gt;logaritmo&lt;/strong&gt;, e já já eu te mostro o&amp;nbsp;porquê.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Agora que você já entendeu a busca binária, vamos entrar em mais três pontos que andam de mãos dadas: &lt;strong&gt;logaritmos, tempo de execução e notação Big O&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Preparei um resumo rápido de cada um, do jeito que fez sentido pra mim.
+Se em algum momento ficar confuso, não tem problema, dá uma olhada no livro que é sucesso&amp;nbsp;🫂💖&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Logaritmos:&lt;/h2&gt;
+&lt;p&gt;O número máximo de tentativas na busca binária é dado por log₂(n), logaritmo na base 2 de&amp;nbsp;n.&lt;/p&gt;
+&lt;p&gt;Se o nome assusta, pensa&amp;nbsp;assim:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;log₂(n) é o número de vezes que você precisa dividir n por 2 até chegar em&amp;nbsp;1&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Exemplo&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;log₂(128) = 7, 7 cortes ao meio até sobrar 1&amp;nbsp;item&lt;/li&gt;
+&lt;li&gt;log₂(256) = 8, só mais uma etapa, mesmo dobrando o tamanho da&amp;nbsp;lista&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;A base &amp;#8220;2&amp;#8221; vem justamente porque a cada passo cortamos a lista &lt;strong&gt;pela metade&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Tempo de&amp;nbsp;execução:&lt;/h2&gt;
+&lt;p&gt;Sempre que falamos sobre um algoritmo, é importante pensar no tempo de execução, quanto esforço (ou quantos passos) ele precisa para chegar ao&amp;nbsp;resultado.&lt;/p&gt;
+&lt;p&gt;Na &lt;strong&gt;busca linear&lt;/strong&gt; (a pesquisa simples), verificamos item por&amp;nbsp;item:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lista com 100 números → até 100&amp;nbsp;tentativas&lt;/li&gt;
+&lt;li&gt;Lista com 4 bilhões de números → até 4 bilhões de&amp;nbsp;tentativas&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;O tempo de execução cresce na mesma proporção que o tamanho da lista. Chamamos isso de &lt;strong&gt;tempo linear&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;busca binária&lt;/strong&gt; é um outro&amp;nbsp;mundo:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Lista com 100 números → no máximo 7&amp;nbsp;tentativas&lt;/li&gt;
+&lt;li&gt;Lista com 4 bilhões → no máximo 32&amp;nbsp;tentativas&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Isso acontece porque a busca binária corta as possibilidades pela metade a cada passo. Esse tipo de crescimento é chamado de &lt;strong&gt;tempo logarítmico&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/image-4.png" alt="tempo de execução" width="400"/&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Notação Big&amp;nbsp;O&lt;/h2&gt;
+&lt;p&gt;A &lt;strong&gt;notação Big O&lt;/strong&gt; é um jeito de medir a eficiência de um algoritmo, mostrando como o &lt;strong&gt;tempo de execução&lt;/strong&gt; cresce conforme aumentamos o tamanho da&amp;nbsp;entrada.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;O(log n), tempo logarítmico (ex: pesquisa&amp;nbsp;binária)&lt;/li&gt;
+&lt;li&gt;O(n), tempo linear (ex: pesquisa&amp;nbsp;simples)&lt;/li&gt;
+&lt;li&gt;O(n * log n), um algoritmo rápido de ordenação, como quicksort (Capítulo&amp;nbsp;4)&lt;/li&gt;
+&lt;li&gt;O(n²), um algoritmo de ordenação mais lenta, como ordenação por seleção (Capítulo&amp;nbsp;2).&lt;/li&gt;
+&lt;li&gt;O(n!), um algoritmo extremamente lento, como o do caixeiro viajante (Capítulo&amp;nbsp;1).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;O livro ilustra isso de forma bem visual e intuitiva: cresce linearmente, cresce em log, cresce muito, cresce lento&amp;#8230; e por aí&amp;nbsp;vai. &lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Agora que vimos como a busca binária funciona, vale notar que ela não está restrita a livros, ela aparece em várias situações do nosso dia a&amp;nbsp;dia&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sistemas de busca (Google, WhatsApp, Spotify)&lt;/strong&gt;: por trás, usam variações de busca binária em listas ordenadas ou&amp;nbsp;índices.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Filtragem de dados&lt;/strong&gt;: encontrar rapidamente um registro específico em planilhas ou bases de dados&amp;nbsp;grandes.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Depuração de código&lt;/strong&gt;: reduzir o espaço do problema pela metade a cada teste para achar onde o bug&amp;nbsp;está.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Observação&lt;/strong&gt;: para que a busca binária funcione, os dados precisam estar&amp;nbsp;ordenados.&lt;/p&gt;
+&lt;h2&gt;Vamos praticar&amp;nbsp;rapidinho?&lt;/h2&gt;
+&lt;p&gt;Aqui está uma lista ordenada de&amp;nbsp;números: &lt;code&gt;[2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Tente encontrar o número 22 de duas&amp;nbsp;formas:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Busca linear:&lt;/strong&gt; Vá um a um desde o&amp;nbsp;2.  &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Busca binária:&lt;/strong&gt; Comece no meio, elimine metade a cada&amp;nbsp;passo.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Compare quantos passos cada método&amp;nbsp;precisou&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;Curiosidades&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;O git tem uma funcionalidade chamada &lt;a href="https://git-scm.com/docs/git-bisect"&gt;&lt;code&gt;git bisect&lt;/code&gt;&lt;/a&gt; que usa busca binária para ajudar desenvolvedores a encontrarem&amp;nbsp;bug&lt;/li&gt;
+&lt;li&gt;Se o item que estamos buscando for o primeiro item da lista, esse é o melhor caso na busca linear e o pior caso na busca&amp;nbsp;binária&lt;/li&gt;
+&lt;li&gt;A implementação&amp;nbsp;do &lt;code&gt;sortedcontainers&lt;/code&gt; usa busca binária (a partir do módulo bisect), &lt;a href="https://grantjenks.com/docs/sortedcontainers/_modules/sortedcontainers/sortedlist.html#SortedList"&gt;veja&amp;nbsp;aqui&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2&gt;Exercícios recomendados&amp;nbsp;👩🏻‍💻💞&lt;/h2&gt;
+&lt;p&gt;Para reforçar o aprendizado, aqui vão alguns desafios&amp;nbsp;práticos:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LeetCode&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/binary-search/description/"&gt;Binary Search&lt;/a&gt; — implementação&amp;nbsp;direta.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/search-insert-position/description/"&gt;Search Insert Position&lt;/a&gt; — variação para encontrar onde inserir um&amp;nbsp;número.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://leetcode.com/problems/first-bad-version/description/"&gt;First Bad Version&lt;/a&gt; — busca binária aplicada em &lt;span class="caps"&gt;API&lt;/span&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Exercism&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://exercism.org/tracks/python/exercises/binary-search"&gt;Binary Search (Python Track)&lt;/a&gt; — implementação e&amp;nbsp;testes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Dica: resolva primeiro o problema sem olhar a solução e depois compare com implementações&amp;nbsp;otimizadas.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;E assim começa meu roadmap de estudo: cada capítulo do livro vem acompanhado de exercícios para fixar o&amp;nbsp;conteúdo.&lt;/p&gt;</content><category term="Entendendo algoritmos"/></entry><entry><title>How I built my blog 💁‍♀️✨</title><link href="/en/2025/07/28/como-criei-meu-blog/" rel="alternate"/><published>2025-07-28T00:00:00-03:00</published><updated>2025-07-28T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-07-28:/en/2025/07/28/como-criei-meu-blog/</id><summary type="html">&lt;p&gt;A step-by-step of how I launched my blog using Pelican, GitHub Pages, and a custom&amp;nbsp;theme.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
+&lt;p&gt;Having a space of my own away from social media, away from algorithms was something I&amp;#8217;d wanted for a long time. A little corner to write about what I love, in my own way, without rushing.
+And that&amp;#8217;s how &lt;a href="https://anapaula.org/"&gt;my blog&lt;/a&gt; was born.&amp;nbsp;💛&lt;/p&gt;
+&lt;p&gt;In this post, I&amp;#8217;m sharing how I went from idea to live site from choosing the stack all the way to deploying&amp;nbsp;it.&lt;/p&gt;
+&lt;h2&gt;The stack I&amp;nbsp;chose&lt;/h2&gt;
+&lt;p&gt;I went with &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, a static site generator written in Python. It won me over for a few&amp;nbsp;reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It&amp;#8217;s built with Python&amp;nbsp;🐍&lt;/li&gt;
+&lt;li&gt;It generates pure &lt;span class="caps"&gt;HTML&lt;/span&gt; (lightweight, fast, and easy to host)&lt;ul&gt;
+&lt;li&gt;Meaning: nothing is processed dynamically on the server. That makes the site faster, more secure, and cheaper/easier to host (like on GitHub Pages, which only serves static&amp;nbsp;files).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The structure is simple to&amp;nbsp;customize&lt;/li&gt;
+&lt;li&gt;Posts are written in Markdown&amp;nbsp;📝&lt;/li&gt;
+&lt;li&gt;The documentation&amp;#8230; is a bit confusing, but I pushed through anyway&amp;nbsp;😅&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I also used &lt;a href="https://github.com/astral-sh/uv"&gt;uv&lt;/a&gt; as my package and virtual environment manager it&amp;#8217;s fast, practical, and has replaced my old manual venv + pip&amp;nbsp;workflow.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;🛠️ Step by&amp;nbsp;step&lt;/h2&gt;
+&lt;h3&gt;1. Setting up the environment and installing&amp;nbsp;Pelican&lt;/h3&gt;
+&lt;p&gt;I used uv to create my virtual&amp;nbsp;environment:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uv&lt;span class="w"&gt; &lt;/span&gt;venv
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then I activated it&amp;nbsp;manually:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;.venv/bin/activate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;uv venv&lt;/code&gt; creates the environment with isolation, but doesn&amp;#8217;t activate it automatically. I did it out of habit it&amp;#8217;s the traditional way most of us learned with&amp;nbsp;venv.&lt;/p&gt;
+&lt;p&gt;That said, uv also offers a more modern (and practical!) way to handle virtual environments. You can&amp;nbsp;skip &lt;code&gt;uv venv&lt;/code&gt; and &lt;code&gt;source&lt;/code&gt; entirely and just let uv manage&amp;nbsp;everything:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uv&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;pelican&lt;span class="o"&gt;[&lt;/span&gt;markdown&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# declares `pelican` as a project dependency&lt;/span&gt;
+
+uv&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;pelican-quickstart&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# runs `pelican-quickstart` inside the automatically managed virtual environment&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This way, uv creates the environment and runs commands inside it automatically no manual activation&amp;nbsp;needed.&lt;/p&gt;
+&lt;p&gt;One note: if you prefer&amp;nbsp;using &lt;code&gt;uv add ...&lt;/code&gt; and &lt;code&gt;uv run ...&lt;/code&gt;, you&amp;#8217;d need to update the Makefile,&amp;nbsp;replacing &lt;code&gt;PELICAN=pelican&lt;/code&gt; with &lt;code&gt;PELICAN=uv run pelican&lt;/code&gt; or&amp;nbsp;all &lt;code&gt;make &amp;lt;rule&amp;gt;&lt;/code&gt; calls would need to&amp;nbsp;become &lt;code&gt;PELICAN="uv run pelican" make &amp;lt;rule&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;2. Project&amp;nbsp;structure&lt;/h3&gt;
+&lt;p&gt;I followed the setup prompts and had a basic structure ready in no time. From there, I organized the repo with a clear&amp;nbsp;focus:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;content/&lt;/code&gt; → where the Markdown posts&amp;nbsp;live&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;output/&lt;/code&gt; → the generated &lt;span class="caps"&gt;HTML&lt;/span&gt;&amp;nbsp;site&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;theme/&lt;/code&gt; → theme files and&amp;nbsp;customizations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The repository is available here: &lt;a href="https://github.com/aninhasalesp/meublog"&gt;github.com/aninhasalesp/meublog&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I created&amp;nbsp;the &lt;code&gt;pelican-themes/&lt;/code&gt; folder manually to clone the theme and make my own&amp;nbsp;modifications.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;3. Choosing and customizing the theme&amp;nbsp;🎨&lt;/h3&gt;
+&lt;p&gt;I used&amp;nbsp;the &lt;code&gt;notmyidea-cms&lt;/code&gt; theme that comes with Pelican and customized it little by&amp;nbsp;little.&lt;/p&gt;
+&lt;p&gt;In &lt;code&gt;pelicanconf.py&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;pelican-themes/notmyidea-cms&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The changes I&amp;nbsp;made:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Footer with my name and a link to my GitHub&amp;nbsp;❤️&lt;/li&gt;
+&lt;li&gt;Comments with &lt;a href="https://utteranc.es"&gt;Utterances&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Share buttons (LinkedIn, WhatsApp and&amp;nbsp;Telegram)&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;CSS&lt;/span&gt; tweaks for spacing, layout, and&amp;nbsp;colors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3&gt;4. Comments with Utterances&amp;nbsp;💬&lt;/h3&gt;
+&lt;p&gt;I used &lt;a href="https://utteranc.es/"&gt;Utterances&lt;/a&gt; to enable comments on posts. It&amp;#8217;s lightweight, uses GitHub issues, and it&amp;#8217;s simple and&amp;nbsp;efficient:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://utteranc.es/client.js&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;repo&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;aninhasalesp/meublog&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;issue-term&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;pathname&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;theme&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;github-light&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;crossorigin&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;anonymous&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;async&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;5. Writing posts&amp;nbsp;✍️&lt;/h3&gt;
+&lt;p&gt;Posts live&amp;nbsp;in &lt;code&gt;content/&lt;/code&gt; and are written like&amp;nbsp;this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Title: First post
+Date: 2025-07-20
+Category: personal
+Summary: A short welcome text for the blog.
+
+---
+
+This is the first post! 🎉
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;6. Theme&amp;nbsp;customizations&lt;/h3&gt;
+&lt;p&gt;I edited files&amp;nbsp;inside &lt;code&gt;pelican-themes/notmyidea-cms/&lt;/code&gt; to give the blog more of its own&amp;nbsp;identity.&lt;/p&gt;
+&lt;p&gt;In &lt;span class="caps"&gt;CSS&lt;/span&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Adjusted padding and&amp;nbsp;margins&lt;/li&gt;
+&lt;li&gt;Better alignment of&amp;nbsp;elements&lt;/li&gt;
+&lt;li&gt;Added icons and visual&amp;nbsp;links&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In &lt;span class="caps"&gt;HTML&lt;/span&gt;&amp;nbsp;(like &lt;code&gt;base.html&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Added the&amp;nbsp;footer&lt;/li&gt;
+&lt;li&gt;Positioned the share&amp;nbsp;buttons&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;💡 &lt;em&gt;Editing the theme directly worked well for me, even if it&amp;#8217;s not the ideal long-term&amp;nbsp;approach.&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;7. Generating the static&amp;nbsp;files&lt;/h3&gt;
+&lt;p&gt;To compile the blog and generate the &lt;span class="caps"&gt;HTML&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make&lt;span class="w"&gt; &lt;/span&gt;html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;During development, I used the local server to preview&amp;nbsp;changes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pelican&lt;span class="w"&gt; &lt;/span&gt;--listen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;8. Deploy to GitHub Pages&amp;nbsp;🚀&lt;/h3&gt;
+&lt;p&gt;I used GitHub Pages to host the blog. The process&amp;nbsp;was:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Generated the files&amp;nbsp;with &lt;code&gt;pelican content&lt;/code&gt; or &lt;code&gt;make html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Pushed&amp;nbsp;the &lt;code&gt;output/&lt;/code&gt; folder to&amp;nbsp;the &lt;code&gt;gh-pages&lt;/code&gt; branch&lt;/li&gt;
+&lt;li&gt;Set up the custom domain on GitHub and pointed the &lt;span class="caps"&gt;DNS&lt;/span&gt; to GitHub&amp;#8217;s&amp;nbsp;servers&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The &lt;code&gt;Makefile&lt;/code&gt; made things easier, I published&amp;nbsp;with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make&lt;span class="w"&gt; &lt;/span&gt;github
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This command handles the whole thing. Here&amp;#8217;s roughly what it&amp;nbsp;does:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;output
+git&lt;span class="w"&gt; &lt;/span&gt;checkout&lt;span class="w"&gt; &lt;/span&gt;-b&lt;span class="w"&gt; &lt;/span&gt;gh-pages
+git&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;.
+git&lt;span class="w"&gt; &lt;/span&gt;commit&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Deploy&amp;quot;&lt;/span&gt;
+git&lt;span class="w"&gt; &lt;/span&gt;push&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;gh-pages
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On GitHub, I went to Settings &amp;gt; Pages&amp;nbsp;and:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Configured it to serve the site from&amp;nbsp;the &lt;code&gt;gh-pages&lt;/code&gt; branch, root folder&amp;nbsp;(/)&lt;/li&gt;
+&lt;li&gt;Added a &lt;span class="caps"&gt;CNAME&lt;/span&gt; file with my custom domain&amp;nbsp;(&lt;code&gt;anapaula.org&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Pointed the &lt;span class="caps"&gt;DNS&lt;/span&gt; from my registrar to GitHub&amp;nbsp;Pages&lt;/li&gt;
+&lt;li&gt;Enabled &lt;span class="caps"&gt;HTTPS&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You can automate this with GitHub Actions too. But since this is a personal blog I don&amp;#8217;t update every day, I preferred the manual&amp;nbsp;approach.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;9. Custom domain&amp;nbsp;🌐&lt;/h3&gt;
+&lt;p&gt;I registered&amp;nbsp;the &lt;code&gt;anapaula.org&lt;/code&gt; domain and configured it for the blog hosted on GitHub&amp;nbsp;Pages.&lt;/p&gt;
+&lt;p&gt;What I did:
+In the registrar&amp;#8217;s panel, I added the following &lt;span class="caps"&gt;DNS&lt;/span&gt;&amp;nbsp;records:&lt;/p&gt;
+&lt;p&gt;A records (IPv4): pointing to GitHub Pages&amp;#8217;&amp;nbsp;IPs:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mf"&gt;185.199.108.153&lt;/span&gt;
+&lt;span class="mf"&gt;185.199.109.153&lt;/span&gt;
+&lt;span class="mf"&gt;185.199.110.153&lt;/span&gt;
+&lt;span class="mf"&gt;185.199.111.153&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="caps"&gt;CNAME&lt;/span&gt; (if you want a subdomain): pointing&amp;nbsp;to &lt;code&gt;youraccount.github.io&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Inside&amp;nbsp;the &lt;code&gt;output/&lt;/code&gt; folder (which goes to&amp;nbsp;the &lt;code&gt;gh-pages&lt;/code&gt; branch), I created a &lt;span class="caps"&gt;CNAME&lt;/span&gt; file with&amp;nbsp;just:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;anapaula.org
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This tells GitHub which domain to link to your site. This file is included automatically in every deploy when I&amp;nbsp;run &lt;code&gt;make github&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;On GitHub, under Settings &amp;gt;&amp;nbsp;Pages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I checked &amp;#8220;Use a custom domain&amp;#8221; and&amp;nbsp;entered &lt;code&gt;anapaula.org&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Enabled &lt;span class="caps"&gt;HTTPS&lt;/span&gt; for secure&amp;nbsp;browsing&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I followed the official GitHub Pages documentation for all of this:
+👉 &lt;a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site"&gt;GitHub Pages&amp;nbsp;docs&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Wrapping&amp;nbsp;up&lt;/h1&gt;
+&lt;p&gt;The process had its bumps (Pelican&amp;#8217;s docs could really use some love 😅), but it was totally worth it. Having a space of my own with my name, my style was a long-time wish that finally became&amp;nbsp;real.&lt;/p&gt;
+&lt;p&gt;If you&amp;#8217;re also thinking about starting a blog, whether technical or personal, I really recommend it! And if I can help in any way, just reach out.&amp;nbsp;💛&lt;/p&gt;
+&lt;p&gt;The blog&amp;#8217;s source code is on GitHub: &lt;a href="https://github.com/aninhasalesp/meublog"&gt;aninhasalesp/meublog&lt;/a&gt;&amp;nbsp;🌱&lt;/p&gt;</content><category term="dev"/></entry><entry><title>Como criei meu blog 💁‍♀️✨</title><link href="/2025/07/28/como-criei-meu-blog/" rel="alternate"/><published>2025-07-28T00:00:00-03:00</published><updated>2025-07-28T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-07-28:/2025/07/28/como-criei-meu-blog/</id><summary type="html">&lt;p&gt;Um passo a passo de como coloquei meu blog no ar usando o Pelican, GitHub Pages e um tema&amp;nbsp;personalizado.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
+&lt;p&gt;Ter um espaço só meu, fora de redes sociais, longe dos algoritmos, era um desejo antigo. Um cantinho para escrever sobre o que gosto, do meu jeito, sem pressa. 
+E foi assim que nasceu o &lt;a href="https://anapaula.org/"&gt;meu blog&lt;/a&gt;.&amp;nbsp;💛&lt;/p&gt;
+&lt;p&gt;Neste post, compartilho como tirei a ideia do papel, desde a escolha da stack até o&amp;nbsp;deploy.&lt;/p&gt;
+&lt;h2&gt;A stack que&amp;nbsp;escolhi&lt;/h2&gt;
+&lt;p&gt;Optei por usar o &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, um gerador de site estático escrito em Python. Ele me atraiu por vários&amp;nbsp;motivos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;É feito com Python&amp;nbsp;🐍&lt;/li&gt;
+&lt;li&gt;Gera &lt;span class="caps"&gt;HTML&lt;/span&gt; puro (leve, rápido e fácil de hospedar)&lt;ul&gt;
+&lt;li&gt;Ou seja: não tem nada sendo processado dinamicamente no servidor; Isso deixa o site mais rápido, seguro e barato/fácil de hospedar (como no GitHub Pages, que só serve arquivos&amp;nbsp;estáticos).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;A estrutura é simples de&amp;nbsp;customizar&lt;/li&gt;
+&lt;li&gt;Permite escrever os posts em Markdown&amp;nbsp;📝&lt;/li&gt;
+&lt;li&gt;A documentação&amp;#8230; é meio confusa, mas fui até o fim mesmo assim&amp;nbsp;😅&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Além do Pelican, usei o &lt;a href="https://github.com/astral-sh/uv"&gt;uv&lt;/a&gt; como gerenciador de pacotes e ambientes virtuais, ele é rápido e prático, e tem substituído o uso manual do venv e do&amp;nbsp;pip.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;🛠️ Passo a&amp;nbsp;passo&lt;/h2&gt;
+&lt;h3&gt;1. Criar o ambiente e instalar o&amp;nbsp;Pelican&lt;/h3&gt;
+&lt;p&gt;Usei o uv para criar meu ambiente virtual&amp;nbsp;com:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uv&lt;span class="w"&gt; &lt;/span&gt;venv
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Depois disso, ativei o ambiente manualmente&amp;nbsp;com:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;.venv/bin/activate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;O &lt;code&gt;uv venv&lt;/code&gt; já cria o ambiente e ativa os pacotes com isolamento, mas, por hábito (e um pouco de força do costume),&amp;nbsp;usei &lt;code&gt;source .venv/bin/activate&lt;/code&gt; logo depois. O uv também poderia dispensar esse&amp;nbsp;passo.&lt;/p&gt;
+&lt;p&gt;Esse passo não é automático, o uv venv cria o ambiente, mas não o ativa. Eu fiz isso por hábito, já que é o modo tradicional que muitos de nós usamos com&amp;nbsp;venv.&lt;/p&gt;
+&lt;p&gt;No entanto, o uv também oferece uma forma mais moderna (e prática!) de lidar com ambientes virtuais: você pode pular o uv venv e o source, e simplesmente deixar que ele gerencie tudo pra&amp;nbsp;você:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uv&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;pelican&lt;span class="o"&gt;[&lt;/span&gt;markdown&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# declara o `pelican` como uma dependência do projeto&lt;/span&gt;
+
+uv&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;pelican-quickstart&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# executa o comando `pelican-quickstart` dentro do ambiente virtual gerenciado automaticamente pelo `uv`&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Assim, o uv cria o ambiente e executa os comandos dentro dele automaticamente, sem precisar ativar nada &amp;#8220;na&amp;nbsp;mão&lt;/p&gt;
+&lt;p&gt;Só uma observação: se você preferir usar a&amp;nbsp;forma &lt;code&gt;uv add ...&lt;/code&gt; e &lt;code&gt;uv run ...&lt;/code&gt;, o arquivo Makefile precisaria ser alterado, substituindo a&amp;nbsp;linha &lt;code&gt;PELICAN=pelican&lt;/code&gt; por &lt;code&gt;PELICAN=uv run pelican&lt;/code&gt; - ou todas as referências&amp;nbsp;a &lt;code&gt;make &amp;lt;rule&amp;gt;&lt;/code&gt; precisariam&amp;nbsp;virar &lt;code&gt;PELICAN="uv run pelican" make &amp;lt;rule&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;2. Organização do&amp;nbsp;projeto&lt;/h3&gt;
+&lt;p&gt;Segui as perguntas do setup e logo já tinha uma estrutura básica criada. A partir disso, organizei o repositório com o seguinte&amp;nbsp;foco:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;content/&lt;/code&gt; → onde ficam os posts em&amp;nbsp;Markdown&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;output/&lt;/code&gt; → site gerado (&lt;span class="caps"&gt;HTML&lt;/span&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;theme/&lt;/code&gt; → arquivos do tema e&amp;nbsp;personalizações&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;O repositório está disponível aqui: &lt;a href="https://github.com/aninhasalesp/meublog"&gt;github.com/aninhasalesp/meublog&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;A&amp;nbsp;pasta &lt;code&gt;pelican-themes/&lt;/code&gt; foi criada por mim manualmente pra colocar o tema clonado e fazer as&amp;nbsp;modificações.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;3. Escolhendo e personalizando o tema&amp;nbsp;🎨&lt;/h3&gt;
+&lt;p&gt;Usei o&amp;nbsp;tema &lt;code&gt;notmyidea-cms&lt;/code&gt;, que vem com o Pelican, e fui personalizando aos&amp;nbsp;poucos.&lt;/p&gt;
+&lt;p&gt;No &lt;code&gt;pelicanconf.py&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;pelican-themes/notmyidea-cms&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Fiz as seguintes&amp;nbsp;mudanças:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Rodapé com meu nome e link pro GitHub&amp;nbsp;❤️&lt;/li&gt;
+&lt;li&gt;Comentários com &lt;a href="https://utteranc.es"&gt;Utterances&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Botões de compartilhamento (LinkedIn, WhatsApp e&amp;nbsp;Telegram)&lt;/li&gt;
+&lt;li&gt;Ajustes no &lt;span class="caps"&gt;CSS&lt;/span&gt; para espaçamentos, layout e&amp;nbsp;cores&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3&gt;4. Comentários com Utterances&amp;nbsp;💬&lt;/h3&gt;
+&lt;p&gt;Usei o &lt;a href="https://utteranc.es/"&gt;Utterances&lt;/a&gt; para habilitar comentários nos posts. É leve, usa issues do GitHub, é simples e&amp;nbsp;eficiente:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://utteranc.es/client.js&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;repo&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;aninhasalesp/meublog&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;issue-term&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;pathname&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;theme&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;github-light&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;crossorigin&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;anonymous&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;async&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;5. Escrevendo os posts&amp;nbsp;✍️&lt;/h3&gt;
+&lt;p&gt;Os posts ficam&amp;nbsp;em &lt;code&gt;content/&lt;/code&gt; e são escritos&amp;nbsp;assim:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Title: Primeiro post
+Date: 2025-07-20
+Category: pessoal
+Summary: Um breve texto pra dar boas-vindas ao blog.
+
+---
+
+Esse é o primeiro post do blog! 🎉
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;6. Customizações no&amp;nbsp;tema&lt;/h3&gt;
+&lt;p&gt;Editei os arquivos dentro&amp;nbsp;de &lt;code&gt;pelican-themes/notmyidea-cms/&lt;/code&gt; e deixei o blog com mais&amp;nbsp;identidade.&lt;/p&gt;
+&lt;p&gt;No &lt;span class="caps"&gt;CSS&lt;/span&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ajustei padding e&amp;nbsp;margin&lt;/li&gt;
+&lt;li&gt;Alinhei melhor os&amp;nbsp;elementos&lt;/li&gt;
+&lt;li&gt;Adicionei ícones e links&amp;nbsp;visuais&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;No &lt;span class="caps"&gt;HTML&lt;/span&gt; (como&amp;nbsp;o &lt;code&gt;base.html&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Adicionei o&amp;nbsp;rodapé&lt;/li&gt;
+&lt;li&gt;Posicionei os botões de&amp;nbsp;compartilhamento&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;💡 &lt;em&gt;Fazer as edições direto no tema funcionou bem pra mim, mesmo que não seja o ideal a longo&amp;nbsp;prazo.&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;7. Gerando os arquivos&amp;nbsp;estáticos&lt;/h3&gt;
+&lt;p&gt;Para compilar o blog e gerar os arquivos &lt;span class="caps"&gt;HTML&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make&lt;span class="w"&gt; &lt;/span&gt;html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Durante o desenvolvimento, usei o servidor local pra visualizar as&amp;nbsp;mudanças:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pelican&lt;span class="w"&gt; &lt;/span&gt;--listen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;8. Deploy no GitHub Pages&amp;nbsp;🚀&lt;/h3&gt;
+&lt;p&gt;Usei GitHub Pages pra hospedar o blog. O processo&amp;nbsp;foi:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Gerei os arquivos&amp;nbsp;com &lt;code&gt;pelican content&lt;/code&gt; ou &lt;code&gt;make html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Subi a&amp;nbsp;pasta &lt;code&gt;output/&lt;/code&gt; para o&amp;nbsp;branch &lt;code&gt;gh-pages&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Configurei o domínio personalizado no GitHub e apontei o &lt;span class="caps"&gt;DNS&lt;/span&gt; para os servidores do&amp;nbsp;GitHub&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;O &lt;code&gt;Makefile&lt;/code&gt; ajuda bastante, publiquei&amp;nbsp;com:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make&lt;span class="w"&gt; &lt;/span&gt;github
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Esse comando está no meu Makefile e automatiza a geração e envio do conteúdo. Se quiser ver, ele basicamente&amp;nbsp;faz:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;output
+git&lt;span class="w"&gt; &lt;/span&gt;checkout&lt;span class="w"&gt; &lt;/span&gt;-b&lt;span class="w"&gt; &lt;/span&gt;gh-pages
+git&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;.
+git&lt;span class="w"&gt; &lt;/span&gt;commit&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Deploy&amp;quot;&lt;/span&gt;
+git&lt;span class="w"&gt; &lt;/span&gt;push&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;gh-pages
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+&lt;li&gt;No GitHub, fui na aba Settings &amp;gt; Pages e configurei pra servir o site a partir do branch gh-pages, pasta raiz&amp;nbsp;(/).&lt;/li&gt;
+&lt;li&gt;Adicionei um arquivo &lt;span class="caps"&gt;CNAME&lt;/span&gt; com meu domínio personalizado&amp;nbsp;(anapaula.org)&lt;/li&gt;
+&lt;li&gt;Apontei os DNSs da minha hospedagem pro GitHub&amp;nbsp;Pages&lt;/li&gt;
+&lt;li&gt;Ativei o &lt;span class="caps"&gt;HTTPS&lt;/span&gt; no&amp;nbsp;painel&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Se você quiser automatizar esse deploy com GitHub Actions, também dá. Mas como é um blog pessoal que não atualizo todos os dias, preferi o método&amp;nbsp;manual.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;9. Domínio personalizado&amp;nbsp;🌐&lt;/h3&gt;
+&lt;p&gt;Registrei o&amp;nbsp;domínio &lt;code&gt;anapaula.org&lt;/code&gt; e configurei para ser usado no meu blog hospedado via GitHub&amp;nbsp;Pages.&lt;/p&gt;
+&lt;p&gt;O que eu fiz:
+No painel da empresa onde registrei o domínio, adicionei os seguintes registros &lt;span class="caps"&gt;DNS&lt;/span&gt;:&lt;/p&gt;
+&lt;p&gt;Tipo A (IPv4): apontando para os IPs do GitHub&amp;nbsp;Pages:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mf"&gt;185.199.108.153&lt;/span&gt;
+&lt;span class="mf"&gt;185.199.109.153&lt;/span&gt;
+&lt;span class="mf"&gt;185.199.110.153&lt;/span&gt;
+&lt;span class="mf"&gt;185.199.111.153&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="caps"&gt;CNAME&lt;/span&gt; (se quiser usar subdomínio): apontando para&amp;nbsp;suaconta.github.io&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dentro da&amp;nbsp;pasta &lt;code&gt;output/&lt;/code&gt; (que é a que vai para o GitHub Pages no branch gh-pages), criei um arquivo &lt;span class="caps"&gt;CNAME&lt;/span&gt; com o&amp;nbsp;conteúdo:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;anapaula.org
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Isso é necessário para que o GitHub saiba qual domínio deve ser vinculado ao seu site. Esse arquivo é incluído automaticamente no deploy quando&amp;nbsp;rodo &lt;code&gt;make github&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;No repositório no GitHub, fui em Settings &amp;gt; Pages&amp;nbsp;e:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Marquei a opção &amp;#8220;Use a custom domain&amp;#8221; e coloquei&amp;nbsp;anapaula.org&lt;/li&gt;
+&lt;li&gt;Ativei o &lt;span class="caps"&gt;HTTPS&lt;/span&gt; (pra garantir navegação&amp;nbsp;segura)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Segui a documentação oficial do GitHub Pages para configurar tudo isso:
+👉 &lt;a href="https://docs.github.com/pt/pages/configuring-a-custom-domain-for-your-github-pages-site"&gt;documentação&amp;nbsp;github-pages&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Conclusão&lt;/h1&gt;
+&lt;p&gt;O processo teve tropeços (a documentação do Pelican podia ser melhor 😅), mas valeu demais. Ter um espaço meu, com o meu nome e com a minha cara, era um desejo antigo que finalmente saiu do&amp;nbsp;papel.&lt;/p&gt;
+&lt;p&gt;Se você também pensa em criar um blog, seja técnico ou pessoal, recomendo muito! E se eu puder ajudar de alguma forma, é só me chamar.&amp;nbsp;💛&lt;/p&gt;
+&lt;p&gt;O código-fonte do blog está no GitHub: &lt;a href="https://github.com/aninhasalesp/meublog"&gt;aninhasalesp/meublog&lt;/a&gt;&amp;nbsp;🌱&lt;/p&gt;</content><category term="dev"/></entry><entry><title>Career vs. Kids</title><link href="/en/2025/07/23/carreira-x-filhos/" rel="alternate"/><published>2025-07-23T00:00:00-03:00</published><updated>2025-07-23T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-07-23:/en/2025/07/23/carreira-x-filhos/</id><summary type="html">&lt;p&gt;Between diapers, meetings, and dreams, what it&amp;#8217;s like to be a mom and a professional at the same&amp;nbsp;time.&lt;/p&gt;</summary><content type="html">&lt;p&gt;I saw a LinkedIn post recently (I lost the link, unfortunately) about a job applicant who had written, boldly highlighted on her résumé: &lt;strong&gt;(&lt;span class="caps"&gt;NO&lt;/span&gt; &lt;span class="caps"&gt;CHILDREN&lt;/span&gt;)&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;For those who don&amp;#8217;t know me, I&amp;#8217;m a mom to a 9-year-old girl. That catches people off guard, because apparently I&amp;#8217;m &amp;#8216;too young&amp;#8217; to be a&amp;nbsp;mom.&lt;/p&gt;
+&lt;p&gt;This is my daughter, Maria Eduarda&amp;nbsp;💕:&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/IMG_1011.jpg" alt="Me and Maria" width="400"/&gt;&lt;/p&gt;
+&lt;p&gt;For a long time, I blamed myself for becoming a mom so young, for not following the timeline that seems &amp;#8220;correct&amp;#8221; for most&amp;nbsp;people:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;study ➜ graduate ➜ work ➜ get married ➜ save money ➜ have&amp;nbsp;kids&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I also felt bad for not having the same technical experience as many of my friends.
+The truth is, while they were in college or doing a master&amp;#8217;s degree, I was learning how to be a mom, learning how to keep a child alive, while being pretty much a child&amp;nbsp;myself.&lt;/p&gt;
+&lt;p&gt;But what does that say about me&amp;nbsp;professionally?&lt;/p&gt;
+&lt;p&gt;When we become mothers, life &lt;strong&gt;doesn&amp;#8217;t stop&lt;/strong&gt; for us to figure out motherhood, life goes on, it &lt;strong&gt;happens in parallel&lt;/strong&gt; with it.
+While I was learning to be a mom, I was also a student, a woman switching careers, moving to a different state in search of better opportunities for me and my daughter.
+I found support in the local PyLadies community. I was looking for something anything that would prove to me I was capable of working outside the home, not just inside&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;Today, I&amp;#8217;m a mom who works, studies, trains, helps her daughter with schoolwork, contributes to the Python community, cooks, speaks at events, travels for work, and keeps the house running (more or less) through all of&amp;nbsp;it.&lt;/p&gt;
+&lt;p&gt;Okay, but… what does that have to do with my professional&amp;nbsp;profile?&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;m a professional with excellent time management and a focus on productivity someone who knows how to prioritize what matters, stay organized, and never stop learning.
+I&amp;#8217;m someone who graduated with a kid running around the house, who can communicate clearly, and who, even with some insecurities, knows how to reinvent herself when needed.
+When I &lt;strong&gt;need&lt;/strong&gt; to study something deeply, I create a talk and submit it to events. That&amp;#8217;s how I learn and&amp;nbsp;share.&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;m not Wonder Woman. I&amp;#8217;m not good at everything.
+I&amp;#8217;m a human being in constant change, someone who adapts, who dives headfirst into whatever she commits to, and that adds a lot to who I am&amp;nbsp;professionally.&lt;/p&gt;
+&lt;p&gt;Today, I don&amp;#8217;t blame myself anymore for becoming a mom young.
+Today, I&amp;#8217;m grateful.
+Without my daughter, I might not have the drive, or the ability to juggle obligations in the middle of chaos, under time pressure, and most importantly, I might not have learned so early how to &lt;strong&gt;ask for help&lt;/strong&gt; instead of waiting for things to magically work&amp;nbsp;out.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hire moms.&lt;/strong&gt;
+Even if their number one priority isn&amp;#8217;t your company, they still make it a priority. And what they deliver is incredibly valuable.&amp;nbsp;💖&lt;/p&gt;</content><category term="Dev Tips"/></entry><entry><title>Carreira x Filhos</title><link href="/2025/07/23/carreira-x-filhos/" rel="alternate"/><published>2025-07-23T00:00:00-03:00</published><updated>2025-07-23T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-07-23:/2025/07/23/carreira-x-filhos/</id><summary type="html">&lt;p&gt;Entre fraldas, reuniões e sonhos: como é ser mãe e profissional ao mesmo&amp;nbsp;tempo.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Vi um post no LinkedIn recentemente (infelizmente perdi o link) sobre uma candidata a uma vaga que, no currículo, escreveu com destaque: &lt;strong&gt;(&lt;span class="caps"&gt;SEM&lt;/span&gt; &lt;span class="caps"&gt;FILHOS&lt;/span&gt;)&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Pra quem não sabe, eu sou mãe de uma menina de 9 anos. Isso causa espanto em algumas pessoas porque sou considerada jovem demais pra ser&amp;nbsp;mãe.&lt;/p&gt;
+&lt;p&gt;Essa é minha filha, Maria Eduarda&amp;nbsp;💕: &lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/IMG_1011.jpg" alt="Eu e Maria" width="400"/&gt;&lt;/p&gt;
+&lt;p&gt;Por muito tempo me culpei por ter sido mãe cedo, por não ter seguido a linha do tempo que parece ser a “correta” para a maioria das&amp;nbsp;pessoas: &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;estudar ➜ se formar ➜ trabalhar ➜ casar ➜ juntar dinheiro ➜ ter&amp;nbsp;filhos&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Também me sentia mal por não ter a mesma experiência técnica que muitos dos meus amigos.&lt;br&gt;
+A verdade é que, enquanto eles estavam na faculdade ou fazendo mestrado, eu estava aprendendo a ser mãe, aprendendo como manter uma criança viva, sendo eu mesma praticamente uma&amp;nbsp;criança.&lt;/p&gt;
+&lt;p&gt;Mas o que isso diz sobre mim e meu perfil&amp;nbsp;profissional?&lt;/p&gt;
+&lt;p&gt;Quando nos tornamos mães, a vida &lt;strong&gt;não para&lt;/strong&gt; pra gente aprender a ser mãe, a vida continua, &lt;strong&gt;acontece em paralelo&lt;/strong&gt; à maternidade.&lt;br&gt;
+Enquanto eu aprendia a ser mãe, também era estudante, mulher migrando de área, mudando de estado em busca de oportunidades melhores pra mim e pra minha filha.&lt;br&gt;
+Busquei apoio nas PyLadies locais, buscava algo que me mostrasse que eu era capaz de trabalhar &lt;strong&gt;fora de casa&lt;/strong&gt;, e não só &lt;strong&gt;em casa&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Hoje, sou uma mãe que trabalha, estuda, treina, ajuda a filha com as provas, colabora com a comunidade Python, cozinha, palestra em eventos, viaja a trabalho e mantém a casa organizada (na medida do possível) no meio de tudo&amp;nbsp;isso.&lt;/p&gt;
+&lt;p&gt;Tá, mas&amp;#8230; o que isso tem a ver com meu perfil&amp;nbsp;profissional?&lt;/p&gt;
+&lt;p&gt;Sou uma profissional com excelente gestão de tempo, foco em produtividade, que sabe priorizar o essencial, que organiza tarefas, que está sempre aprendendo algo novo.&lt;br&gt;
+Sou alguém que se formou com uma criança correndo pela casa, que sabe se comunicar com clareza e que, mesmo com algumas inseguranças, consegue se reinventar quando necessário.&lt;br&gt;
+Quando eu &lt;strong&gt;preciso&lt;/strong&gt; estudar algo profundamente, crio uma palestra e submeto em eventos, é assim que aprendo e&amp;nbsp;compartilho.&lt;/p&gt;
+&lt;p&gt;Não sou a Mulher-Maravilha. Não sou boa em tudo.&lt;br&gt;
+Sou um ser humano em constante mudança, que se adapta, que mergulha de cabeça no que se propõe a fazer e isso me agrega muito&amp;nbsp;profissionalmente.&lt;/p&gt;
+&lt;p&gt;Hoje, não me culpo mais por ter sido mãe cedo.&lt;br&gt;
+Hoje, agradeço.&lt;br&gt;
+Sem minha filha, eu talvez não tivesse a garra, a facilidade de lidar com obrigações em meio ao caos, num curto espaço de tempo e, principalmente, não teria aprendido tão cedo a &lt;strong&gt;pedir ajuda&lt;/strong&gt; antes de perder tempo esperando que as coisas acontecessem&amp;nbsp;magicamente.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Contratem mães.&lt;/strong&gt;&lt;br&gt;
+Mesmo que a prioridade número um delas não seja sua empresa, elas ainda fazem dela uma prioridade. E o que elas entregam tem muito valor.&amp;nbsp;💖&lt;/p&gt;</content><category term="Dicas Dev"/></entry><entry><title>Customizing your GitHub 🤌🏻💕</title><link href="/en/2025/07/16/personalizando-o-github/" rel="alternate"/><published>2025-07-16T00:00:00-03:00</published><updated>2025-07-16T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-07-16:/en/2025/07/16/personalizando-o-github/</id><summary type="html">&lt;p&gt;Learn how to turn your GitHub profile into a space that shows who you are, with personality, organization, and a touch of&amp;nbsp;care.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
+&lt;p&gt;Hey, have you ever visited someone&amp;#8217;s GitHub profile that seemed to tell their whole story, what they do, who they are, without even opening a single repository? Or one that just felt cute and super&amp;nbsp;organized?&lt;/p&gt;
+&lt;p&gt;I find it amazing how people can bring that little corner of the internet to life, giving it personality, care, and sometimes even warmth.&amp;nbsp;✨&lt;/p&gt;
+&lt;p&gt;In this post, I&amp;#8217;ll show you how to customize your GitHub profile. Let&amp;#8217;s&amp;nbsp;go?&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/image-3.png" alt="Happy little dog" width="300"/&gt;&lt;/p&gt;
+&lt;h2&gt;1. Creating your profile &lt;span class="caps"&gt;README&lt;/span&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to GitHub and click &lt;strong&gt;&amp;#8220;New&amp;nbsp;repository&amp;#8221;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;In the name field, type &lt;strong&gt;exactly your&amp;nbsp;username&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Check the &lt;strong&gt;&amp;#8220;Add a &lt;span class="caps"&gt;README&lt;/span&gt; file&amp;#8221;&lt;/strong&gt;&amp;nbsp;option&lt;/li&gt;
+&lt;li&gt;Click &lt;strong&gt;&amp;#8220;Create&amp;nbsp;repository&amp;#8221;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Done! You now have your own space, right at the top of your&amp;nbsp;profile.&lt;/p&gt;
+&lt;h2&gt;2. What to put in your &lt;span class="caps"&gt;README&lt;/span&gt;?&amp;nbsp;💁‍♀️✨&lt;/h2&gt;
+&lt;p&gt;There&amp;#8217;s no right formula, but here are some ideas that work&amp;nbsp;well:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;About&amp;nbsp;you:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A sentence that represents&amp;nbsp;you&lt;/li&gt;
+&lt;li&gt;Fun facts, where you are, what you&amp;nbsp;do&lt;/li&gt;
+&lt;li&gt;A personal touch (hobbies, side projects, favorite&amp;nbsp;playlists)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Technologies:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tools and libraries you use every&amp;nbsp;day&lt;/li&gt;
+&lt;li&gt;Languages you know or have been&amp;nbsp;learning&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Links:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Your blog, LinkedIn, personal site,&amp;nbsp;email&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Highlights:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Pin your most important repositories to your&amp;nbsp;profile&lt;/li&gt;
+&lt;li&gt;You can even briefly explain what they do or why they&amp;#8217;re special to&amp;nbsp;you&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;3. A few tips&amp;nbsp;🌿&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Write with simplicity and&amp;nbsp;honesty&lt;/li&gt;
+&lt;li&gt;Organize with headings, spacing, and&amp;nbsp;lists&lt;/li&gt;
+&lt;li&gt;Use emojis if you want, but keep it&amp;nbsp;balanced&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;4. It doesn&amp;#8217;t have to be&amp;nbsp;perfect&lt;/h2&gt;
+&lt;p&gt;The most important thing is that it says something about you. It&amp;#8217;s totally fine to start simple and grow it over time.
+The goal isn&amp;#8217;t to impress, it&amp;#8217;s to express&amp;nbsp;💜&lt;/p&gt;
+&lt;p&gt;Oh, if you want to see mine, it&amp;#8217;s &lt;a href="https://github.com/aninhasalesp/aninhasalesp"&gt;right here&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;If you have any questions getting started, just reach out, I&amp;#8217;d love to help&amp;nbsp;🌷&lt;/p&gt;</content><category term="Dev Tips"/></entry><entry><title>Personalizando o GitHub 🤌🏻💕</title><link href="/2025/07/16/personalizando-o-github/" rel="alternate"/><published>2025-07-16T00:00:00-03:00</published><updated>2025-07-16T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-07-16:/2025/07/16/personalizando-o-github/</id><summary type="html">&lt;p&gt;Aprenda a transformar seu perfil do GitHub num espaço que mostre quem você é, com personalidade, organização e um toque de&amp;nbsp;afeto.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
+&lt;p&gt;Ei, tu já visitou algum perfil no GitHub que parecia te contar a história da pessoa e/ou com o que ela trabalha, mesmo sem abrir nenhum repositório? Ou que tu tenha achado fofinho e super&amp;nbsp;organizado?&lt;/p&gt;
+&lt;p&gt;Eu acho incrível como as pessos conseguem dar vida àquele cantinho, fica com personalidade, cuidado e, muitas vezes, até com afeto.&amp;nbsp;✨&lt;/p&gt;
+&lt;p&gt;Neste post, eu te mostro como personalizar o seu perfil no GitHub. Bora&amp;nbsp;lá?&lt;/p&gt;
+&lt;p&gt;&lt;img src="/en/images/image-3.png" alt="Cachorrinho feliz" width="300"/&gt;&lt;/p&gt;
+&lt;h2&gt;1. Criando o seu &lt;span class="caps"&gt;README&lt;/span&gt; de&amp;nbsp;perfil&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Acesse o GitHub e clique em &lt;strong&gt;&amp;#8220;New&amp;nbsp;repository&amp;#8221;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;No campo de nome, digite &lt;strong&gt;exatamente o seu nome de&amp;nbsp;usuário&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Marque a opção &lt;strong&gt;&amp;#8220;Add a &lt;span class="caps"&gt;README&lt;/span&gt;&amp;nbsp;file&amp;#8221;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;Clique em &lt;strong&gt;&amp;#8220;Create&amp;nbsp;repository&amp;#8221;&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Pronto! Agora você tem um espaço só seu, no topo do seu&amp;nbsp;perfil.&lt;/p&gt;
+&lt;h2&gt;2. O que colocar no seu &lt;span class="caps"&gt;README&lt;/span&gt;?&amp;nbsp;💁‍♀️✨&lt;/h2&gt;
+&lt;p&gt;Não existe uma fórmula certa, mas aqui vão ideias que funcionam&amp;nbsp;bem:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Sobre&amp;nbsp;você:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Uma frase que te&amp;nbsp;represente&lt;/li&gt;
+&lt;li&gt;Curiosidades, onde você está, o que&amp;nbsp;faz&lt;/li&gt;
+&lt;li&gt;Um toque pessoal (hobbie, projetos pessoais, playlists&amp;nbsp;favoritas)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Tecnologias:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ferramentas e libs que você usa no dia a&amp;nbsp;dia&lt;/li&gt;
+&lt;li&gt;Linguagens que domina ou tem&amp;nbsp;estudado&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;URLs:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Seu blog, LinkedIn, site pessoal,&amp;nbsp;email&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Destaques:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Fixe seus repositórios mais importantes no&amp;nbsp;perfil&lt;/li&gt;
+&lt;li&gt;Pode até explicar brevemente o que eles fazem ou por que são especiais pra&amp;nbsp;você&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;3. Dicas de cuidado&amp;nbsp;🌿&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Escreva com simplicidade e&amp;nbsp;verdade&lt;/li&gt;
+&lt;li&gt;Organize com títulos, espaçamentos e&amp;nbsp;listas&lt;/li&gt;
+&lt;li&gt;Use emojis se quiser, mas com&amp;nbsp;moderação&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;4. Não precisa ser&amp;nbsp;perfeito&lt;/h2&gt;
+&lt;p&gt;O mais importante é que ele diga algo sobre você. Ta tudo bem ser simples no início e ir crescendo aos poucos.
+A ideia não é impressionar, é se expressar&amp;nbsp;💜&lt;/p&gt;
+&lt;p&gt;Ah, se quiser ver como ficou o meu, está &lt;a href="https://github.com/aninhasalesp/aninhasalesp"&gt;aqui&lt;/a&gt;!&lt;/p&gt;
+&lt;p&gt;Se tiver dúvidas pra começar, me chama, vou adorar ajudar&amp;nbsp;🌷.&lt;/p&gt;</content><category term="Dicas Dev"/></entry><entry><title>My dev environment</title><link href="/en/2025/06/10/meu-ambiente-dev/" rel="alternate"/><published>2025-06-10T00:00:00-03:00</published><updated>2025-06-10T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-06-10:/en/2025/06/10/meu-ambiente-dev/</id><summary type="html">&lt;p&gt;I decided to share how I set up my development environment, from the &lt;span class="caps"&gt;OS&lt;/span&gt; installation to the tools and extensions I use every&amp;nbsp;day.&lt;/p&gt;
+&lt;h2&gt;Operating&amp;nbsp;System&lt;/h2&gt;
+&lt;p&gt;I start with a Linux installation. I have a personal guide I follow whenever I need to configure a new machine, maybe I&amp;#8217;ll …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I decided to share how I set up my development environment, from the &lt;span class="caps"&gt;OS&lt;/span&gt; installation to the tools and extensions I use every&amp;nbsp;day.&lt;/p&gt;
+&lt;h2&gt;Operating&amp;nbsp;System&lt;/h2&gt;
+&lt;p&gt;I start with a Linux installation. I have a personal guide I follow whenever I need to configure a new machine, maybe I&amp;#8217;ll share it in another post&amp;nbsp;someday.&lt;/p&gt;
+&lt;h2&gt;Tools and utilities I&amp;nbsp;install&lt;/h2&gt;
+&lt;p&gt;Here are some of the programs and libraries I install and use&amp;nbsp;frequently:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://cursor.so/"&gt;&lt;strong&gt;Cursor&lt;/strong&gt;&lt;/a&gt;: Haven&amp;#8217;t really used it yet. Despite looking promising, I don&amp;#8217;t think it&amp;#8217;s ideal for work since it involves sensitive&amp;nbsp;data.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/astral-sh/uv"&gt;&lt;strong&gt;&lt;span class="caps"&gt;UV&lt;/span&gt;&lt;/strong&gt;&lt;/a&gt;: Perfect! Super fast, I use it a lot in my day-to-day Python&amp;nbsp;work.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;1Password&lt;/strong&gt;: It&amp;#8217;s been great for managing passwords&amp;nbsp;securely.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/ClementTsang/bottom"&gt;&lt;strong&gt;Bottom&lt;/strong&gt;&lt;/a&gt;: &lt;span class="caps"&gt;BEAUTIFUL&lt;/span&gt; and easy to understand. A system monitor that&amp;#8217;s a joy to&amp;nbsp;use.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/jesseduffield/lazygit"&gt;&lt;strong&gt;Lazygit&lt;/strong&gt;&lt;/a&gt; and &lt;a href="https://github.com/jesseduffield/lazydocker"&gt;&lt;strong&gt;Lazydocker&lt;/strong&gt;&lt;/a&gt;: Both &lt;em&gt;lazy&lt;/em&gt; tools are great, lightweight and&amp;nbsp;practical.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/sharkdp/bat"&gt;&lt;strong&gt;Bat&lt;/strong&gt;&lt;/a&gt;: A&amp;nbsp;turbocharged &lt;code&gt;cat&lt;/code&gt;. Beautiful output with syntax&amp;nbsp;highlighting.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;VSCode&lt;/strong&gt;: My main&amp;nbsp;editor.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gnome-terminator.org/"&gt;&lt;strong&gt;Terminator&lt;/strong&gt;&lt;/a&gt;: I really like the panel&amp;nbsp;layout.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;span class="caps"&gt;OBS&lt;/span&gt; Studio&lt;/strong&gt;: For screen recordings and eventually live&amp;nbsp;streams.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://flameshot.org/"&gt;&lt;strong&gt;Flameshot&lt;/strong&gt;&lt;/a&gt;: My favorite for quick annotated&amp;nbsp;screenshots.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Terminal and&amp;nbsp;productivity&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Oh My Zsh&lt;/strong&gt;: My configuration manager for&amp;nbsp;Zsh.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/sxyazi/yazi"&gt;&lt;strong&gt;Yazi&lt;/strong&gt;&lt;/a&gt;: A fast file manager with a beautiful&amp;nbsp;interface.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://sw.kovidgoyal.net/kitty/"&gt;&lt;strong&gt;Kitty&lt;/strong&gt;&lt;/a&gt;: My current favorite terminal, fast and&amp;nbsp;customizable.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;VSCode extensions I&amp;nbsp;use&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sublime Text Keymap&lt;/strong&gt;: Gives VSCode the Sublime shortcuts I&amp;nbsp;love.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;VSCode Great Icons&lt;/strong&gt;: Makes icons more beautiful and easy to&amp;nbsp;identify.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitLens&lt;/strong&gt;: A powerful extension for visualizing commit history, line annotations,&amp;nbsp;etc.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Copilot&lt;/strong&gt;: I use it with moderation, but it helps a lot with quick&amp;nbsp;suggestions.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Run on Save&lt;/strong&gt;: To automate tasks when I save&amp;nbsp;files.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Docker&lt;/strong&gt;: For working with containers directly in the&amp;nbsp;editor.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;If you also enjoy organizing your environment in a practical and beautiful way, share your tools with me!&amp;nbsp;♥&lt;/p&gt;</content><category term="Dev Tips"/></entry><entry><title>Meu ambiente dev</title><link href="/2025/06/10/meu-ambiente-dev/" rel="alternate"/><published>2025-06-10T00:00:00-03:00</published><updated>2025-06-10T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-06-10:/2025/06/10/meu-ambiente-dev/</id><summary type="html">&lt;p&gt;Gosto de deixar meu ambiente de trabalho com a minha cara. Neste post, compartilho os programas, atalhos e extensões que me ajudam no dia a dia como&amp;nbsp;desenvolvedora.&lt;/p&gt;</summary><content type="html">&lt;p&gt;Decidi compartilhar como monto meu ambiente de desenvolvimento, desde a instalação do sistema até as ferramentas e extensões que uso no dia a&amp;nbsp;dia.&lt;/p&gt;
+&lt;h2&gt;Sistema&amp;nbsp;Operacional&lt;/h2&gt;
+&lt;p&gt;Começo com a instalação do Linux. Tenho um guia pessoal que sigo sempre que preciso configurar uma máquina nova talvez eu compartilhe em outro post&amp;nbsp;futuramente.&lt;/p&gt;
+&lt;h2&gt;Ferramentas e utilitários que&amp;nbsp;instalo&lt;/h2&gt;
+&lt;p&gt;Esses são alguns dos programas e bibliotecas que instalo e uso com&amp;nbsp;frequência:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://cursor.so/"&gt;&lt;strong&gt;Cursor&lt;/strong&gt;&lt;/a&gt;: Ainda não usei de fato. Apesar de parecer promissor, não acho ideal para o trabalho por envolver dados&amp;nbsp;sigilosos.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/astral-sh/uv"&gt;&lt;strong&gt;&lt;span class="caps"&gt;UV&lt;/span&gt;&lt;/strong&gt;&lt;/a&gt;: Perfeito! Super rápido, uso muito no dia a dia com&amp;nbsp;Python.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;1Password&lt;/strong&gt;: Tem sido ótimo para gerenciar senhas com&amp;nbsp;segurança.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/ClementTsang/bottom"&gt;&lt;strong&gt;Bottom&lt;/strong&gt;&lt;/a&gt;: &lt;span class="caps"&gt;MUITO&lt;/span&gt; &lt;span class="caps"&gt;LINDO&lt;/span&gt; e fácil de entender. Um monitor de sistema que dá gosto de&amp;nbsp;usar.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/jesseduffield/lazygit"&gt;&lt;strong&gt;Lazygit&lt;/strong&gt;&lt;/a&gt; e &lt;a href="https://github.com/jesseduffield/lazydocker"&gt;&lt;strong&gt;Lazydocker&lt;/strong&gt;&lt;/a&gt;: Os dois &lt;em&gt;lazy&lt;/em&gt; são ótimos, leves e&amp;nbsp;práticos.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/sharkdp/bat"&gt;&lt;strong&gt;Bat&lt;/strong&gt;&lt;/a&gt;:&amp;nbsp;Um &lt;code&gt;cat&lt;/code&gt; turbinado. Visualização linda e com syntax&amp;nbsp;highlight.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;VSCode&lt;/strong&gt;: Meu editor&amp;nbsp;principal.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://gnome-terminator.org/"&gt;&lt;strong&gt;Terminator&lt;/strong&gt;&lt;/a&gt;: Gosto bastante da organização em&amp;nbsp;painéis.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;span class="caps"&gt;OBS&lt;/span&gt; Studio&lt;/strong&gt;: Para gravações de tela e eventualmente fazer&amp;nbsp;lives.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://flameshot.org/"&gt;&lt;strong&gt;Flameshot&lt;/strong&gt;&lt;/a&gt;: Meu queridinho para prints com marcações&amp;nbsp;rápidas.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Terminal e&amp;nbsp;produtividade&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Oh My Zsh&lt;/strong&gt;: Meu gerenciador de configurações para o&amp;nbsp;Zsh.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/sxyazi/yazi"&gt;&lt;strong&gt;Yazi&lt;/strong&gt;&lt;/a&gt;: Um gerenciador de arquivos rápido e com interface&amp;nbsp;linda.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://sw.kovidgoyal.net/kitty/"&gt;&lt;strong&gt;Kitty&lt;/strong&gt;&lt;/a&gt;: Meu terminal favorito atualmente, rápido e&amp;nbsp;personalizável.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Extensões do VSCode que&amp;nbsp;uso&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Sublime Text Keymap&lt;/strong&gt;: Deixa o VSCode com os atalhos do Sublime, que eu&amp;nbsp;adoro.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;VSCode Great Icons&lt;/strong&gt;: Deixa os ícones mais bonitos e fáceis de&amp;nbsp;identificar.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GitLens&lt;/strong&gt;: Uma extensão poderosa para visualizar histórico de commits, anotações por linha&amp;nbsp;etc.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Copilot&lt;/strong&gt;: Tenho usado com moderação, mas ajuda bastante com sugestões&amp;nbsp;rápidas.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Run on Save&lt;/strong&gt;: Para automatizar tarefas quando salvo&amp;nbsp;arquivos.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Docker&lt;/strong&gt;: Para trabalhar com containers diretamente no&amp;nbsp;editor.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;Se você também curte organizar seu ambiente de forma prática e bonita, compartilha comigo suas ferramentas!&amp;nbsp;♥&lt;/p&gt;</content><category term="Dicas Dev"/></entry></feed>
