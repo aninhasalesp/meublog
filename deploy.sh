@@ -20,13 +20,14 @@ uv run pelican content -s publishconf.py
 echo "Trocando para gh-pages..."
 git checkout gh-pages
 
-# Remove arquivos gerados antigos (preserva .git, CNAME, .nojekyll e output/)
+# Remove arquivos gerados antigos (preserva .git, CNAME, .nojekyll, .gitignore e output/)
 echo "Limpando arquivos antigos..."
 find . -maxdepth 1 \
     ! -name '.' \
     ! -name '.git' \
     ! -name 'CNAME' \
     ! -name '.nojekyll' \
+    ! -name '.gitignore' \
     ! -name "$OUTPUT_DIR" \
     -exec rm -rf {} +
 
@@ -34,9 +35,10 @@ find . -maxdepth 1 \
 echo "Copiando novos arquivos..."
 cp -r "$OUTPUT_DIR"/. .
 
-# Garante que CNAME e .nojekyll existem
+# Garante que CNAME, .nojekyll e .gitignore existem
 echo "anapaula.org" > CNAME
 touch .nojekyll
+echo "output/" > .gitignore
 
 # Commit e push
 echo "Publicando..."
