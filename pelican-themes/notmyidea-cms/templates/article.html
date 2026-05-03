@@ -39,6 +39,31 @@
           </a>
         </div>
       </div><!-- /.entry-content -->
+
+      {% set ns = namespace(prev=None, next=None) %}
+      {% for a in articles %}
+        {% if a.slug == article.slug and a.lang == article.lang %}
+          {% if loop.index > 1 %}{% set ns.next = articles[loop.index - 2] %}{% endif %}
+          {% if not loop.last %}{% set ns.prev = articles[loop.index] %}{% endif %}
+        {% endif %}
+      {% endfor %}
+
+      <nav class="post-navigation">
+        {% if ns.prev %}
+        <a href="{{ SITEURL }}/{{ ns.prev.url }}" class="nav-prev">
+          ← {{ ns.prev.title }}
+        </a>
+        {% else %}
+        <span></span>
+        {% endif %}
+
+        {% if ns.next %}
+        <a href="{{ SITEURL }}/{{ ns.next.url }}" class="nav-next">
+          {{ ns.next.title }} →
+        </a>
+        {% endif %}
+      </nav>
+
     </article>
   </section>
 

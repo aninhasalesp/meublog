@@ -1,4 +1,6 @@
 Title: Quem sou eu? 🌿🌸
+Lang: pt
+Slug: quem-sou-eu
 
 Oi, meu nome é Ana Paula.
 Bom, digamos que eu sou um pouco de muita coisa e muito de pouca coisa.

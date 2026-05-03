@@ -4,8 +4,8 @@
         <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{{ SITEURL }}/theme/css/{{ CSS_FILE }}" type="text/css" />
-        <link href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
+        <link rel="stylesheet" href="/theme/css/{{ CSS_FILE }}" type="text/css" />
+        <link href="/{{ FEED_ALL_ATOM }}" type="application/atom+xml" rel="alternate" title="{{ SITENAME }} Atom Feed" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-toggles@4.10.1/css/classic.min.css">
 </head>
 
@@ -29,10 +29,15 @@
                 </li>
                 <li>
                     <a href="{{ SITEURL }}/{{ FEED_ALL_ATOM }}" title="Assinar RSS">
-                        <img src="{{ SITEURL }}/images/rss-icon.png" alt="RSS" style="width:20px;height:20px;vertical-align:middle;">
+                        <img src="/images/rss-icon.png" alt="RSS" style="width:20px;height:20px;vertical-align:middle;">
                     </a>
                 </li>
-                <li style="float: right;">
+                <li style="float: right; display: flex; align-items: center; gap: 10px;">
+                    {% if DEFAULT_LANG == 'pt' %}
+                    <a href="/en/" title="Switch to English" style="font-size: 13px; font-weight: bold; text-decoration: none;">EN</a>
+                    {% else %}
+                    <a href="/" title="Mudar para Português" style="font-size: 13px; font-weight: bold; text-decoration: none;">PT</a>
+                    {% endif %}
                     <a href="#" id="theme-toggle" class="theme-toggle theme-toggle--toggled" aria-label="Toggle theme">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"

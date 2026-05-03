@@ -4,7 +4,7 @@ SITEURL = ""
 
 # Path to the content directory
 PATH = "content"
-PAGE_PATHS = ["pages"]
+PAGE_PATHS = ["pages", "pages/en"]
 STATIC_PATHS = ["blog", "pages", "images", "extra/custom.css"]
 EXTRA_PATH_METADATA = {
     "extra/custom.css": {"path": "static/custom.css"},
@@ -14,6 +14,17 @@ CUSTOM_CSS = "static/custom.css"
 
 TIMEZONE = "America/Sao_Paulo"
 DEFAULT_LANG = "pt"
+
+# i18n
+PLUGINS = ["i18n_subsites"]
+I18N_SUBSITES = {
+    "en": {
+        "SITENAME": "@aninhasalesp",
+        "SITEURL": "/en",
+    }
+}
+I18N_UNTRANSLATED_ARTICLES = "keep"
+I18N_UNTRANSLATED_PAGES = "keep"
 
 THEME = "pelican-themes/notmyidea-cms"
 

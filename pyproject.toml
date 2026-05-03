@@ -10,6 +10,7 @@ dependencies = [
     "black>=25.1.0",
     "flake8>=7.3.0",
     "isort>=6.0.1",
+    "pelican-i18n-subsites>=1.0.0",
     "pelican[markdown]>=4.11.0",
     "smartypants>=2.0.2",
     "typogrify>=2.1.0",
