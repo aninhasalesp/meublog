@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Recursion</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="@aninhasalesp Atom Feed" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/theme-toggles@4.10.1/css/classic.min.css">
+</head>
+
+<body id="index" class="home" style="margin: auto;">
+    <header id="banner" class="body">
+        <h1><a href="/en/">@aninhasalesp </a></h1>
+        <nav>
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <ul id="menu">
+                    <li ><a href="/en/pages/quem-sou-eu.html">Who am I?&nbsp;🌿🌸</a></li>
+                    <li ><a href="/en/pages/contato.html">Contact</a></li>
+                    <li ><a href="/en/pages/sugestoes-de-leitura.html">Reading&nbsp;suggestions</a></li>
+                <li id="posts-link">
+                    <a href="/en/">Posts</a>
+                </li>
+                <li>
+                    <a href="/en/feeds/all.atom.xml" title="Assinar RSS">
+                        <img src="/images/rss-icon.png" alt="RSS" style="width:20px;height:20px;vertical-align:middle;">
+                    </a>
+                </li>
+                <li style="float: right; display: flex; align-items: center; gap: 10px;">
+                    <a href="/" title="Mudar para Português" style="font-size: 13px; font-weight: bold; text-decoration: none;">PT</a>
+                    <a href="#" id="theme-toggle" class="theme-toggle theme-toggle--toggled" aria-label="Toggle theme">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true"
+                            width="22px"
+                            height="22px"
+                            fill="currentColor"
+                            stroke-linecap="round"
+                            class="theme-toggle__classic"
+                            viewBox="0 0 32 32"
+                        >
+                            <clipPath id="theme-toggle__classic__cutout">
+                            <path d="M0-5h30a1 1 0 0 0 9 13v24H0Z" />
+                            </clipPath>
+                            <g clip-path="url(#theme-toggle__classic__cutout)">
+                            <circle cx="16" cy="16" r="9.34" />
+                            <g stroke="currentColor" stroke-width="1.5">
+                                <path d="M16 5.5v-4" />
+                                <path d="M16 30.5v-4" />
+                                <path d="M1.5 16h4" />
+                                <path d="M26.5 16h4" />
+                                <path d="m23.4 8.6 2.8-2.8" />
+                                <path d="m5.7 26.3 2.9-2.9" />
+                                <path d="m5.8 5.8 2.8 2.8" />
+                                <path d="m23.4 23.4 2.9 2.9" />
+                            </g>
+                            </g>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header><!-- /#banner -->
+
+<div style="display: flex; flex-direction: column;">
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="2025/09/17/recursao/" rel="bookmark">
+            Recursion
+          </a>
+        </h1>       </header>
+
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-09-17T00:00:00-03:00">
+                qua 17 setembro 2025
+        </abbr>
+
+        <!-- <address class="vcard author">
+                By <a class="url fn" href="/en/author/ana-paula-sales.html">Ana Paula Sales</a>
+        </address> -->
+<!-- <p>In <a href="/en/category/grokking-algorithms.html">Grokking Algorithms</a>. </p> -->
+</p>Translations: 
+        <a href="/en/../2025/09/17/recursao/">pt</a>
+</footer><!-- /.post-info --><!-- /.post-info -->
+        <p>Third chapter of my study series on <a href="https://www.manning.com/books/grokking-algorithms">Grokking Algorithms</a> by Aditya Y.&nbsp;Bhargava.</p>
+<p>If you&#8217;ve been following along, I&#8217;ve already summarized the previous chapters 👀 go back if you have any questions:
+- <a href="/2025/08/12/busca-binaria-e-introducao-a-analise-de-algoritmos/">Chapter 1 - Introduction and Binary Search</a>
+- <a href="/2025/08/27/ordenacao-por-selecao-arrays-e-listas/">Chapter 2 - Arrays, Linked Lists and Selection Sort</a>
+- <a href="/2025/09/17/recursao/">Chapter 3 - Recursion</a> 📍 <strong>you are&nbsp;here</strong></p>
+<hr>
+<p>Hey everyone! Another little summary of our beloved book&nbsp;😊</p>
+<p>This was one of the chapters that did the most to take away the feeling that programming is magic. Ready to understand recursion and stacks without&nbsp;fear?</p>
+<p>In this chapter, the author explains the concept and use of <strong>recursion</strong> in a simple way, breaking it down into base case and recursive case.
+He suggests that at least once, you trace through a recursive function with pen and paper, step by step that&#8217;s how you truly understand how it&nbsp;works.</p>
+<h1>Recursion</h1>
+<p>It&#8217;s the technique where a function calls itself to solve a problem, breaking it down into smaller subproblems. Because a recursive function calls itself, it&#8217;s easy to write it incorrectly and end up in an infinite loop. For recursion to work correctly, it must have a base case to stop the calls, and a recursive case that moves the problem closer to the final&nbsp;solution.</p>
+<h2>How recursion&nbsp;works</h2>
+<p>Before showing an example, let&#8217;s understand how it&nbsp;works.</p>
+<ol>
+<li>
+<p><strong>Base case</strong>: defines when the function should <strong>stop</strong> calling itself. Without it, the recursion would go on forever and cause an&nbsp;error.</p>
+</li>
+<li>
+<p><strong>Recursive case</strong>: the part where the function <strong>calls itself again</strong>, getting one step closer to the final solution each&nbsp;time.</p>
+</li>
+</ol>
+<p>A classic example is calculating the factorial of a&nbsp;number:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># Base Case</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># Recursive Case</span>
+        <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># Output: 120</span>
+</code></pre></div>
+
+<p>In this&nbsp;example:</p>
+<ul>
+<li><strong>Base Case</strong>: <code>n</code> is 0 or 1, so the factorial is&nbsp;1</li>
+<li><strong>Recursive Case</strong>:&nbsp;if <code>n</code> is greater than 1, the factorial&nbsp;is <code>n * factorial(n-1)</code></li>
+</ul>
+<p>See how it&#8217;s almost poetic each number calls the next until 1 says &#8220;okay, stop, now go back.&#8221; Then the multiplication happens on the way back&nbsp;up.</p>
+<hr>
+<h1>Stack</h1>
+<p>Imagine you&#8217;re hosting a barbecue for your friends. You have a to-do list in the form of a stack of sticky notes. When you add an item, it goes on top of the stack. When you read an item, you only read the one on top and it gets removed. So your to-do list has only two actions: <em>push</em> (add) and <em>pop</em> (remove and&nbsp;read).</p>
+<p><img src="/en/images/pilha.png" alt="stack" width="700"/></p>
+<p>This data structure is called a <strong>stack</strong>. It&#8217;s a simple structure and we use it all the time without even realizing&nbsp;it.</p>
+<hr>
+<h1>The call&nbsp;stack</h1>
+<p>Every time a function is called, the computer needs to &#8220;remember&#8221; where it left off so it can continue later.
+This temporary memory is organized in a <strong>call stack</strong>.</p>
+<p>Here&#8217;s how it&nbsp;works:</p>
+<ul>
+<li>With each new function call, the computer pushes information about that execution (like parameters and local variables) onto the&nbsp;stack.</li>
+<li>When the function finishes, the computer pops that data and returns to the previous&nbsp;point.</li>
+</ul>
+<p>The book&#8217;s metaphor is great think of a stack of plates in the kitchen. You can only grab (or remove) the plate on top. Functions work the same way: the last one in is the first one out (<span class="caps">LIFO</span>: Last In, First&nbsp;Out).</p>
+<p>We can visualize this with a simple Python&nbsp;example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hi,&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+    <span class="n">farewell</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">farewell</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Goodbye!&quot;</span><span class="p">)</span>
+
+<span class="n">greet</span><span class="p">(</span><span class="s2">&quot;Ana&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Execution order on the&nbsp;stack:</p>
+<ol>
+<li><code>greet("Ana")</code> is called → pushed onto the&nbsp;stack.</li>
+<li>Inside&nbsp;it, <code>farewell()</code> is called → sits on&nbsp;top.</li>
+<li><code>farewell()</code> runs and is popped from the&nbsp;stack.</li>
+<li><code>greet("Ana")</code> finishes and is popped from the&nbsp;stack.</li>
+</ol>
+<p>Everything organized, one plate at a&nbsp;time.</p>
+<p>This example already shows that it&#8217;s not just recursion that uses a stack any function does. The difference is that recursion forces the stack to grow much&nbsp;faster.</p>
+<hr>
+<h1>The call stack with&nbsp;recursion</h1>
+<p>With recursion, the stack can grow quite a bit, because the function keeps calling itself until it hits the base&nbsp;case.</p>
+<p>Simplified example&nbsp;with <code>factorial(3)</code>:</p>
+<div class="highlight"><pre><span></span><code>The program calls factorial(3)
+    <span class="k">-</span> pushes factorial(3)
+
+To solve it, it needs factorial(2)
+    <span class="k">-</span> pushes factorial(2)
+
+To solve that, it needs factorial(1)
+    <span class="k">-</span> pushes factorial(1)
+
+factorial(1) hits the base case and returns 1
+    <span class="k">-</span> pops factorial(1)
+
+Now factorial(2) can calculate 2 × 1 = 2
+    <span class="k">-</span> pops factorial(2)
+
+Finally, factorial(3) calculates 3 × 2 = 6
+    <span class="k">-</span> pops factorial(3)
+</code></pre></div>
+
+<p>In the end, each call can only finish after the smaller one returns.
+That&#8217;s why <strong>defining the base case well is so important</strong> without it, the function never stops stacking calls and eventually crashes the memory (stack&nbsp;overflow).</p>
+<p><img src="/en/images/coffee.gif" alt="overflow" width="400"/></p>
+<p>That &#8220;stack overflow&#8221; is literally where the <a href="https://stackoverflow.com/questions">Stack Overflow</a> website got its&nbsp;name.</p>
+<p>When I first saw this process, it felt like some kind of magic as if the computer just <em>knew</em> where to go back&nbsp;to.</p>
+<p>That&#8217;s when I realized that understanding programming is a lot about demystifying things. It&#8217;s not a gift, it&#8217;s not genius it&#8217;s just pushing and popping, calmly.
+Now whenever I see a recursive function, I try to picture that stack running in the background. It brings clarity and turns &#8220;I wasn&#8217;t born for this / I&#8217;ll never get this&#8221; into &#8220;hehe, that&#8217;s actually cool&#8221;&nbsp;😎</p>
+<p><img src="/en/images/chihuahua.gif" alt="dog" width="200"/></p>
+<p>So next time you get lost in a recursive piece of code breathe. Draw the stack, follow the steps, and remember: it&#8217;s not magic, it&#8217;s just <strong>practice</strong>!!!</p>
+<hr>
+<h2>Fun facts&nbsp;💡</h2>
+<ol>
+<li>A very common recursion outside of programming: Russian dolls (matryoshkas). Each doll holds another inside it, until the smallest one (the base case) holds nothing at&nbsp;all.</li>
+<li>Some languages apply tail call optimization, which reuses stack frames to avoid memory overflow in very deeply recursive functions. Python, however, does not do&nbsp;this.</li>
+<li>The call stack is invisible most of the time but you&#8217;ve already seen it working: when Python shows a traceback (that error full of arrows, showing which function the execution was&nbsp;in).</li>
+<li>Many recursive functions can be rewritten iteratively&nbsp;(using <code>for</code> or <code>while</code> loops). This avoids the risk of stack overflow in cases with very deep&nbsp;calls.</li>
+<li>To understand recursion, you must first understand recursion.&nbsp;😅</li>
+</ol>
+<hr>
+<h2>Recommended exercises&nbsp;👩🏻‍💻💞</h2>
+<p>Here are some practical challenges to reinforce what you&nbsp;learned:</p>
+<p><strong>LeetCode</strong></p>
+<ul>
+<li><a href="https://leetcode.com/problems/merge-two-sorted-lists/description/">Merge Two Sorted Lists</a> can be solved recursively, treating the base case as when one list reaches the&nbsp;end.</li>
+<li><a href="https://leetcode.com/problems/climbing-stairs/description/">Climbing Stairs</a> a classic recursion + optimization problem (similar to&nbsp;Fibonacci).</li>
+</ul>
+<p><strong>Exercism</strong></p>
+<ul>
+<li><a href="https://exercism.org/tracks/python/exercises/flatten-array">Flatten Array</a> receives a list that may contain sublists and needs to return everything &#8220;flattened&#8221; into a single&nbsp;list.</li>
+<li><a href="https://exercism.org/tracks/python/concepts/recursion">Recursion with Python</a> reinforces the concept and includes the &#8220;Luhn&#8221; exercise, which works well with a recursive&nbsp;approach.</li>
+</ul>
+<p><strong>Extra&nbsp;challenge</strong></p>
+<ul>
+<li>Write a recursive function that walks through folders and files on your computer (or just a simulated nested list). That&#8217;s literally how many file systems&nbsp;work.</li>
+</ul>
+<hr>
+<p>I hope you enjoyed the content!&nbsp;✨💕</p>
+<p>If you have any exercise suggestions or improvements for the explanation, let me know&nbsp;🫂🌻</p>
+
+         <!-- Botões de compartilhamento -->
+        <div class="compartilhar" style="margin-top: 2em; display: flex; gap: 1em; align-items: center;">
+          <strong>Compartilhar:</strong>
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://anapaula.org/2025/09/17/recursao/"
+            target="_blank" rel="noopener noreferrer" title="Compartilhar no LinkedIn">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" width="24" height="24" style="vertical-align: middle;">
+          </a>
+
+          <!-- Telegram -->
+          <a href="https://t.me/share/url?url=https://anapaula.org/2025/09/17/recursao/"
+             target="_blank" rel="noopener noreferrer" title="Compartilhar no Telegram">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" alt="Telegram" width="24" height="24" style="vertical-align: middle;">
+          </a>
+
+          <!-- WhatsApp -->
+          <a href="https://wa.me/?text=https://anapaula.org/2025/09/17/recursao/"
+            target="_blank" rel="noopener noreferrer" title="Compartilhar no WhatsApp">
+            <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp" width="24" height="24">
+          </a>
+        </div>
+      </div><!-- /.entry-content -->
+
+
+      <nav class="post-navigation">
+        <a href="/en/2025/08/27/ordenacao-por-selecao-arrays-e-listas/" class="nav-prev">
+          ← Selection Sort, Arrays and Linked&nbsp;Lists
+        </a>
+
+      </nav>
+
+    </article>
+  </section>
+
+  <div id="comments" style="max-width: 700px;">
+    <script src="https://utteranc.es/client.js"
+      repo="aninhasalesp/meublog"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+    </script>
+  </div>
+</div>
+
+    <footer id="footer" class="body">
+        <p>Feito com amor, por <a href="https://github.com/aninhasalesp"> Ana Paula</a> ❤️</p>
+    </footer><!-- /#footer -->
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            const toggle = document.querySelector('.menu-toggle');
+            menu.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+        const toggle = document.getElementById("theme-toggle");
+        const currentTheme = localStorage.getItem("theme") || "light";
+
+        document.documentElement.setAttribute("data-theme", currentTheme);
+
+        function setThemeToggleIcon(theme) {
+            const themeToggle = document.getElementById("theme-toggle");
+            if (theme === "light") {
+                themeToggle.classList.add("theme-toggle--toggled");
+            } else {
+                themeToggle.classList.remove("theme-toggle--toggled");
+            }
+        }
+
+        setThemeToggleIcon(currentTheme);
+
+        toggle.addEventListener("click", () => {
+            const theme = document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+            document.documentElement.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+            setThemeToggleIcon(theme);
+
+            const menuToggle = document.querySelector('.menu-toggle');
+            if (menuToggle.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+                document.getElementById('posts-link').classList.add('active');
+            }
+        });
+    </script>
+
+</body>
+</html>
