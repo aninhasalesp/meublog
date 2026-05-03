@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>@aninhasalesp - dev</title><link href="/en/" rel="alternate"/><link href="/feeds/dev.atom.xml" rel="self"/><id>/en/</id><updated>2025-07-28T00:00:00-03:00</updated><entry><title>How I built my blog 💁‍♀️✨</title><link href="/en/2025/07/28/como-criei-meu-blog/" rel="alternate"/><published>2025-07-28T00:00:00-03:00</published><updated>2025-07-28T00:00:00-03:00</updated><author><name>Ana Paula Sales</name></author><id>tag:None,2025-07-28:/en/2025/07/28/como-criei-meu-blog/</id><summary type="html">&lt;p&gt;A step-by-step of how I launched my blog using Pelican, GitHub Pages, and a custom&amp;nbsp;theme.&lt;/p&gt;</summary><content type="html">&lt;hr&gt;
+&lt;p&gt;Having a space of my own away from social media, away from algorithms was something I&amp;#8217;d wanted for a long time. A little corner to write about what I love, in my own way, without rushing.
+And that&amp;#8217;s how &lt;a href="https://anapaula.org/"&gt;my blog&lt;/a&gt; was born.&amp;nbsp;💛&lt;/p&gt;
+&lt;p&gt;In this post, I&amp;#8217;m sharing how I went from idea to live site from choosing the stack all the way to deploying&amp;nbsp;it.&lt;/p&gt;
+&lt;h2&gt;The stack I&amp;nbsp;chose&lt;/h2&gt;
+&lt;p&gt;I went with &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt;, a static site generator written in Python. It won me over for a few&amp;nbsp;reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It&amp;#8217;s built with Python&amp;nbsp;🐍&lt;/li&gt;
+&lt;li&gt;It generates pure &lt;span class="caps"&gt;HTML&lt;/span&gt; (lightweight, fast, and easy to host)&lt;ul&gt;
+&lt;li&gt;Meaning: nothing is processed dynamically on the server. That makes the site faster, more secure, and cheaper/easier to host (like on GitHub Pages, which only serves static&amp;nbsp;files).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The structure is simple to&amp;nbsp;customize&lt;/li&gt;
+&lt;li&gt;Posts are written in Markdown&amp;nbsp;📝&lt;/li&gt;
+&lt;li&gt;The documentation&amp;#8230; is a bit confusing, but I pushed through anyway&amp;nbsp;😅&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I also used &lt;a href="https://github.com/astral-sh/uv"&gt;uv&lt;/a&gt; as my package and virtual environment manager it&amp;#8217;s fast, practical, and has replaced my old manual venv + pip&amp;nbsp;workflow.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;🛠️ Step by&amp;nbsp;step&lt;/h2&gt;
+&lt;h3&gt;1. Setting up the environment and installing&amp;nbsp;Pelican&lt;/h3&gt;
+&lt;p&gt;I used uv to create my virtual&amp;nbsp;environment:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uv&lt;span class="w"&gt; &lt;/span&gt;venv
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then I activated it&amp;nbsp;manually:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;source&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;.venv/bin/activate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;uv venv&lt;/code&gt; creates the environment with isolation, but doesn&amp;#8217;t activate it automatically. I did it out of habit it&amp;#8217;s the traditional way most of us learned with&amp;nbsp;venv.&lt;/p&gt;
+&lt;p&gt;That said, uv also offers a more modern (and practical!) way to handle virtual environments. You can&amp;nbsp;skip &lt;code&gt;uv venv&lt;/code&gt; and &lt;code&gt;source&lt;/code&gt; entirely and just let uv manage&amp;nbsp;everything:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;uv&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;pelican&lt;span class="o"&gt;[&lt;/span&gt;markdown&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# declares `pelican` as a project dependency&lt;/span&gt;
+
+uv&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;pelican-quickstart&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;# runs `pelican-quickstart` inside the automatically managed virtual environment&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This way, uv creates the environment and runs commands inside it automatically no manual activation&amp;nbsp;needed.&lt;/p&gt;
+&lt;p&gt;One note: if you prefer&amp;nbsp;using &lt;code&gt;uv add ...&lt;/code&gt; and &lt;code&gt;uv run ...&lt;/code&gt;, you&amp;#8217;d need to update the Makefile,&amp;nbsp;replacing &lt;code&gt;PELICAN=pelican&lt;/code&gt; with &lt;code&gt;PELICAN=uv run pelican&lt;/code&gt; or&amp;nbsp;all &lt;code&gt;make &amp;lt;rule&amp;gt;&lt;/code&gt; calls would need to&amp;nbsp;become &lt;code&gt;PELICAN="uv run pelican" make &amp;lt;rule&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;2. Project&amp;nbsp;structure&lt;/h3&gt;
+&lt;p&gt;I followed the setup prompts and had a basic structure ready in no time. From there, I organized the repo with a clear&amp;nbsp;focus:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;content/&lt;/code&gt; → where the Markdown posts&amp;nbsp;live&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;output/&lt;/code&gt; → the generated &lt;span class="caps"&gt;HTML&lt;/span&gt;&amp;nbsp;site&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;theme/&lt;/code&gt; → theme files and&amp;nbsp;customizations&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The repository is available here: &lt;a href="https://github.com/aninhasalesp/meublog"&gt;github.com/aninhasalesp/meublog&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I created&amp;nbsp;the &lt;code&gt;pelican-themes/&lt;/code&gt; folder manually to clone the theme and make my own&amp;nbsp;modifications.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;3. Choosing and customizing the theme&amp;nbsp;🎨&lt;/h3&gt;
+&lt;p&gt;I used&amp;nbsp;the &lt;code&gt;notmyidea-cms&lt;/code&gt; theme that comes with Pelican and customized it little by&amp;nbsp;little.&lt;/p&gt;
+&lt;p&gt;In &lt;code&gt;pelicanconf.py&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;THEME&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;pelican-themes/notmyidea-cms&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The changes I&amp;nbsp;made:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Footer with my name and a link to my GitHub&amp;nbsp;❤️&lt;/li&gt;
+&lt;li&gt;Comments with &lt;a href="https://utteranc.es"&gt;Utterances&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Share buttons (LinkedIn, WhatsApp and&amp;nbsp;Telegram)&lt;/li&gt;
+&lt;li&gt;&lt;span class="caps"&gt;CSS&lt;/span&gt; tweaks for spacing, layout, and&amp;nbsp;colors&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3&gt;4. Comments with Utterances&amp;nbsp;💬&lt;/h3&gt;
+&lt;p&gt;I used &lt;a href="https://utteranc.es/"&gt;Utterances&lt;/a&gt; to enable comments on posts. It&amp;#8217;s lightweight, uses GitHub issues, and it&amp;#8217;s simple and&amp;nbsp;efficient:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt; &lt;span class="na"&gt;id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;comments&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt; &lt;span class="na"&gt;src&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;https://utteranc.es/client.js&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;repo&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;aninhasalesp/meublog&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;issue-term&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;pathname&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;theme&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;github-light&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;crossorigin&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;anonymous&amp;quot;&lt;/span&gt;
+    &lt;span class="na"&gt;async&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;script&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;div&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;5. Writing posts&amp;nbsp;✍️&lt;/h3&gt;
+&lt;p&gt;Posts live&amp;nbsp;in &lt;code&gt;content/&lt;/code&gt; and are written like&amp;nbsp;this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Title: First post
+Date: 2025-07-20
+Category: personal
+Summary: A short welcome text for the blog.
+
+---
+
+This is the first post! 🎉
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;6. Theme&amp;nbsp;customizations&lt;/h3&gt;
+&lt;p&gt;I edited files&amp;nbsp;inside &lt;code&gt;pelican-themes/notmyidea-cms/&lt;/code&gt; to give the blog more of its own&amp;nbsp;identity.&lt;/p&gt;
+&lt;p&gt;In &lt;span class="caps"&gt;CSS&lt;/span&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Adjusted padding and&amp;nbsp;margins&lt;/li&gt;
+&lt;li&gt;Better alignment of&amp;nbsp;elements&lt;/li&gt;
+&lt;li&gt;Added icons and visual&amp;nbsp;links&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In &lt;span class="caps"&gt;HTML&lt;/span&gt;&amp;nbsp;(like &lt;code&gt;base.html&lt;/code&gt;):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Added the&amp;nbsp;footer&lt;/li&gt;
+&lt;li&gt;Positioned the share&amp;nbsp;buttons&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;💡 &lt;em&gt;Editing the theme directly worked well for me, even if it&amp;#8217;s not the ideal long-term&amp;nbsp;approach.&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;7. Generating the static&amp;nbsp;files&lt;/h3&gt;
+&lt;p&gt;To compile the blog and generate the &lt;span class="caps"&gt;HTML&lt;/span&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make&lt;span class="w"&gt; &lt;/span&gt;html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;During development, I used the local server to preview&amp;nbsp;changes:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pelican&lt;span class="w"&gt; &lt;/span&gt;--listen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;h3&gt;8. Deploy to GitHub Pages&amp;nbsp;🚀&lt;/h3&gt;
+&lt;p&gt;I used GitHub Pages to host the blog. The process&amp;nbsp;was:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Generated the files&amp;nbsp;with &lt;code&gt;pelican content&lt;/code&gt; or &lt;code&gt;make html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Pushed&amp;nbsp;the &lt;code&gt;output/&lt;/code&gt; folder to&amp;nbsp;the &lt;code&gt;gh-pages&lt;/code&gt; branch&lt;/li&gt;
+&lt;li&gt;Set up the custom domain on GitHub and pointed the &lt;span class="caps"&gt;DNS&lt;/span&gt; to GitHub&amp;#8217;s&amp;nbsp;servers&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The &lt;code&gt;Makefile&lt;/code&gt; made things easier, I published&amp;nbsp;with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;make&lt;span class="w"&gt; &lt;/span&gt;github
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This command handles the whole thing. Here&amp;#8217;s roughly what it&amp;nbsp;does:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;cd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;output
+git&lt;span class="w"&gt; &lt;/span&gt;checkout&lt;span class="w"&gt; &lt;/span&gt;-b&lt;span class="w"&gt; &lt;/span&gt;gh-pages
+git&lt;span class="w"&gt; &lt;/span&gt;add&lt;span class="w"&gt; &lt;/span&gt;.
+git&lt;span class="w"&gt; &lt;/span&gt;commit&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Deploy&amp;quot;&lt;/span&gt;
+git&lt;span class="w"&gt; &lt;/span&gt;push&lt;span class="w"&gt; &lt;/span&gt;-f&lt;span class="w"&gt; &lt;/span&gt;origin&lt;span class="w"&gt; &lt;/span&gt;gh-pages
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On GitHub, I went to Settings &amp;gt; Pages&amp;nbsp;and:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Configured it to serve the site from&amp;nbsp;the &lt;code&gt;gh-pages&lt;/code&gt; branch, root folder&amp;nbsp;(/)&lt;/li&gt;
+&lt;li&gt;Added a &lt;span class="caps"&gt;CNAME&lt;/span&gt; file with my custom domain&amp;nbsp;(&lt;code&gt;anapaula.org&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Pointed the &lt;span class="caps"&gt;DNS&lt;/span&gt; from my registrar to GitHub&amp;nbsp;Pages&lt;/li&gt;
+&lt;li&gt;Enabled &lt;span class="caps"&gt;HTTPS&lt;/span&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You can automate this with GitHub Actions too. But since this is a personal blog I don&amp;#8217;t update every day, I preferred the manual&amp;nbsp;approach.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3&gt;9. Custom domain&amp;nbsp;🌐&lt;/h3&gt;
+&lt;p&gt;I registered&amp;nbsp;the &lt;code&gt;anapaula.org&lt;/code&gt; domain and configured it for the blog hosted on GitHub&amp;nbsp;Pages.&lt;/p&gt;
+&lt;p&gt;What I did:
+In the registrar&amp;#8217;s panel, I added the following &lt;span class="caps"&gt;DNS&lt;/span&gt;&amp;nbsp;records:&lt;/p&gt;
+&lt;p&gt;A records (IPv4): pointing to GitHub Pages&amp;#8217;&amp;nbsp;IPs:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="mf"&gt;185.199.108.153&lt;/span&gt;
+&lt;span class="mf"&gt;185.199.109.153&lt;/span&gt;
+&lt;span class="mf"&gt;185.199.110.153&lt;/span&gt;
+&lt;span class="mf"&gt;185.199.111.153&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;span class="caps"&gt;CNAME&lt;/span&gt; (if you want a subdomain): pointing&amp;nbsp;to &lt;code&gt;youraccount.github.io&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Inside&amp;nbsp;the &lt;code&gt;output/&lt;/code&gt; folder (which goes to&amp;nbsp;the &lt;code&gt;gh-pages&lt;/code&gt; branch), I created a &lt;span class="caps"&gt;CNAME&lt;/span&gt; file with&amp;nbsp;just:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;anapaula.org
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This tells GitHub which domain to link to your site. This file is included automatically in every deploy when I&amp;nbsp;run &lt;code&gt;make github&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;On GitHub, under Settings &amp;gt;&amp;nbsp;Pages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I checked &amp;#8220;Use a custom domain&amp;#8221; and&amp;nbsp;entered &lt;code&gt;anapaula.org&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Enabled &lt;span class="caps"&gt;HTTPS&lt;/span&gt; for secure&amp;nbsp;browsing&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I followed the official GitHub Pages documentation for all of this:
+👉 &lt;a href="https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site"&gt;GitHub Pages&amp;nbsp;docs&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;Wrapping&amp;nbsp;up&lt;/h1&gt;
+&lt;p&gt;The process had its bumps (Pelican&amp;#8217;s docs could really use some love 😅), but it was totally worth it. Having a space of my own with my name, my style was a long-time wish that finally became&amp;nbsp;real.&lt;/p&gt;
+&lt;p&gt;If you&amp;#8217;re also thinking about starting a blog, whether technical or personal, I really recommend it! And if I can help in any way, just reach out.&amp;nbsp;💛&lt;/p&gt;
+&lt;p&gt;The blog&amp;#8217;s source code is on GitHub: &lt;a href="https://github.com/aninhasalesp/meublog"&gt;aninhasalesp/meublog&lt;/a&gt;&amp;nbsp;🌱&lt;/p&gt;</content><category term="dev"/></entry></feed>
